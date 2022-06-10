@@ -13,15 +13,8 @@ class ContactProject
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 50,
-        options: [
-            "check" => [
-                "Coordinator",
-                "WP_Leader",
-                "WP_Participant",
-                "DMP_Leader"]
-        ])]
-    private $RoleContact;
+    #[ORM\Column(type: 'string', length: 50, columnDefinition:"TEXT CHECK (role_contact IN ('Coordinator', 'WP_Leader', 'WP_Participant', 'DMP_Leader'))")]
+    private $roleContact;
 
     #[ORM\ManyToOne(targetEntity: Contact::class, inversedBy: 'projects')]
     #[ORM\JoinColumn(nullable: false)]
@@ -38,12 +31,12 @@ class ContactProject
 
     public function getRoleContact(): ?string
     {
-        return $this->RoleContact;
+        return $this->roleContact;
     }
 
-    public function setRoleContact(string $RoleContact): self
+    public function setRoleContact(string $roleContact): self
     {
-        $this->RoleContact = $RoleContact;
+        $this->roleContact = $roleContact;
 
         return $this;
     }

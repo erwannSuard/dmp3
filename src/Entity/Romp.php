@@ -25,16 +25,10 @@ class Romp
     #[ORM\Column(type: 'text')]
     private $deliverable;
 
-    #[ORM\Column(type: 'text', 
+    #[ORM\Column(type: 'text', columnDefinition:"TEXT CHECK (licence_romp IN ('CC-BY-4.0', 'CC-BY-NC-4.0', 'CC-BY--ND-4.0', 'CC-BY--SA-4.0', 'CC0-1.0'))",
         options: [
-            "default" => "CC-BY-4.0", 
-            "check" => [
-                "CC-BY-4.0",
-                "CC-BY-NC-4.0",
-                "CC-BY--ND-4.0",
-                "CC-BY--SA-4.0",
-                "CC0-1.0"
-                ]])]
+            "default" => "CC-BY-4.0"
+                ])]
     private $licenceRomp;
 
     #[ORM\Column(type: 'text')]
