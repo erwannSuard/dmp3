@@ -33,8 +33,9 @@ class ProjectController extends AbstractController
             // dd($contact);
             $cp->setProject($project);
             $cp->setContact($contact);
-            $cp->setRoleContact("Blabla");
+            $cp->setRoleContact("Coordinator");
             $this->entityManager->persist($cp);
+            $this->entityManager->persist($project);
             $this->entityManager->flush();
             dd($cp);
             $contact = $form->get('idContact')->getData();
