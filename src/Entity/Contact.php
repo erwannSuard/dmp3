@@ -49,6 +49,13 @@ class Contact
         $this->romps = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        $res = '';
+        $this->firstName ? $res = $this->lastName . ' ' . $this->firstName : $res = $this->lastName;
+        return $res;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
