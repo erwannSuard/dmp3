@@ -30,11 +30,13 @@ class WorkPackageType extends AbstractType
                 'required' => false,
             ])
             
-            ->add('website', TextType::class,[
-                'label' => 'Website : '
+            ->add('website', TextType::class, [
+                'label' => 'Website (optionnal)',
+                'required' => false,
             ])
-            ->add('objectives', TextAreaType::class,[
-                'label' => 'Objectives : '
+            ->add('objectives', TextAreaType::class, [
+                'label' => 'Objectives (optionnal)',
+                'required' => false,
             ])
 
             ->add('idContact', EntityType::class, 

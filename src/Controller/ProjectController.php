@@ -63,14 +63,42 @@ class ProjectController extends AbstractController
         if($formProject->isSubmitted() && $formProject->isValid())
         {
             $funding = $formProject->get('funding')->getData();
-            dd($funding);
+            // dd($funding);
             $project = $formProject->getData();
+            $project->setFunding($funding['project']);
             $contact = $formProject->get('idContact')->getData();
+            // dd($project);
             $cp->setProject($project);
             $cp->setContact($contact);
             $cp->setRoleContact("Coordinator");
             $this->entityManager->persist($cp);
             $this->entityManager->persist($project);
+
+            //Boucler dans les WP + index pour trouver le bon contact en charge du wp:
+            $i=0;
+            foreach($formProject->get('idRefProject')->getData() as $wp)
+            {
+                
+                $cp = new ContactProject();
+                $cct = new Contact();
+                $cct = $formProject['idRefProject'][$i]['idContact']->getNormData();
+                $workPackage = new Project();
+                $workPackage = $wp;
+
+                $workPackage->setParentProject($project);
+
+                $cp->setProject($wp);
+                $cp->setContact($cct);
+                $cp->setRoleContact("WP_Leader");
+                //JUSTE TANT QUE L'ACRONYME EST NON NULLABLE
+                $workPackage->setAcronym($project->getAcronym());
+                // dd($workPackage);
+                $this->entityManager->persist($workPackage);
+                $this->entityManager->persist($cct);
+                $this->entityManager->persist($cp);
+                $i+=1;
+            }
+            // dd($project);
             $this->entityManager->flush();
             
             
