@@ -45,10 +45,17 @@ class Project
     #[ORM\OneToMany(mappedBy: 'project', targetEntity: Romp::class, orphanRemoval: true)]
     private $romps;
 
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'workPackages')]
+    private $parentProject;
+
+    #[ORM\OneToMany(mappedBy: 'parentProject', targetEntity: self::class)]
+    private $workPackages;
+
     public function __construct()
     {
         $this->contacts = new ArrayCollection();
         $this->romps = new ArrayCollection();
+        $this->workPackages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -206,6 +213,48 @@ class Project
             // set the owning side to null (unless already changed)
             if ($romp->getProject() === $this) {
                 $romp->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getParentProject(): ?self
+    {
+        return $this->parentProject;
+    }
+
+    public function setParentProject(?self $parentProject): self
+    {
+        $this->parentProject = $parentProject;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getWorkPackages(): Collection
+    {
+        return $this->workPackages;
+    }
+
+    public function addWorkPackage(self $workPackage): self
+    {
+        if (!$this->workPackages->contains($workPackage)) {
+            $this->workPackages[] = $workPackage;
+            $workPackage->setParentProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWorkPackage(self $workPackage): self
+    {
+        if ($this->workPackages->removeElement($workPackage)) {
+            // set the owning side to null (unless already changed)
+            if ($workPackage->getParentProject() === $this) {
+                $workPackage->setParentProject(null);
             }
         }
 

@@ -55,6 +55,23 @@ class ProjectType extends AbstractType
                 // 'multiple' => true,
                 
             ])
+
+            ->add('idRefProject', CollectionType::class, 
+
+            [   'label' => false,
+                'entry_type' => WorkPackageType::class,
+                'entry_options' => ['label' => false],
+                //Permettre de rajouter des formulaires :
+                'allow_add' => true,
+
+                //Pour ne pas lier le champ à l'objet
+                'mapped' => false,
+                //Je ne sais pas encore pourquoi :
+                'by_reference' => true,
+                'allow_delete' => true,
+                'prototype' => true,
+            ]
+            )
             ->add('submit', SubmitType::class, [
                 'label' => 'Add Project'
             ])

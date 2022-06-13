@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Hello ProjectController!{% endblock %}
 
@@ -20,4 +20,125 @@
 {{ form_row(formProject.objectives) }}
 {{ form_row(formProject.submit) }}
 </fieldset>
+{% endblock %} #}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Form{% endblock %}
+
+{% block body %}
+{# {{ form(formContact) }}
+<button class='contactBtn'>Add a contact</button> #}
+
+
+
+{{ form_start(formProject) }}
+<fieldset>
+    <h2>PROJECT</h2>
+    <fieldset>
+    <legend>Funding Infos : </legend>
+        {{ form_row(formProject.funding.vars.prototype) }}
+    </fieldset>
+{{ form_row(formProject.idContact) }}
+{{ form_row(formProject.title) }}
+{{ form_row(formProject.abstract) }}
+{{ form_row(formProject.acronym) }}
+{{ form_row(formProject.startDate) }}
+{{ form_row(formProject.duration) }}
+{{ form_row(formProject.website) }}
+{{ form_row(formProject.objectives) }}
+</fieldset>
+
+
+    <h3>Work Packages</h3>
+    {# <fieldset> #}
+    <ul class="idRefProject"
+{# {{ form_row(formProject.idProject.vars.prototype) }} #}
+
+    {# Ajouter des tags : #}
+     
+        data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
+        data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"    
+    >
+        {% for tag in formProject.idRefProject %}
+            <li>
+                <fieldset>
+                    <legend>Work package n°{{formProject.idRefProject|length}}</legend>
+                {{ form_row(tag.idRefProject.vars.prototype) }}
+                </fieldset>
+            </li>
+        {% endfor %}
+    </ul>
+    {# </fieldset> #}
+
+
+{{ form_end(formProject) }}
+
+
+{# Bouton ajout WP #}
+<button type="button" class="add_item_link" data-collection-holder-class="idRefProject">
+Add a Work Package
+</button>
+
+{# Style pour cacher form contact #}
+{# <style>
+.cache {
+    display: none;
+}
+li {
+    padding: 10px;
+    margin: 15px;
+    border: solid black 2px;
+}
+</style> #}
+
+
+
+<script>
+{# //Formulaire de contact
+var formContact = document.getElementById('contact');
+// Le cacher ou non
+const showContactForm = (e) => {
+    formContact.classList.toggle('cache');
+    console.log('click');
+}
+
+formContact.classList.add('cache');
+document.querySelectorAll('contact').forEach(button => {
+    button.addEventListener('click', showContactForm)
+});
+
+document.querySelectorAll('.contactBtn').forEach(btn => {
+        btn.addEventListener('click', showContactForm)
+    }); #}
+
+
+
+//Ajouter Work Packages
+const addFormToCollection = (e) => {
+    const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+        
+    const item = document.createElement('li');
+        
+    item.innerHTML = collectionHolder
+    .dataset
+    .prototype
+    .replace(/__name__/g,
+    collectionHolder.dataset.index
+    );
+        
+    collectionHolder.appendChild(item);
+
+    collectionHolder.dataset.index++;
+
+    addTagFormDeleteLink(item);
+}
+    //onClick
+    document.querySelectorAll('.add_item_link').forEach(btn => {
+        btn.addEventListener('click', addFormToCollection)
+    });
+</script>
 {% endblock %}
+
+
