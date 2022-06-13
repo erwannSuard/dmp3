@@ -1,37 +1,36 @@
-{# {% extends 'base.html.twig' %}
-
-{% block title %}Hello ProjectController!{% endblock %}
-
-{% block body %}
-{{ form_start(formProject) }}
-<fieldset>
-    <h2>PROJECT</h2>
-    <fieldset>
-    <legend>Funding Infos : </legend>
-        {{ form_row(formProject.funding.vars.prototype) }}
-    </fieldset>
-{{ form_row(formProject.idContact) }}
-{{ form_row(formProject.title) }}
-{{ form_row(formProject.abstract) }}
-{{ form_row(formProject.acronym) }}
-{{ form_row(formProject.startDate) }}
-{{ form_row(formProject.duration) }}
-{{ form_row(formProject.website) }}
-{{ form_row(formProject.objectives) }}
-{{ form_row(formProject.submit) }}
-</fieldset>
-{% endblock %} #}
-
 
 {% extends 'base.html.twig' %}
 
 {% block title %}Form{% endblock %}
 
 {% block body %}
-{# {{ form(formContact) }}
-<button class='contactBtn'>Add a contact</button> #}
+{# FORMULAIRE CONTACT #}
+<div id="contact">
+<button type="button" class='btn'>Show project form</button>
+{{ form_start(formContact) }}
+<fieldset>
+<h2>CONTACT</h2>
+<fieldset>
+<legend>Contact General information</legend>
+{{ form_row(formContact.lastName) }}
+{{ form_row(formContact.firstName) }}
+{{ form_row(formContact.mail) }}
+</fieldset>
+{{ form_row(formContact.affiliation) }}
+{{ form_row(formContact.laboratoryOrDepartment) }}
+{{ form_row(formContact.identifier) }}
+</fieldset>
 
 
+{{ form_row(formContact.submit) }}
+
+{{ form_end(formContact) }}
+</div>
+
+<div id="project">
+<button type="button" class='btn'>Show contact form</button>
+
+{# FORMULAIRE PROJECT #}
 
 {{ form_start(formProject) }}
 <fieldset>
@@ -48,6 +47,8 @@
 {{ form_row(formProject.duration) }}
 {{ form_row(formProject.website) }}
 {{ form_row(formProject.objectives) }}
+
+{# WORK PACKAGES #}
 </fieldset>
 
 
@@ -56,16 +57,16 @@
     <ul class="idRefProject"
 {# {{ form_row(formProject.idProject.vars.prototype) }} #}
 
-    {# Ajouter des tags : #}
+    {# Ajouter des wps : #}
      
         data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
         data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"    
     >
-        {% for tag in formProject.idRefProject %}
+        {% for wp in formProject.idRefProject %}
             <li>
                 <fieldset>
                     <legend>Work package n°{{formProject.idRefProject|length}}</legend>
-                {{ form_row(tag.idRefProject.vars.prototype) }}
+                {{ form_row(wp.idRefProject.vars.prototype) }}
                 </fieldset>
             </li>
         {% endfor %}
@@ -81,8 +82,14 @@
 Add a Work Package
 </button>
 
+
+</div>
+
+{# ---------------------------------------------  STYLE ET SCRIPT  --------------------------------- #}
+
+
 {# Style pour cacher form contact #}
-{# <style>
+<style>
 .cache {
     display: none;
 }
@@ -91,27 +98,31 @@ li {
     margin: 15px;
     border: solid black 2px;
 }
-</style> #}
+</style>
 
 
 
 <script>
-{# //Formulaire de contact
+//Formulaire de contact
 var formContact = document.getElementById('contact');
-// Le cacher ou non
+//Formulaire de projet
+var formProject = document.getElementById('project');
+// Les cacher ou non
 const showContactForm = (e) => {
     formContact.classList.toggle('cache');
-    console.log('click');
+    formProject.classList.toggle('cache');
 }
 
+var test = formProject.childNode;
+console.log(test);
 formContact.classList.add('cache');
 document.querySelectorAll('contact').forEach(button => {
     button.addEventListener('click', showContactForm)
 });
 
-document.querySelectorAll('.contactBtn').forEach(btn => {
+document.querySelectorAll('.btn').forEach(btn => {
         btn.addEventListener('click', showContactForm)
-    }); #}
+    });
 
 
 
@@ -132,7 +143,6 @@ const addFormToCollection = (e) => {
 
     collectionHolder.dataset.index++;
 
-    addTagFormDeleteLink(item);
 }
     //onClick
     document.querySelectorAll('.add_item_link').forEach(btn => {

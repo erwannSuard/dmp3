@@ -25,10 +25,11 @@ class WorkPackageType extends AbstractType
             ])
             
             ->add('startDate')
-            ->add('duration')
-            ->add('type', TextType::class,[
-                'label' => 'Type : '
+            ->add('duration', null, [
+                'label' => 'Duration in month (optionnal)',
+                'required' => false,
             ])
+            
             ->add('website', TextType::class,[
                 'label' => 'Website : '
             ])

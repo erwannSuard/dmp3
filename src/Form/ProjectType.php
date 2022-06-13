@@ -36,7 +36,7 @@ class ProjectType extends AbstractType
                 'prototype_name' => 'project',
             ])
             ->add('startDate')
-            ->add('duration', TextType::class, [
+            ->add('duration', null, [
                 'label' => 'Duration in month (optionnal)',
                 'required' => false,
             ])
@@ -73,7 +73,7 @@ class ProjectType extends AbstractType
             ]
             )
             ->add('submit', SubmitType::class, [
-                'label' => 'Add Project'
+                'label' => 'Submit the Project'
             ])
         ;
     }
