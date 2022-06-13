@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Entity\Contact;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 
 class ProjectType extends AbstractType
@@ -24,6 +25,15 @@ class ProjectType extends AbstractType
             ->add('abstract')
             ->add('acronym', TextType::class, [
                 'label' => 'Project\'s Acronym'
+            ])
+            ->add('funding', CollectionType::class, [
+                'label' => false,
+                'entry_type' => FundingType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'prototype' => true,
+                'mapped' => false,
+                'prototype_name' => 'project',
             ])
             ->add('startDate')
             ->add('duration', TextType::class, [

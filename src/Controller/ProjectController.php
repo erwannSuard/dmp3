@@ -23,13 +23,13 @@ class ProjectController extends AbstractController
     {
         $cp = new ContactProject();
         $project = new Project();
-        $form = $this->createForm(ProjectType::class, $project);
-        $form->handleRequest($request);
+        $formProject = $this->createForm(ProjectType::class, $project);
+        $formProject->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid())
+        if($formProject->isSubmitted() && $formProject->isValid())
         {
-            $project = $form->getData();
-            $contact = $form->get('idContact')->getData();
+            $project = $formProject->getData();
+            $contact = $formProject->get('idContact')->getData();
             // dd($contact);
             $cp->setProject($project);
             $cp->setContact($contact);
@@ -38,12 +38,12 @@ class ProjectController extends AbstractController
             $this->entityManager->persist($project);
             $this->entityManager->flush();
             dd($cp);
-            $contact = $form->get('idContact')->getData();
+            $contact = $formProject->get('idContact')->getData();
             $contact->addIdProject($project);
             $project->addIdContact($contact);
-            // dd($form->get('idContact'));
+            // dd($formProject->get('idContact'));
             // dd($contact);
-            // $project = $form->getData();
+            // $project = $formProject->getData();
             $this->entityManager->persist($project);
             // dd($project);
             $this->entityManager->flush();
@@ -51,7 +51,7 @@ class ProjectController extends AbstractController
             return $this->redirectToRoute('homepage');
         }
         return $this->renderForm('project/index.html.twig', [
-            'form' => $form,
+            'formProject' => $formProject,
         ]);
     }
 }
