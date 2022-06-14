@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use App\Entity\Contact;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-
+use App\Entity\Romp;
 
 class ProjectType extends AbstractType
 {
@@ -24,8 +24,9 @@ class ProjectType extends AbstractType
             ])
             ->add('abstract')
             ->add('acronym', TextType::class, [
-                'label' => 'Project\'s Acronym'
+                'label' => 'Project\'s Acronym : '
             ])
+            //----------   Form Funding   ----------
             ->add('funding', CollectionType::class, [
                 'label' => false,
                 'entry_type' => FundingType::class,
@@ -35,27 +36,33 @@ class ProjectType extends AbstractType
                 'mapped' => false,
                 'prototype_name' => 'project',
             ])
-            ->add('startDate')
+            //------------------------------------
+            ->add('startDate', null, [
+                'label' => 'Project starting date : '
+            ])
             ->add('duration', null, [
-                'label' => 'Duration in month (optionnal)',
+                'label' => 'Duration in month (optionnal) : ',
                 'required' => false,
             ])
             ->add('website', TextType::class, [
-                'label' => 'Website (optionnal)',
+                'label' => 'Website (optionnal) : ',
                 'required' => false,
             ])
             ->add('objectives', TextAreaType::class, [
-                'label' => 'Objectives (optionnal)',
+                'label' => 'Objectives (optionnal) : ',
                 'required' => false,
             ])
+
             ->add('idContact', EntityType::class, [
                 'class' => Contact::class,
-                'label' => 'Project Coordinator',
+                'label' => 'Project Coordinator : ',
                 'mapped' => false,
                 // 'multiple' => true,
                 
             ])
 
+
+            //----------   Work Package(s)   ----------
             ->add('idRefProject', CollectionType::class, 
 
             [   'label' => false,
@@ -66,12 +73,23 @@ class ProjectType extends AbstractType
 
                 //Pour ne pas lier le champ à l'objet
                 'mapped' => false,
-                //Je ne sais pas encore pourquoi :
                 'by_reference' => true,
                 'allow_delete' => true,
                 'prototype' => true,
-            ]
-            )
+            ])
+            //-------------------------------------------
+
+            //---------------   ROMP   ---------------
+            ->add('romp', CollectionType::class, [
+                'entry_type' => RompType::class,
+                'entry_options' => ['label' => false],
+                'allow_add' => true,
+                'prototype' => true,
+                'mapped' => false,
+                'prototype_name' => 'romp',
+                'label' => false,
+            ])
+            //-----------------------------------
             ->add('submit', SubmitType::class, [
                 'label' => 'Submit the Project'
             ])

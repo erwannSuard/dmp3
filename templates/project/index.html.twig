@@ -21,9 +21,7 @@
 {{ form_row(formContact.identifier) }}
 </fieldset>
 
-
 {{ form_row(formContact.submit) }}
-
 {{ form_end(formContact) }}
 </div>
 
@@ -35,10 +33,10 @@
 {{ form_start(formProject) }}
 <fieldset>
     <h2>PROJECT</h2>
-    <fieldset>
-    <legend>Funding Infos : </legend>
-        {{ form_row(formProject.funding.vars.prototype) }}
-    </fieldset>
+
+{# GENERAL INFOS #}
+<fieldset>
+<legend><h3>General Infos : </h3></legend>
 {{ form_row(formProject.idContact) }}
 {{ form_row(formProject.title) }}
 {{ form_row(formProject.abstract) }}
@@ -47,16 +45,24 @@
 {{ form_row(formProject.duration) }}
 {{ form_row(formProject.website) }}
 {{ form_row(formProject.objectives) }}
+</fieldset>
 
-{# WORK PACKAGES #}
+{# FUNDING #}
+<fieldset>
+<legend><h3>Funding Infos : </h3></legend>
+    {{ form_row(formProject.funding.vars.prototype) }}
+</fieldset>
+
+{# ROMP #}
+<fieldset>
+<legend><h3>ROMP : </h3></legend>
+{{form_row(formProject.romp.vars.prototype)}}
 </fieldset>
 
 
-    <h3>Work Packages</h3>
-    {# <fieldset> #}
+{# WORK PACKAGES #}
+<h3>Work Packages</h3>
     <ul class="idRefProject"
-{# {{ form_row(formProject.idProject.vars.prototype) }} #}
-
     {# Ajouter des wps : #}
      
         data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
@@ -71,18 +77,14 @@
             </li>
         {% endfor %}
     </ul>
-    {# </fieldset> #}
-
-
-{{ form_end(formProject) }}
-
-
+    
 {# Bouton ajout WP #}
 <button type="button" class="add_item_link" data-collection-holder-class="idRefProject">
 Add a Work Package
 </button>
 
-
+</fieldset>
+{{ form_end(formProject) }}
 </div>
 
 {# ---------------------------------------------  STYLE ET SCRIPT  --------------------------------- #}

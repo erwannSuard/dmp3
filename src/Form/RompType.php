@@ -9,6 +9,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Contact;
 
 class RompType extends AbstractType
 {
@@ -16,9 +18,15 @@ class RompType extends AbstractType
     {
         $builder
             // ->add('identifier')
-            ->add('submissionDate')
-            ->add('versionRomp', TextType::class)
-            ->add('deliverable', TextType::class)
+            ->add('submissionDate', null, [
+                'label' => 'Submission date : ',
+            ])
+            ->add('versionRomp', TextType::class, [
+                'label' => 'ROMP Version : ',
+            ])
+            ->add('deliverable', TextType::class, [
+                'label' => 'Deliverable n° : ',
+            ])
             ->add('licenceRomp', ChoiceType::class, [
                 'choices' => [
                     'CC-BY-4.0' => 'CC-BY-4.0',
@@ -26,7 +34,8 @@ class RompType extends AbstractType
                     'CC-BY--ND-4.0' => 'CC-BY--ND-4.0',
                     'CC-BY--SA-4.0' => 'CC-BY--SA-4.0',
                     'CC0-1.0' => 'CC0-1.0',
-                ]
+                ],
+                'label' => 'Licence : ',
             ])
 
             ->add('ethicalIssues', TextareaType::class, [
@@ -36,7 +45,7 @@ class RompType extends AbstractType
 
             ->add('contact', EntityType::class, [
                 'class' => Contact::class,
-                'label' => 'Project Coordinator',
+                'label' => 'DMP Leader : ',
                 'mapped' => false,
                 // 'multiple' => true,
                 
