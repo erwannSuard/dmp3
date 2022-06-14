@@ -115,7 +115,7 @@ class ProjectController extends AbstractController
             }
             //dd($project);
             $this->entityManager->flush();
-            dd($project);
+            // dd($project);
 
             return $this->redirectToRoute('homepage');
         }
