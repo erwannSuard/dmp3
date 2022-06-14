@@ -9,6 +9,7 @@ use App\Entity\ContactProject;
 use App\Entity\Project;
 use App\Entity\Contact;
 use App\Entity\Funding;
+use App\Entity\Romp;
 use App\Form\ProjectType;
 use App\Form\ContactType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -28,7 +29,11 @@ class ProjectController extends AbstractController
         $cp = new ContactProject();
         $project = new Project();
         $contact = new Contact();
+        $contactRomp = new Contact();
+        //Création instances funding et Romp
+        $romp = new Romp();
         $funding = new Funding();
+        $cpRomp = new ContactProject();
         //Formulaire projet + contact (caché de base)
         $formContact = $this->createForm(ContactType::class, $contact);
         $formContact->handleRequest($request);
@@ -51,7 +56,6 @@ class ProjectController extends AbstractController
             unset($formContact);
             $contact = new Contact();
             $formContact = $this->createForm(ContactType::class, $contact);
-
             //Return la même page
             return $this->renderForm('project/index.html.twig', [
                 'formProject' => $formProject,
@@ -62,16 +66,30 @@ class ProjectController extends AbstractController
         //Si le projet est soumis et valide :
         if($formProject->isSubmitted() && $formProject->isValid())
         {
+            //Ajout des données aux attributs
+            $romp = $formProject->get('romp')->getData();
+            $romp = $romp['romp'];
             $funding = $formProject->get('funding')->getData();
-            // dd($funding);
             $project = $formProject->getData();
-            $project->setFunding($funding['project']);
             $contact = $formProject->get('idContact')->getData();
-            // dd($project);
+            $contactRomp = $formProject['romp']['romp']['contactRomp']->getNormData();
+            // dd($romp);
+            //Associations
+            $project->setFunding($funding['project']);
+            //Association Contact <-> Coordinateur
             $cp->setProject($project);
             $cp->setContact($contact);
             $cp->setRoleContact("Coordinator");
+            //Association Contact <-> DMP Leader
+            $project->addRomp($romp);
+            $contactRomp->addRomp($romp);
+            $cpRomp->setProject($project);
+            $cpRomp->setContact($contactRomp);
+            $cpRomp->setRoleContact('DMP_Leader');
+            //Persist les données
+            $this->entityManager->persist($romp);
             $this->entityManager->persist($cp);
+            $this->entityManager->persist($cpRomp);
             $this->entityManager->persist($project);
 
             //Boucler dans les WP + index pour trouver le bon contact en charge du wp:
@@ -84,24 +102,20 @@ class ProjectController extends AbstractController
                 $cct = $formProject['idRefProject'][$i]['idContact']->getNormData();
                 $workPackage = new Project();
                 $workPackage = $wp;
-
                 $workPackage->setParentProject($project);
-
                 $cp->setProject($wp);
                 $cp->setContact($cct);
                 $cp->setRoleContact("WP_Leader");
                 //JUSTE TANT QUE L'ACRONYME EST NON NULLABLE
                 $workPackage->setAcronym($project->getAcronym());
-                // dd($workPackage);
                 $this->entityManager->persist($workPackage);
                 $this->entityManager->persist($cct);
                 $this->entityManager->persist($cp);
                 $i+=1;
             }
-            // dd($project);
+            //dd($project);
             $this->entityManager->flush();
-            
-            
+            dd($project);
 
             return $this->redirectToRoute('homepage');
         }

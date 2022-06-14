@@ -43,7 +43,7 @@ class RompType extends AbstractType
                 'required' => false,
             ])
 
-            ->add('contact', EntityType::class, [
+            ->add('contactRomp', EntityType::class, [
                 'class' => Contact::class,
                 'label' => 'DMP Leader : ',
                 'mapped' => false,
