@@ -20,7 +20,7 @@ class WorkPackageType extends AbstractType
             ->add('title', TextType::class,[
                 'label' => 'Title : '
             ])
-            ->add('abstract', TextType::class,[
+            ->add('abstract', TextAreaType::class,[
                 'label' => 'Abstract : '
             ])
             
