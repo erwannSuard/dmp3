@@ -1,0 +1,24 @@
+{% extends 'test.html.twig' %}
+
+{% block title %}FAIR-EASE | Log In{% endblock %}
+
+{% block div %}
+    <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-7 offset-xxl-7">
+        <div style="background: linear-gradient(to left bottom, #AED741, #8fd16f, #53abab, #65CFCB);padding: 10px;border-radius: 25px;width: 100%;margin: 0px;margin-left: 0px;">
+            <div class="container text-center d-flex flex-column align-items-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="background: #ffffff;color: #000000;padding: 3rem;border-radius: 25px;max-height: fit-content;gap: 20px;padding-bottom: 20px;position: relative;">
+                <h1>Sign in</h1>
+                <form class="text-center" method="post" style="width: 100%;">
+                    <div class="row d-flex" style="margin-bottom: 20px;">
+                        <div class="col">
+                            <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="* Email"></div>
+                            <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="* Password"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3" style="margin-left: auto;width: 50%;margin-right: auto;max-width: 700px;"><button class="btn btn-primary d-block w-100" type="submit">Sign in</button></div>
+                    <p class="text-muted">Forgout your password?</p>
+                </form>
+                <div class="d-inline float-end d-lg-flex d-xl-flex align-content-center align-items-lg-center" style="width: 100%;"><a href="#accueil" style="color: var(--bs-secondary);">&lt; Back</a></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
