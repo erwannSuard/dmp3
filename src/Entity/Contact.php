@@ -42,6 +42,9 @@ class Contact
     #[ORM\OneToMany(mappedBy: 'contact', targetEntity: Romp::class, orphanRemoval: true)]
     private $romps;
 
+    #[ORM\OneToOne(inversedBy: 'contact', targetEntity: User::class, cascade: ['persist', 'remove'])]
+    private $userAuth;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -219,6 +222,18 @@ class Contact
                 $romp->setContact(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getUserAuth(): ?User
+    {
+        return $this->userAuth;
+    }
+
+    public function setUserAuth(?User $userAuth): self
+    {
+        $this->userAuth = $userAuth;
 
         return $this;
     }
