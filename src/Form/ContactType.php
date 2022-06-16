@@ -35,9 +35,9 @@ class ContactType extends AbstractType
                 'label' => 'ORCID type identifier (optionnal) : ',
                 'required' => false,
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'Submit new Contact'
-            ])
+            // ->add('submit', SubmitType::class, [
+            //     'label' => 'Submit new Contact'
+            // ])
         ;
     }
 
