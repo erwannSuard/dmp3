@@ -4,9 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d55e6233-1315-4a33-8d61-11e395b33c1f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+    <list default="true" id="2ac970e0-8faf-4de3-95d9-07b50fbcc926" name="Changes" comment="page accueil + authentification + log in + sign in">
+      <change afterPath="$PROJECT_DIR$/assets/images/icons/android-chrome-192x192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/icons/android-chrome-512x512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/icons/apple-touch-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/icons/favicon-16x16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/icons/favicon-32x32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/icons/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/icons/site.webmanifest" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/twig.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/twig.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/homepage/authentication.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/homepage/authentication.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/homepage/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/homepage/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/homepage/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/homepage/login.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/homepage/signin.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/homepage/signin.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/test.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test.html.twig" afterDir="false" />
@@ -185,6 +195,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Users/Sami/Desktop/STAGE/GitHub - Repos/dmp3/assets/images/icons",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -199,6 +210,11 @@
     ]
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\Sami\Desktop\STAGE\GitHub - Repos\dmp3\assets\images\icons" />
+    </key>
+  </component>
   <component name="RunManager" selected="PHPUnit.phpunit.xml.dist">
     <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner scope="XML" />

@@ -1,27 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
-
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
-</head>
-    <body>
+{% extends 'base.html.twig'%}
 {% block body %}
-
-    <div class="container-fluid d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="height: 87vh;/*max-height: 100%;*/background: url({{ asset('build/images/F-E_BG.png') }}) no-repeat;background-size: cover;z-index: 1;">
-        {% block div %}{% endblock %}
-    </div>
     <header style="background: linear-gradient(-89deg, #AED741, #8fd16f, #53abab, #65CFCB);padding-top: 13px;z-index: 2;">
-        <div class="container-fluid" style="background: #ffffff;padding-top: 10px;padding-bottom: 10px;">
+        <div class="container-fluid" style="background: #ffffff;padding-top: 20px;padding-bottom: 10px;">
             <div class="row">
                 <div class="col-md-1 col-lg-3 col-xl-3 col-xxl-3 d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center"><img src="{{ asset('build/images/logo_F-E.png') }}" style="width: 50px;margin-top: 10px;margin-bottom: 10px;"></div>
                 <div class="col-md-7 col-lg-6 col-xxl-6 d-flex d-sm-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-xxl-center"><img src="{{ asset('build/images/text_F-E.png') }}" style="max-width: 400px;width: 100%;"></div>
@@ -29,6 +9,8 @@
             </div>
         </div>
     </header>
+
+    <div class="container-fluid d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="height: 87vh;/*max-height: 100%;*/background: url({{ asset('build/images/F-E_BG.png') }}) no-repeat;background-size: cover;z-index: 1;">
+        {% block div %}{% endblock %}
+    </div>
 {% endblock %}
-</body>
-</html>
