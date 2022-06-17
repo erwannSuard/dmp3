@@ -19,6 +19,15 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'contact')]
     public function index(Request $request): Response
     {
+//------------------------------------------------
+//------------------------------------------------
+//------------------------------------------------
+        //Sécurité accès
+        $this->denyAccessUnlessGranted('ROLE_USER');       
+//------------------------------------------------
+//------------------------------------------------
+//------------------------------------------------
+
         $contact = new Contact();
         $form = $this->createForm(ContactType::class, $contact);
         $form->handleRequest($request);

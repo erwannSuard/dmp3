@@ -25,6 +25,15 @@ class ProjectController extends AbstractController
     #[Route('/project', name: 'project')]
     public function index(Request $request): Response
     {
+//------------------------------------------------
+//------------------------------------------------
+//------------------------------------------------
+        //Sécurité accès
+        $this->denyAccessUnlessGranted('ROLE_USER');       
+//------------------------------------------------
+//------------------------------------------------
+//------------------------------------------------
+
         //Création des instances de projet, contact et de liaison des deux.
         $cp = new ContactProject();
         $project = new Project();
