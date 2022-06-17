@@ -1,0 +1,56 @@
+{% extends 'test.html.twig' %}
+
+{% block title %}FAIR-EASE{% endblock %}
+
+{% block div %}
+    <div class="col-auto col-md-10 col-xl-6 col-xxl-6 offset-md-1 offset-xl-5 offset-xxl-5" style="margin-top: 15px;">
+        <div style="background: linear-gradient(to left bottom, #AED741, #8fd16f, #53abab, #65CFCB);padding: 10px;border-radius: 25px;width: 100%;margin: 0px;margin-left: 0px;">
+            <div class="container text-center d-flex flex-column align-items-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="background: #ffffff;color: #000000;padding: 3rem;border-radius: 25px;max-height: fit-content;gap: 20px;padding-bottom: 20px;position: relative;">
+                <h1>Sign in</h1>
+                <form class="text-center" method="post" style="width: 100%;">
+                    <div class="row d-flex" style="margin-bottom: 20px;">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                                <label for="floatingInput">* Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
+                                <label for="floatingPassword">* Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" name="password_confirmation" class="form-control" id="floatingInput" placeholder="Password confirmation">
+                                <label for="floatingPassword">* Password confirmation</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="last_name" class="form-control" id="floatingInput" placeholder="Last Name">
+                                <label for="floatingInput">* Last Name</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" name="first_name" class="form-control" id="floatingInput" placeholder="First Name">
+                                <label for="floatingInput">First Name</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="affiliation" class="form-control" id="floatingInput" placeholder="Affiliation">
+                                <label for="floatingInput">* Affiliation</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="l_or_d" class="form-control" id="floatingInput" placeholder="Laboratory or Department">
+                                <label for="floatingInput">Laboratory or Department</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" name="identifier" class="form-control" id="floatingInput" placeholder="Identifier">
+                                <label for="floatingInput">Identifier</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3" style="margin-left: auto;width: 50%;margin-right: auto;max-width: 700px;"><button class="btn btn-primary d-block w-100" type="submit">Sign in</button></div>
+                    <p class="text-muted">Already registered?&nbsp; &nbsp; &nbsp; <a href="{{path('login')}}">Log in</a></p>
+                </form>
+                <div class="d-inline float-end d-lg-flex d-xl-flex align-content-center align-items-lg-center" style="width: 100%;"><a href="{{ path('authentication') }}" style="color: var(--bs-secondary);">&lt; Back</a></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

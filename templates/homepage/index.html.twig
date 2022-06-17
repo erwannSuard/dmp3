@@ -1,8 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomepageController!{% endblock %}
+{% block title %}FAIR-EASE{% endblock %}
 
 {% block body %}
+    <div class="d-flex d-xxl-flex justify-content-center align-items-center justify-content-xxl-center align-items-xxl-center" style="background: url({{ asset('build/images/F-E_BG.png') }}) no-repeat, #ffffff;margin-left: 0;transform: translate(0px);background-size: cover, auto;height: 100vh;">
+        <div style="background: linear-gradient(to bottom left,#AED741, #8fd16f, #53abab, #65CFCB);padding: 10px;border-radius: 25px;/*max-width: 650px;*/width: 450px;min-width: 250px;">
+            <div class="text-center d-flex flex-column align-items-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="background: #ffffff;color: #000000;padding: 0px;border-radius: 25px;gap: 50px;max-width: 900px;min-width: 200px;width: auto;padding-top: 3em;"><img src="{{ asset('build/images/text_F-E.png') }}" style="max-width: 313px;">
+                <h1 class="text-center" style="font-size: 35px;font-weight: bold;min-width: auto;">Project and Data<br>Management Plan</h1>
+                <a href="{{path('authentication')}}"><button class="btn btn-primary btn-lg text-uppercase fw-bold" type="submit" style="width: 129.875px;border-radius: 6px;">Enter</button></a>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12"><img src="{{ asset('build/images/logo_F-E.png') }}" style="width: 60px;"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"><img src="{{ asset('build/images/logo_Horizon_EU.png') }}"></div>
+                        <div class="col-md-6 d-md-flex d-lg-flex align-items-md-center align-items-lg-center"><img src="{{ asset('build/images/logo_Funded_EU.png') }}" style="width: 100%;max-width: 250px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 <h1>hello</h1>
 <a href="{{path('contact')}}">Add contact</a>
 <br>
