@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
-    "content-hash": "c636789d09ac02f91077a20889b7017b",
-=======
-    "content-hash": "7c7969d437d92b60e2ae4235cafe6a50",
->>>>>>> test
+    "content-hash": "9eb8a50dab4e720da1f2b17d2fb2f316",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -7305,7 +7301,6 @@
             "time": "2022-04-15T14:25:02+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "symfonycasts/verify-email-bundle",
             "version": "v1.10.0",
             "source": {
@@ -7343,7 +7338,18 @@
                     "SymfonyCasts\\Bundle\\VerifyEmail\\": "src/"
                 }
             },
-=======
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple, stylish Email Verification for Symfony",
+            "support": {
+                "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
+                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.10.0"
+            },
+            "time": "2022-03-08T22:08:27+00:00"
+        },
+        {
             "name": "twbs/bootstrap",
             "version": "v5.2.0-beta1",
             "source": {
@@ -7357,23 +7363,37 @@
                 "reference": "fca04c07131a81e625a516cf7b98a8c7df0df1c1",
                 "shasum": ""
             },
+            "require": {
+                "php": ">=7.2.5",
+                "symfony/config": "^4.4 | ^5.0 | ^6.0",
+                "symfony/dependency-injection": "^4.4 | ^5.0 | ^6.0",
+                "symfony/deprecation-contracts": "^2.2 | ^3.0",
+                "symfony/http-kernel": "^4.4 | ^5.0 | ^6.0",
+                "symfony/routing": "^4.4 | ^5.0 | ^6.0"
+            },
+            "conflict": {
+                "symfony/framework-bundle": "<4.4"
+            },
             "replace": {
                 "twitter/bootstrap": "self.version"
             },
+            "require-dev": {
+                "doctrine/orm": "^2.7",
+                "doctrine/persistence": "^2.0",
+                "symfony/framework-bundle": "^4.4 | ^5.0 | ^6.0",
+                "symfony/phpunit-bridge": "^5.0 | ^6.0",
+                "vimeo/psalm": "^4.3"
+            },
             "type": "library",
->>>>>>> test
+            "autoload": {
+                "psr-4": {
+                    "SymfonyCasts\\Bundle\\VerifyEmail\\": "src/"
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
-<<<<<<< HEAD
-            "description": "Simple, stylish Email Verification for Symfony",
-            "support": {
-                "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.10.0"
-            },
-            "time": "2022-03-08T22:08:27+00:00"
-=======
             "authors": [
                 {
                     "name": "Mark Otto",
@@ -7401,7 +7421,6 @@
                 "source": "https://github.com/twbs/bootstrap/tree/v5.2.0-beta1"
             },
             "time": "2022-05-13T16:44:01+00:00"
->>>>>>> test
         },
         {
             "name": "twig/extra-bundle",

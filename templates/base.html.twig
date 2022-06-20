@@ -20,15 +20,5 @@
     <body style="min-height: 100vh;">
         {% block body %}{% endblock %}
     </body>
-    {% if is_granted('ROLE_USER') %}
-        <hr>
-        <ul>
-            <li><a href="{{ path('logout') }}"><h3>Logout</h3></a></li>
-        </ul>
-    {% else %}
-        <ul>
-            <li><a href="{{ path('register') }}"><h3>Register</h3></a></li>
-            <li><a href="{{ path('login') }}"><h3>Login</h3></a></li>
-        </ul>
-    {% endif %}
+
 </html>

@@ -1,15 +1,37 @@
-{# {% extends 'base.html.twig' %} #}
-
-{% block body %}
-    <h1>Register</h1>
-
-    {{ form_start(registrationForm) }}
-        
-        {{ form_row(registrationForm.contact.vars.prototype) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+{% extends 'test.html.twig' %}
+{% block title %}FAIR-EASE | Register{% endblock %}
+{% block div %}
+    <div class="row" style="width: 100%;">
+        <div class="col-auto col-md-10 col-xl-6 col-xxl-6 offset-md-1 offset-xl-5 offset-xxl-5">
+            <div style="background: linear-gradient(to left bottom, #AED741, #8fd16f, #53abab, #65CFCB);padding: 6px;border-radius: 25px;width: 100%;margin: 0px;margin-left: 0px;">
+                <div class="container text-center d-flex flex-column align-items-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="background: #ffffff;color: #000000;padding: 1rem 2rem;border-radius: 20px;max-height: fit-content;gap: 20px;position: relative;">
+                    <h1>Register</h1>
+                    <form class="text-center" method="post" style="width: 100%;">
+                        <div class="row d-flex">
+                            <p class="text-muted fs-6">Fields marked with an * are mandatory</p>
+                            <div class="col-sm-12 col-md-6">
+                                {{ form_start(registrationForm) }}
+                                <div class="mb-3">{{ form_row(registrationForm.contact.vars.prototype.mail) }}</div>
+                                <div class="mb-3">{{ form_row(registrationForm.plainPassword.first)}}</div>
+                                <div class="mb-3">{{ form_row(registrationForm.plainPassword.second)}}</div>
+                                <div class="mb-3">{{ form_row(registrationForm.contact.vars.prototype.lastName) }}</div>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="mb-3">{{ form_row(registrationForm.contact.vars.prototype.firstName) }}</div>
+                                <div class="mb-3">{{ form_row(registrationForm.contact.vars.prototype.affiliation) }}</div>
+                                <div class="mb-3">{{ form_row(registrationForm.contact.vars.prototype.laboratoryOrDepartment) }}</div>
+                                <div class="mb-3">{{ form_row(registrationForm.contact.vars.prototype.identifier) }}</div>
+                            </div>
+                        </div>
+                        {{ form_end(registrationForm) }}
+                        <div class="mb-3" style="margin-left: auto;width: 50%;margin-right: auto;max-width: 700px;"><button class="btn btn-primary d-block w-100" type="submit">Register</button></div>
+                    </form>
+                    <div class="row align-items-center" style="width: 100%;">
+                        <div class="col-4 col-sm-3 d-sm-flex d-lg-flex justify-content-sm-start justify-content-lg-center align-items-lg-center"><a href="{{ path('authentication') }}" style="color: var(--bs-secondary);">&lt; Back</a></div>
+                        <div class="col-6 offset-2 offset-sm-3 d-flex justify-content-evenly align-items-center"><small class="text-muted">Already registered ?</small><a class="link-primary d-lg-flex align-items-lg-center" href="{{ path('login') }}">Log in</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
