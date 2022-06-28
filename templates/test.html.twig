@@ -1,15 +1,15 @@
 {% extends 'base.html.twig'%}
 {% block body %}
-    {% if is_granted('ROLE_USER') %}
-        <ul>
-            <li><a href="{{ path('logout') }}"><h3>Logout</h3></a></li>
-        </ul>
-    {% else %}
-        <ul>
-            <li><a href="{{ path('register') }}"><h3>Register</h3></a></li>
-            <li><a href="{{ path('login') }}"><h3>Login</h3></a></li>
-        </ul>
-    {% endif %}
+{#    {% if is_granted('ROLE_USER') %}#}
+{#        <ul>#}
+{#            <li><a href="{{ path('logout') }}"><h3>Logout</h3></a></li>#}
+{#        </ul>#}
+{#    {% else %}#}
+{#        <ul>#}
+{#            <li><a href="{{ path('register') }}"><h3>Register</h3></a></li>#}
+{#            <li><a href="{{ path('login') }}"><h3>Login</h3></a></li>#}
+{#        </ul>#}
+{#    {% endif %}#}
     <div style="display: flex;flex-flow: column;height: 100%;">
         <header style="background: linear-gradient(-89deg, #AED741, #8fd16f, #53abab, #65CFCB);padding-bottom: 13px;flex: 0 1 auto;">
             <div class="container-fluid" style="background: #ffffff;padding-top: 10px;padding-bottom: 10px;">
