@@ -2,34 +2,37 @@
 {% block title %}FAIR-EASE | Log in{% endblock %}
 
 {% block div %}
-    <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-7 offset-xxl-7">
-        <div style="background: linear-gradient(to left bottom, #AED741, #8fd16f, #53abab, #65CFCB);padding: 6px;border-radius: 25px;width: 100%;margin: 0px;margin-left: 0px;">
-            <div class="container text-center d-flex flex-column align-items-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="background: #ffffff;color: #000000;padding:1rem 3rem;border-radius: 20px;max-height: fit-content;gap: 20px;position: relative;">
-                <h1>Log in</h1>
-                <form class="text-center" action="{{ path('login') }}" method="post" style="width: 100%;">
-                    <div class="row d-flex" style="margin-bottom: 20px;">
-                        <div class="col">
-                            <div class="form-floating mb-3">
-                                <input type="email" name="_username" class="form-control" id="username" value="{{ lastUser }}" placeholder="Email" required>
-                                <label for="username">Email :</label>
-                            </div>
-                            <div class="form-floating">
-                                <input type="password" name="_password" class="form-control" id="floatingPassword" placeholder="Password" required>
-                                <label for="floatingPassword">Password :</label>
+    <div class="row" style="width: 100%">
+        <div class="col-sm-10 col-md-8 col-lg-6 col-xl-4 col-xxl-4 offset-sm-1 offset-md-2 offset-lg-3 offset-xl-7 offset-xxl-7">
+            <div style="background: linear-gradient(to left bottom, #AED741, #8fd16f, #53abab, #65CFCB);padding: 6px;border-radius: 25px;width: 100%;margin: 0px;margin-left: 0px;">
+                <div class="container text-center d-flex flex-column align-items-center align-items-lg-center justify-content-xl-center align-items-xl-center" style="background: #ffffff;color: #000000;padding:1rem 3rem;border-radius: 20px;max-height: fit-content;gap: 20px;position: relative;">
+                    <h1>Log in</h1>
+                    <form class="text-center" action="{{ path('login') }}" method="post" style="width: 100%;">
+                        <div class="row d-flex" style="margin-bottom: 20px;">
+                            <div class="col">
+                                <div class="form-floating mb-3">
+                                    <input type="email" name="_username" class="form-control" id="username" value="{{ lastUser }}" placeholder="Email" required>
+                                    <label for="username">Email :</label>
+                                </div>
+                                <div class="form-floating">
+                                    <input type="password" name="_password" class="form-control" id="floatingPassword" placeholder="Password" required>
+                                    <label for="floatingPassword">Password :</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {% if error %}
-                        <div class="alert-danger mb-3 rounded">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
-                    {# Protection crsf #}
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <div class="mb-3" style="margin-left: auto;width: 50%;margin-right: auto;max-width: 700px;"><button class="btn btn-primary d-block w-100" type="submit">Log in</button></div>
-                    <p class="text-muted">Forgout your password?</p>
-                    <a href="#lost_password">Click here</a>
-                </form>
-                <div class="d-inline float-end d-lg-flex d-xl-flex align-content-center align-items-lg-center" style="width: 100%;"><a href="{{path('authentication')}}" style="color: var(--bs-secondary);">< Return</a></div>
+                        {% if error %}
+                            <div class="alert-danger mb-3 rounded">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+                        {# Protection crsf #}
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <div class="mb-3" style="margin-left: auto;width: 50%;margin-right: auto;max-width: 700px;"><button class="btn btn-primary d-block w-100" type="submit">Log in</button></div>
+                        <p class="text-muted">Forgout your password?</p>
+                        <a href="#lost_password">Click here</a>
+                    </form>
+                    <div class="d-inline float-end d-lg-flex d-xl-flex align-content-center align-items-lg-center" style="width: 100%;"><a href="{{path('authentication')}}" style="color: var(--bs-secondary);">< Return</a></div>
+                </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
