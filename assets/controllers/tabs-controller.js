@@ -5,17 +5,63 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
     static targets = [ "links", "content", "button" ]
     static values = {
-        name: String
+        name: String ,
+        input : String
     }
 
+    connect() {
+
+    }
+
+    openDialog() {
+        console.log(this.buttonTarget.id);
+        // console.log(this.inputTarget);
+        document.getElementById("dialogLabel").innerText = this.nameValue + ' title to add :';
+        const dialog = document.getElementById("dialog");
+        dialog.showModal();
+
+
+        const cancelButton = document.getElementById('cancel');
+
+        const addButton = document.getElementById('add');
+
+        cancelButton.addEventListener("click", () => {
+            console.log('close btn clicked');
+            dialog.close()
+        })
+
+        addButton.addEventListener("click",  () => {
+            console.log('add btn clicked');
+            var input = document.getElementById("tabTitle");
+            if (input.value.length > 0) {
+                console.log('input valid');
+                this.inputValue = input.value;
+                this.addTab();
+
+
+            }
+            else if (input.value.length == 0) {
+                console.log(' invalid input')
+                alert('invalid input')
+                console.log('essai essai')
+            }
+        })
+        //reset
+        document.getElementById("tabTitle").value = ""
+        this.inputValue = "";
+
+
+
+    }
+
+
     addTab() {
+        console.log(this.buttonTarget);
         var tabName = this.nameValue;
         var tabCounter = $("#" + this.linksTarget.id)[0].childElementCount;
-        var tabHref = "#nav-" + tabName.toLowerCase() + "-" + tabCounter + " ";
+        var tabTitle = this.inputValue || tabCounter ;
 
-        console.log(tabCounter + ' tabcounter')
-
-        var tabLinkTemplateHtml = '<a ' +
+        const tabLinkTemplateHtml = '<a ' +
             'class="nav-item nav-link" ' +
             "id=nav-" + tabName.toLowerCase() + "-" + tabCounter + "-tab " +
             'data-toggle="tab" ' +
@@ -23,130 +69,41 @@ export default class extends Controller {
             'role="tab" ' +
             'aria-controls="nav-' + tabName.toLowerCase() + "-" + tabCounter + " "  +
             'aria-selected="true">' +
-            tabName + ' n°' + tabCounter +
+            tabName + ' n°' + tabTitle || tabCounter +
+            ' <button ' + 'class="btn btn-sm btn-outline-danger" ' +
+            ' data-action="tabs#delTab" ' +
+            'id='+ tabName.toLowerCase() + "-" + tabCounter + '>' +
+            '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">\n' +
+            '  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>\n' +
+            '  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>\n' +
+            '</svg>' +
+            '</button>'
             '</a>'
-        var tabContentTemplateHtml = ('<div class="tab-pane fade" id="nav-' + tabName.toLowerCase() + '-' + tabCounter + '" role="tabpanel" aria-labelledby="nav-' + tabName.toLowerCase() + '-'+tabCounter+'-tab">content for ' + tabName + ' n°'+ tabCounter +'</div>');
-        console.log(tabName + ' name value');
-        let btnId = this.buttonTarget.id;
+
+        const tabContentTemplateHtml = ('<div' +
+            ' class="tab-pane fade" ' +
+            'id="nav-' + tabName.toLowerCase() + '-' + tabCounter + '" ' +
+            'role="tabpanel" aria-labelledby="nav-' + tabName.toLowerCase() + '-'+tabCounter+'-tab">' +
+            'content for ' + tabName + ' n°'+ tabCounter +'</div>');
+
+        console.log('btnId: ' + btnId)
+        let btnId = (this.buttonTarget.id);
         $("#" + btnId).before(tabLinkTemplateHtml);
         let contentContainerId = this.contentTarget.id;
         $("#" + contentContainerId).append(tabContentTemplateHtml);
+        $("#nav-" + tabName.toLowerCase() + "-" + tabCounter + "-tab").click();
+
+    }
+
+    delTab() {
+        let cible = (event.currentTarget).id;
+        $("#nav-" + cible).remove();
+        $("#" + cible).parent().remove();
+
+        console.log(test);
+    }
+
+    test() {
+        alert('method test');
     }
 }
-
-
-
-//     var tabsContainerName;
-//
-//     var tabNavId;
-//
-//     var tabContent;
-//     var tabNum;
-//
-//     var btnName;
-//
-//     var tabRompCounter = 2;
-//     var tabWpCounter = 2;
-//
-//     var numTabRompDeleted = [];
-//     numTabWpDeleted = [];
-//
-//     var tabName = "";
-//
-//
-//
-//     $( "#btnAddRomp" ).on("click",function () {
-//         console.log(tabNum + " btn romp del click")
-//         if (!numTabRompDeleted.length) {
-//             tabNum = numTabRompDeleted[0];
-//             numTabRompDeleted.shift();
-//             console.log(tabNum + "array pas vide")
-//         } else {
-//             tabNum = tabRompCounter;
-//             console.log(tabNum + " array vide")
-//         }
-//         tabRompCounter++;
-//         addTab("romp", "#btnAddRomp");
-//         console.log(tabNum)
-//     });
-//
-//     $("#btnAddWp").on("click",function () {
-//         if (!numTabWpDeleted.length) {
-//             tabNum = numTabWpDeleted[0];
-//             numTabWpDeleted.shift();
-//         } else {
-//             tabNum = tabRompCounter;
-//         }
-//         addTab("wp", "#btnAddWp");
-//         tabWpCounter++
-//
-//     });
-//
-//     // Modal dialog init: custom buttons and a "close" callback resetting the form inside
-//     var dialog = $( "#dialog" ).dialog({
-//         autoOpen: false,
-//         modal: true,
-//         buttons: {
-//             Add: function() {
-//                 addTab();
-//                 $( this ).dialog( "close" );
-//             },
-//             Cancel: function() {
-//                 $( this ).dialog( "close" );
-//             }
-//         },
-//         close: function() {
-//             form[ 0 ].reset();
-//         }
-//     });
-//
-//
-//
-//     // AddTab form: calls addTab function on submit and closes the dialog
-//     var form = dialog.find( "form" ).on( "submit", function( event ) {
-//         addTab();
-//         dialog.dialog( "close" );
-//         event.preventDefault();
-//     });
-//
-//     // AddTab button: just opens the dialog
-//     $( "#btnAddRomp" )
-// .on( "click", function() {
-//         dialog.dialog( "open" );
-//     });
-//
-//     function addTab(tabName, btnName) {
-//
-//
-//
-//         tabContent = $("#nav-tabContent-" + tabName)[0];
-//         // var tabNum = tab.childElementCount;
-//         let tabTitle = tabName.toUpperCase();
-//
-//         btnDel = '<button type="button" class="btn btn-sm btn-outline-danger delete-btn" onclick="delTab(\'' + tabName + '\','+ tabNum +')"><i class="fa-solid fa-xmark-large">x</i></button>'
-//
-//         $( btnName ).before( '<a class="nav-item nav-link" id="nav-'+ tabName + '-' + tabNum + '-tab" data-toggle="tab" href="#nav-'+ tabName +'-'+tabNum+'" role="tab" aria-controls="nav-'+ tabName +'-'+tabNum+'" aria-selected="false">'+ tabTitle + ' n°' + tabNum +'  '+ btnDel + '</a>');
-//         $( tabContent ).append('<div class="tab-pane fade" id="nav-' + tabName + '-' + tabNum + '" role="tabpanel" aria-labelledby="nav-' + tabName + '-'+tabNum+'-tab">content for ' + tabName + ' n°'+ tabNum +'</div>');
-//         activeTab = $("#nav-" + tabName + "-"+ tabNum + "-tab");
-//         activeTab.click();
-//     }
-//
-//
-//
-//
-//
-//
-//     function delTab(tabName, tabNum) {
-//         $("#nav-" + tabName + "-" + tabNum).remove();
-//         $("#nav-"+ tabName + "-" + tabNum + "-tab").remove();
-//         console.log(tabRompCounter);
-//         console.log(tabNum + " delTab()")
-//         if (tabName == 'romp') {
-//             numTabRompDeleted.push(tabNum);
-//             tabRompCounter--;
-//         }
-//         else
-//             numTabWpDeleted.push(tabNum);
-//         tabWpCounter--;
-//     }
-

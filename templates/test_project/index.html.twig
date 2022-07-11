@@ -24,6 +24,15 @@
 {% endblock %}
 {% block body %}
 
+    <dialog id="dialog">
+        <form name="dialogForm" method="dialog">
+            <label id="dialogLabel" for="dialog-title"></label>
+            <input type="text" id="tabTitle" name="title">
+            <button type="reset" id="cancel">Cancel</button>
+            <button id="add">Add</button>
+        </form>
+    </dialog>
+
     <div class="row">
         <div class="col-3">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -40,7 +49,7 @@
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab-romp" role="tablist" data-tabs-target="links">
                             <a class="nav-item nav-link active" id="nav-romp-1-tab" data-toggle="tab" href="#nav-romp-1" role="tab" aria-controls="nav-romp-1" aria-selected="true">ROMP n°1</a>
-                            <button type="button" class="nav-item btn btn-primary" id="btnAddRomp" value="romp" data-tabs-target="button" data-action="tabs#addTab">+ Add a ROMP</button>
+                            <button type="button" class="nav-item btn btn-primary" id="btnAddRomp" value="romp" data-tabs-target="button" data-action="tabs#openDialog">+ Add a ROMP</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent-romp" data-tabs-target="content">
@@ -52,7 +61,7 @@
                     <nav>
                         <div class="nav nav-tabs" id="nav-tab-wp" role="tablist" data-tabs-target="links">
                             <a class="nav-item nav-link active" id="nav-wp-1-tab" data-toggle="tab" href="#nav-wp-1" role="tab" aria-controls="nav-wp-1" aria-selected="true">WP n°1</a>
-                            <button type="button" class="nav-item btn btn-primary" id="btnAddWp" data-tabs-target="button" data-action="tabs#addTab">+ Add a WP</button>
+                            <button type="button" class="nav-item btn btn-primary" id="btnAddWp" data-tabs-target="button" data-action="tabs#openDialog">+ Add a WP</button>
                         </div>
                     </nav>
                     <div class="tab-content" id="nav-tabContent-wp" data-tabs-target="content">
@@ -62,4 +71,7 @@
             </div>
         </div>
     </div>
+
+
+
 {% endblock %}
