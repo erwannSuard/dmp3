@@ -1,65 +1,100 @@
 // assets/controllers/lazy-example-controller.js
 import { Controller } from '@hotwired/stimulus';
+import {waitFor} from "@babel/core/lib/gensync-utils/async";
 
 /* stimulusFetch: 'lazy' */
 export default class extends Controller {
-    static targets = [ "links", "content", "button" ]
+    static targets = [ "links", "content", "button", "input" ]
     static values = {
-        name: String ,
-        input : String
+        name: String
     }
 
-    connect() {
-
-    }
+    //todo : essayer dinserer le dialog dans le formulaire et de l'ouvrir quand le bouton est cliqué
+    //todo : puis lancer add tab avec la target input et retirer le dialog
+    //todo : le faire que ce soit possbile pour chaque instance du controller
 
     openDialog() {
-        console.log(this.buttonTarget.id);
-        // console.log(this.inputTarget);
-        document.getElementById("dialogLabel").innerText = this.nameValue + ' title to add :';
-        const dialog = document.getElementById("dialog");
+        let btn = this.buttonTarget.id;
+
+        let test = this.buttonTarget.parentElement.id;
+        console.log(test)
+
+        let dialogHtml = '<dialog id="dialog">\n' +
+            '            <label id="dialogLabel" for="dialog-title">Title for ' + this.nameValue + '</label>\n' +
+            '            <input type="text" id="tabTitle" name="title" data-tabs-target="input">\n' +
+            '            <button type="reset" id="cancel">Cancel</button>\n' +
+            '            <button id="btnAdd" data-action="tabs#addTab">Add</button>\n' +
+            '            </dialog>'
+        $("#" + test ).append( dialogHtml )
+        console.log('ok');
+        let dialog = document.getElementById('dialog')
         dialog.showModal();
+        this.context
 
-
-        const cancelButton = document.getElementById('cancel');
-
-        const addButton = document.getElementById('add');
-
-        cancelButton.addEventListener("click", () => {
-            console.log('close btn clicked');
-            dialog.close()
+        $("#cancel").on("click", () => {
+            dialog.remove()
         })
 
-        addButton.addEventListener("click",  () => {
-            console.log('add btn clicked');
-            var input = document.getElementById("tabTitle");
-            if (input.value.length > 0) {
-                console.log('input valid');
-                this.inputValue = input.value;
-                this.addTab();
-
-
-            }
-            else if (input.value.length == 0) {
-                console.log(' invalid input')
-                alert('invalid input')
-                console.log('essai essai')
-            }
+        $("#btnAdd").on("click", () => {
+            this.addTab()
+            dialog.remove()
         })
-        //reset
-        document.getElementById("tabTitle").value = ""
-        this.inputValue = "";
-
 
 
     }
+
+    submitDialog() {
+
+
+    }
+
+
+        // // console.log(this.inputTarget);
+        // document.getElementById("dialogLabel").innerText = this.nameValue + ' title to add :';
+        // const dialog = document.getElementById("dialog");
+        // dialog.showModal();
+        //
+        //
+        // const cancelButton = document.getElementById('cancel');
+        //
+        // const addButton = document.getElementById('add');
+        //
+        // cancelButton.addEventListener("click", () => {
+        //     console.log('close btn clicked');
+        //     dialog.close()
+        // })
+        //
+        // addButton.addEventListener("click",  () => {
+        //     console.log('add btn clicked');
+        //     var input = document.getElementById("tabTitle");
+        //     if (input.value.length > 0) {
+        //         console.log('input valid');
+        //         this.inputValue = input.value;
+        //         this.addTab(btnid);
+        //
+        //
+        //     }
+        //     else if (input.value.length == 0) {
+        //         console.log(' invalid input')
+        //         alert('invalid input')
+        //         console.log('essai essai')
+        //     }
+        // })
+        // //reset
+        // document.getElementById("tabTitle").value = ""
+        // this.inputValue = "";
+        //
+        //
+
+
 
 
     addTab() {
-        console.log(this.buttonTarget);
+        console.log('button target : '+ this.buttonTarget.id + ' content targer :'+this.contentTarget.id);
         var tabName = this.nameValue;
         var tabCounter = $("#" + this.linksTarget.id)[0].childElementCount;
-        var tabTitle = this.inputValue || tabCounter ;
+        // var tabTitle = this.inputValue || tabCounter ;
+        var tabTitle = $("#tabTitle").val() || tabCounter ;
 
         const tabLinkTemplateHtml = '<a ' +
             'class="nav-item nav-link" ' +
@@ -89,9 +124,12 @@ export default class extends Controller {
         console.log('btnId: ' + btnId)
         let btnId = (this.buttonTarget.id);
         $("#" + btnId).before(tabLinkTemplateHtml);
+        console.log('btnid: ' + btnId)
         let contentContainerId = this.contentTarget.id;
         $("#" + contentContainerId).append(tabContentTemplateHtml);
         $("#nav-" + tabName.toLowerCase() + "-" + tabCounter + "-tab").click();
+
+
 
     }
 
