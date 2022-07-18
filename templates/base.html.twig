@@ -8,7 +8,9 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset ('build/images/icons/favicon-16x16.png') }}">
         <link rel="manifest" href="{{ asset ('build/images/icons/site.webmanifest') }}">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block head %}{% endblock %}
+        {% block head %}
+
+        {% endblock %}
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
@@ -19,7 +21,9 @@
         {% endblock %}
     </head>
     <body style="min-height: 100vh;">
-        {% block body %}{% endblock %}
+        {% block body %}
+
+        {% endblock %}
     </body>
 
 </html>

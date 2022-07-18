@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e1849d3d-e957-4ba3-9086-05e7dea303f7" name="Changes" comment="redirect vers project une fois connecté">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/controllers/tabs-controller.js" beforeDir="false" afterPath="$PROJECT_DIR$/assets/controllers/tabs-controller.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/controllers/dialog-controller.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/FundingType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/FundingType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProjectType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProjectType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/RompType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/RompType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/project/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/project/index.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/test_project/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/test_project/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -253,7 +258,10 @@
       <workItem from="1657182011624" duration="20377000" />
       <workItem from="1657266187775" duration="14255000" />
       <workItem from="1657524548585" duration="24700000" />
-      <workItem from="1657617524379" duration="2446000" />
+      <workItem from="1657617524379" duration="16859000" />
+      <workItem from="1658077259110" duration="280000" />
+      <workItem from="1658077884374" duration="135000" />
+      <workItem from="1658145498741" duration="3019000" />
     </task>
     <task id="LOCAL-00001" summary="reprise log in erwann avec style sami">
       <created>1655475835888</created>

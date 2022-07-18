@@ -1,91 +1,229 @@
 
-{% extends 'base.html.twig' %}
+{% extends 'test.html.twig' %}
 
 {% block title %}FAIR-EASE | Project{% endblock %}
 
-{% block body%}
+{% block head %}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"/>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/93ff644644.js" crossorigin="anonymous"></script>
+    <style>
+        .nav.nav-tabs .nav-item.nav-link button {
+            display: none;
+        }
+
+        .nav.nav-tabs .nav-item.nav-link.active.show button {
+            display: inline;
+        }
+    </style>
+{% endblock %}
+
+{% block div %}
+
+    <div class="container-fluid" style="border: solid 4px red; border-radius: 10px;">
+        <div class="row">
+            <div class="col-3" style="min-height: 78vh; background-color: #B0413E">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-project-tab" data-toggle="pill" href="#v-pills-project" role="tab" aria-controls="v-pills-project" aria-selected="true">Project</a>
+                    <a class="nav-link" id="v-pills-romp-tab" data-toggle="pill" href="#v-pills-romp" role="tab" aria-controls="v-pills-romp" aria-selected="false">ROMP(s)</a>
+                    <a class="nav-link" id="v-pills-wp-tab" data-toggle="pill" href="#v-pills-wp" role="tab" aria-controls="v-pills-wp" aria-selected="false">Work Package(s)</a>
+                    <a class="nav-link" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-contact" aria-selected="false">Contact</a>
+                </div>
+            </div>
+            <div class="col-9" style="background-color: #5eb5e0">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-project" role="tabpanel" aria-labelledby="v-pills-project-tab">
+                        {{ form_start(formProject) }}
+                        <div class="row">
+                            <h2>PROJECT</h2>
+                            {# GENERAL INFOS #}
+                            <legend><h3>General Infos : </h3></legend>
+                            <div class="col-6">
+                                <fieldset>
+                                    {{ form_row(formProject.idContact) }}
+                                    {{ form_row(formProject.title) }}
+                                    {{ form_row(formProject.abstract) }}
+                                    {{ form_row(formProject.acronym) }}
+
+                            </div>
+                            <div class="col-6">
+                                {{ form_row(formProject.startDate) }}
+                                {{ form_row(formProject.duration) }}
+                                {{ form_row(formProject.website) }}
+                                {{ form_row(formProject.objectives) }}
+                                </fieldset>
+                            </div>
+                            {# FUNDING #}
+                            <fieldset>
+                                <legend><h3>Funding Infos : </h3></legend>
+                                {{ form_row(formProject.funding.vars.prototype) }}
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="v-pills-romp" role="tabpanel" aria-labelledby="v-pills-romp-tab" data-controller="tabs" data-tabs-name-value="ROMP">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab-romp" role="tablist" data-tabs-target="links">
+                                <a class="nav-item nav-link active" id="nav-romp-1-tab" data-toggle="tab" href="#nav-romp-1" role="tab" aria-controls="nav-romp-1" aria-selected="true">ROMP n°1</a>
+                                <button type="button" class="nav-item btn btn-primary" id="btnAddRomp" value="romp" data-tabs-target="button" data-action="tabs#openDialog">+ Add a ROMP</button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent-romp" data-tabs-target="content">
+                            <div class="tab-pane fade show active" id="nav-romp-1" role="tabpanel" aria-labelledby="nav-romp-1-tab">
+                                {# ROMP #}
+                                <fieldset>
+                                    <legend><h3>ROMP : </h3></legend>
+                                    {{form_row(formProject.romp.vars.prototype)}}
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="v-pills-wp" role="tabpanel" aria-labelledby="v-pills-wp-tab" data-controller="tabs" data-tabs-name-value="WP">
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab-wp" role="tablist" data-tabs-target="links">
+                                <a class="nav-item nav-link active" id="nav-wp-1-tab" data-toggle="tab" href="#nav-wp-1" role="tab" aria-controls="nav-wp-1" aria-selected="true">WP n°1</a>
+                                <button type="button" class="nav-item btn btn-primary" id="btnAddWp" data-tabs-target="button" data-action="tabs#openDialog">+ Add a WP</button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent-wp" data-tabs-target="content">
+                            <div class="tab-pane fade show active" id="nav-wp-1" role="tabpanel" aria-labelledby="nav-wp-1-tab">
+                                {# WORK PACKAGES #}
+                                <h3>Work Packages</h3>
+                                <ul class="idRefProject"
+                                        {# Ajouter des wps : #}
+
+                                    data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
+                                    data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"
+                                >
+                                    {% for wp in formProject.idRefProject %}
+                                        <li>
+                                            <fieldset>
+                                                <legend>Work package n°{{formProject.idRefProject|length}}</legend>
+                                                {{ form_row(wp.idRefProject.vars.prototype) }}
+                                            </fieldset>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+
+                                <button type="button" class="add_item_link" data-collection-holder-class="idRefProject">
+                                    Add a Work Package
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="v-pills-contact" role="tabpanel" aria-labelledby="v-pills-contact-tab">
+                        <div class="row">
+                            {{ form_start(formContact) }}
+                            <h2>CONTACT</h2>
+                            <legend>Contact General information</legend>
+                            <div class="col-6 flex-column gap-1">
+                                {{ form_row(formContact.lastName) }}
+                                {{ form_row(formContact.firstName) }}
+                                {{ form_row(formContact.mail) }}
+                            </div>
+                            <div class="col-6 flex-column gap-1">
+                                {{ form_row(formContact.affiliation) }}
+                                {{ form_row(formContact.laboratoryOrDepartment) }}
+                                {{ form_row(formContact.identifier) }}
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit new contact</button>
+                        {{ form_end(formContact) }}
+                    </div>
+                    {{ form_end(formProject) }}
+                </div>
+            </div>
+        </div>
+    </div>
+
 {# FORMULAIRE CONTACT #}
-<div id="contact">
-<button type="button" class='btn'>Show project form</button>
-{{ form_start(formContact) }}
-<fieldset>
-<h2>CONTACT</h2>
-<fieldset>
-<legend>Contact General information</legend>
-{{ form_row(formContact.lastName) }}
-{{ form_row(formContact.firstName) }}
-{{ form_row(formContact.mail) }}
-</fieldset>
-{{ form_row(formContact.affiliation) }}
-{{ form_row(formContact.laboratoryOrDepartment) }}
-{{ form_row(formContact.identifier) }}
-</fieldset>
+{#<div id="contact">#}
+{#<button type="button" class='btn'>Show project form</button>#}
+{#{{ form_start(formContact) }}#}
+{#<fieldset>#}
+{#<h2>CONTACT</h2>#}
+{#<fieldset>#}
+{#<legend>Contact General information</legend>#}
+{#{{ form_row(formContact.lastName) }}#}
+{#{{ form_row(formContact.firstName) }}#}
+{#{{ form_row(formContact.mail) }}#}
+{#</fieldset>#}
+{#{{ form_row(formContact.affiliation) }}#}
+{#{{ form_row(formContact.laboratoryOrDepartment) }}#}
+{#{{ form_row(formContact.identifier) }}#}
+{#</fieldset>#}
 
-<button type="submit" class="btn">Submit new contact</button>
-{{ form_end(formContact) }}
-</div>
+{#<button type="submit" class="btn">Submit new contact</button>#}
+{#{{ form_end(formContact) }}#}
+{#</div>#}
 
-<div id="project">
-<button type="button" class='btn'>Show contact form</button>
+{#<div id="project">#}
+{#<button type="button" class='btn'>Show contact form</button>#}
 
 {# FORMULAIRE PROJECT #}
 
-{{ form_start(formProject) }}
-<fieldset>
-    <h2>PROJECT</h2>
+{#{{ form_start(formProject) }}#}
+{#<fieldset>#}
+{#    <h2>PROJECT</h2>#}
 
 {# GENERAL INFOS #}
-<fieldset>
-<legend><h3>General Infos : </h3></legend>
-{{ form_row(formProject.idContact) }}
-{{ form_row(formProject.title) }}
-{{ form_row(formProject.abstract) }}
-{{ form_row(formProject.acronym) }}
-{{ form_row(formProject.startDate) }}
-{{ form_row(formProject.duration) }}
-{{ form_row(formProject.website) }}
-{{ form_row(formProject.objectives) }}
-</fieldset>
+{#<fieldset>#}
+{#<legend><h3>General Infos : </h3></legend>#}
+{#{{ form_row(formProject.idContact) }}#}
+{#{{ form_row(formProject.title) }}#}
+{#{{ form_row(formProject.abstract) }}#}
+{#{{ form_row(formProject.acronym) }}#}
+{#{{ form_row(formProject.startDate) }}#}
+{#{{ form_row(formProject.duration) }}#}
+{#{{ form_row(formProject.website) }}#}
+{#{{ form_row(formProject.objectives) }}#}
+{#</fieldset>#}
 
 {# FUNDING #}
-<fieldset>
-<legend><h3>Funding Infos : </h3></legend>
-    {{ form_row(formProject.funding.vars.prototype) }}
-</fieldset>
+{#<fieldset>#}
+{#<legend><h3>Funding Infos : </h3></legend>#}
+{#    {{ form_row(formProject.funding.vars.prototype) }}#}
+{#</fieldset>#}
 
 {# ROMP #}
-<fieldset>
-<legend><h3>ROMP : </h3></legend>
-{{form_row(formProject.romp.vars.prototype)}}
-</fieldset>
+{#<fieldset>#}
+{#<legend><h3>ROMP : </h3></legend>#}
+{#{{form_row(formProject.romp.vars.prototype)}}#}
+{#</fieldset>#}
 
 
 {# WORK PACKAGES #}
-<h3>Work Packages</h3>
-    <ul class="idRefProject"
-    {# Ajouter des wps : #}
-     
-        data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
-        data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"    
-    >
-        {% for wp in formProject.idRefProject %}
-            <li>
-                <fieldset>
-                    <legend>Work package n°{{formProject.idRefProject|length}}</legend>
-                {{ form_row(wp.idRefProject.vars.prototype) }}
-                </fieldset>
-            </li>
-        {% endfor %}
-    </ul>
-    
-{# Bouton ajout WP #}
-<button type="button" class="add_item_link" data-collection-holder-class="idRefProject">
-Add a Work Package
-</button>
+{#<h3>Work Packages</h3>#}
+{#    <ul class="idRefProject"#}
+{#    #}{# Ajouter des wps : #}
 
-</fieldset>
-{{ form_end(formProject) }}
-</div>
+{#        data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"#}
+{#        data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"#}
+{#    >#}
+{#        {% for wp in formProject.idRefProject %}#}
+{#            <li>#}
+{#                <fieldset>#}
+{#                    <legend>Work package n°{{formProject.idRefProject|length}}</legend>#}
+{#                {{ form_row(wp.idRefProject.vars.prototype) }}#}
+{#                </fieldset>#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+
+{# Bouton ajout WP #}
+{#<button type="button" class="add_item_link" data-collection-holder-class="idRefProject">#}
+{#Add a Work Package#}
+{#</button>#}
+
+{#</fieldset>#}
+{#{{ form_end(formProject) }}#}
+{#</div>#}
 
 {# ---------------------------------------------  STYLE ET SCRIPT  --------------------------------- #}
 
@@ -146,6 +284,10 @@ const addFormToCollection = (e) => {
     collectionHolder.dataset.index++;
 
 }
+    $(".add_item_link").on("click", () => {
+        console.log("click btn wp")
+        addFormToCollection();
+    })
     //onClick
     document.querySelectorAll('.add_item_link').forEach(btn => {
         btn.addEventListener('click', addFormToCollection)

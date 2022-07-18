@@ -19,11 +19,31 @@ class ProjectType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'label' => 'Project Title : '
+                'label' => '* Project title : ',
+                'attr' => [
+                    'placeholder' => '* Project title : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
             ])
-            ->add('abstract')
+            ->add('abstract' ,TextAreaType::class, [
+                'label' => '* Abstract : ',
+                'attr' => [
+                    'placeholder' => '* Abstract : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
+            ])
             ->add('acronym', TextType::class, [
-                'label' => 'Project\'s Acronym : '
+                'label' => '* Project\'s acronym : ',
+                'attr' => [
+                    'placeholder' => '* Project\'s acronym : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
             ])
             //----------   Form Funding   ----------
             ->add('funding', CollectionType::class, [
@@ -40,16 +60,35 @@ class ProjectType extends AbstractType
                 'label' => 'Project starting date : '
             ])
             ->add('duration', null, [
-                'label' => 'Duration in month (optionnal) : ',
+                'label' => 'Duration in month : ',
                 'required' => false,
+                'attr' => [
+                    'placeholder' => 'Duration in month : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
             ])
+
             ->add('website', TextType::class, [
-                'label' => 'Website (optionnal) : ',
+                'label' => 'Website : ',
                 'required' => false,
+                'attr' => [
+                    'placeholder' => 'Website : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
             ])
             ->add('objectives', TextAreaType::class, [
-                'label' => 'Objectives (optionnal) : ',
+                'label' => 'Objectives : ',
                 'required' => false,
+                'attr' => [
+                    'placeholder' => 'Objectives : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
             ])
 
             ->add('idContact', EntityType::class, [
