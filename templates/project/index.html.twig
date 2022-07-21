@@ -23,48 +23,46 @@
 
 {% block div %}
 
-    <div class="container-fluid" style="border: solid 4px red; border-radius: 10px;">
+    <div class="container-fluid" style="border: solid 10px red; border-radius: 10px; background-color: black;">
         <div class="row">
-            <div class="col-3" style="min-height: 78vh; background-color: #B0413E">
+            <div class="col-3" style="min-height: 78vh; background-color: #F4F4F4; border-right: solid 10px red; padding-top: 5px;">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-project-tab" data-toggle="pill" href="#v-pills-project" role="tab" aria-controls="v-pills-project" aria-selected="true">Project</a>
                     <a class="nav-link" id="v-pills-romp-tab" data-toggle="pill" href="#v-pills-romp" role="tab" aria-controls="v-pills-romp" aria-selected="false">ROMP(s)</a>
                     <a class="nav-link" id="v-pills-wp-tab" data-toggle="pill" href="#v-pills-wp" role="tab" aria-controls="v-pills-wp" aria-selected="false">Work Package(s)</a>
-                    <a class="nav-link" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-contact" aria-selected="false">Contact</a>
+                    <hr>
+                    <a class="nav-link" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-contact" aria-selected="false">+ Add a Contact</a>
                 </div>
             </div>
-            <div class="col-9" style="background-color: #5eb5e0">
+            <div class="col-9" style="background-color: white;">
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade show active" id="v-pills-project" role="tabpanel" aria-labelledby="v-pills-project-tab">
                         {{ form_start(formProject) }}
                         <div class="row">
-                            <h2>PROJECT</h2>
-                            {# GENERAL INFOS #}
-                            <legend><h3>General Infos : </h3></legend>
-                            <div class="col-6">
-                                <fieldset>
+                            <legend><h3>Project General Infos : </h3></legend>
+                            <div class="col-6 flex-column gap-2">
                                     {{ form_row(formProject.idContact) }}
-                                    {{ form_row(formProject.title) }}
+                                    <div>{{ form_row(formProject.title) }}</div>
                                     {{ form_row(formProject.abstract) }}
                                     {{ form_row(formProject.acronym) }}
 
                             </div>
-                            <div class="col-6">
+                            <div class="col-6" >
                                 {{ form_row(formProject.startDate) }}
                                 {{ form_row(formProject.duration) }}
                                 {{ form_row(formProject.website) }}
                                 {{ form_row(formProject.objectives) }}
-                                </fieldset>
                             </div>
-                            {# FUNDING #}
-                            <fieldset>
+
                                 <legend><h3>Funding Infos : </h3></legend>
-                                {{ form_row(formProject.funding.vars.prototype) }}
-                            </fieldset>
+                                <div class="col-6">{{ form_row (formProject.funding.vars.prototype.grantFunding) }}</div>
+                                <div class="col-6">{{ form_row (formProject.funding.vars.prototype.funder) }}</div>
                         </div>
+                        <button class="btn-primary rounded" style="margin-top: 10px;">Next</button>
                     </div>
 
                     <div class="tab-pane fade" id="v-pills-romp" role="tabpanel" aria-labelledby="v-pills-romp-tab" data-controller="tabs" data-tabs-name-value="ROMP">
+                        <h3>ROMP : </h3>
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab-romp" role="tablist" data-tabs-target="links">
                                 <a class="nav-item nav-link active" id="nav-romp-1-tab" data-toggle="tab" href="#nav-romp-1" role="tab" aria-controls="nav-romp-1" aria-selected="true">ROMP n°1</a>
@@ -73,13 +71,25 @@
                         </nav>
                         <div class="tab-content" id="nav-tabContent-romp" data-tabs-target="content">
                             <div class="tab-pane fade show active" id="nav-romp-1" role="tabpanel" aria-labelledby="nav-romp-1-tab">
-                                {# ROMP #}
-                                <fieldset>
-                                    <legend><h3>ROMP : </h3></legend>
-                                    {{form_row(formProject.romp.vars.prototype)}}
+
+                                <fieldset class="row">
+
+                                    <div class="col-6">
+                                        {{form_row(formProject.romp.vars.prototype.submissionDate)}}
+                                        {{form_row(formProject.romp.vars.prototype.versionRomp)}}
+                                        {{form_row(formProject.romp.vars.prototype.deliverable)}}
+                                    </div>
+
+                                    <div class="col-6">
+                                        <p>test</p>
+                                        {{form_row(formProject.romp.vars.prototype.licenceRomp)}}
+                                        {{form_row(formProject.romp.vars.prototype.ethicalIssues)}}
+                                        {{form_row(formProject.romp.vars.prototype.contactRomp)}}
+                                    </div>
                                 </fieldset>
                             </div>
                         </div>
+                        <button class="btn-primary rounded" style="margin-top: 10px;">Next</button>
                     </div>
 
                     <div class="tab-pane fade" id="v-pills-wp" role="tabpanel" aria-labelledby="v-pills-wp-tab" data-controller="tabs" data-tabs-name-value="WP">
@@ -91,10 +101,9 @@
                         </nav>
                         <div class="tab-content" id="nav-tabContent-wp" data-tabs-target="content">
                             <div class="tab-pane fade show active" id="nav-wp-1" role="tabpanel" aria-labelledby="nav-wp-1-tab">
-                                {# WORK PACKAGES #}
                                 <h3>Work Packages</h3>
                                 <ul class="idRefProject"
-                                        {# Ajouter des wps : #}
+                                         Ajouter des wps :
 
                                     data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
                                     data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"
@@ -112,37 +121,37 @@
                                 <button type="button" class="add_item_link" data-collection-holder-class="idRefProject">
                                     Add a Work Package
                                 </button>
+                                {{ form_end(formProject) }}
                             </div>
                         </div>
                     </div>
 
                     <div class="tab-pane fade" id="v-pills-contact" role="tabpanel" aria-labelledby="v-pills-contact-tab">
-                        <div class="row">
                             {{ form_start(formContact) }}
-                            <h2>CONTACT</h2>
-                            <legend>Contact General information</legend>
-                            <div class="col-6 flex-column gap-1">
-                                {{ form_row(formContact.lastName) }}
-                                {{ form_row(formContact.firstName) }}
-                                {{ form_row(formContact.mail) }}
-                            </div>
-                            <div class="col-6 flex-column gap-1">
-                                {{ form_row(formContact.affiliation) }}
-                                {{ form_row(formContact.laboratoryOrDepartment) }}
-                                {{ form_row(formContact.identifier) }}
-                            </div>
+                            <div class="row">
+                                <h2>NEW CONTACT</h2>
+                                <legend>Contact General informations</legend>
+                                <div class="col-6">
+                                   <div> {{ form_row(formContact.lastName) }}</div>
+                                    <div> {{ form_row(formContact.firstName) }} </div>
+                                    <div> {{ form_row(formContact.mail) }} </div>
+                                </div>
+                                <div class="col-6" >
+                                    {{ form_row(formContact.affiliation) }}
+                                    {{ form_row(formContact.laboratoryOrDepartment) }}
+                                    {{ form_row(formContact.identifier) }}
+                                </div>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit new contact</button>
                         {{ form_end(formContact) }}
                     </div>
-                    {{ form_end(formProject) }}
                 </div>
             </div>
         </div>
     </div>
 
-{# FORMULAIRE CONTACT #}
+{# FORMULAIRE CONTACT#}
 {#<div id="contact">#}
 {#<button type="button" class='btn'>Show project form</button>#}
 {#{{ form_start(formContact) }}#}
@@ -166,13 +175,13 @@
 {#<div id="project">#}
 {#<button type="button" class='btn'>Show contact form</button>#}
 
-{# FORMULAIRE PROJECT #}
+{# FORMULAIRE PROJECT#}
 
 {#{{ form_start(formProject) }}#}
 {#<fieldset>#}
 {#    <h2>PROJECT</h2>#}
 
-{# GENERAL INFOS #}
+{# GENERAL INFOS#}
 {#<fieldset>#}
 {#<legend><h3>General Infos : </h3></legend>#}
 {#{{ form_row(formProject.idContact) }}#}
@@ -185,27 +194,26 @@
 {#{{ form_row(formProject.objectives) }}#}
 {#</fieldset>#}
 
-{# FUNDING #}
+{# FUNDING#}
 {#<fieldset>#}
 {#<legend><h3>Funding Infos : </h3></legend>#}
 {#    {{ form_row(formProject.funding.vars.prototype) }}#}
 {#</fieldset>#}
 
-{# ROMP #}
+{# ROMP#}
 {#<fieldset>#}
 {#<legend><h3>ROMP : </h3></legend>#}
 {#{{form_row(formProject.romp.vars.prototype)}}#}
 {#</fieldset>#}
 
 
-{# WORK PACKAGES #}
+{# WORK PACKAGES#}
 {#<h3>Work Packages</h3>#}
 {#    <ul class="idRefProject"#}
-{#    #}{# Ajouter des wps : #}
 
 {#        data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"#}
 {#        data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"#}
-{#    >#}
+{#    >     Ajouter des wps :#}
 {#        {% for wp in formProject.idRefProject %}#}
 {#            <li>#}
 {#                <fieldset>#}
@@ -216,7 +224,7 @@
 {#        {% endfor %}#}
 {#    </ul>#}
 
-{# Bouton ajout WP #}
+{# Bouton ajout WP#}
 {#<button type="button" class="add_item_link" data-collection-holder-class="idRefProject">#}
 {#Add a Work Package#}
 {#</button>#}
