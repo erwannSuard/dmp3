@@ -26,12 +26,8 @@ class ProjectController extends AbstractController
     public function index(Request $request): Response
     {
 //------------------------------------------------
-//------------------------------------------------
-//------------------------------------------------
         //Sécurité accès
-        $this->denyAccessUnlessGranted('ROLE_USER');       
-//------------------------------------------------
-//------------------------------------------------
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');       
 //------------------------------------------------
 
         //Création des instances de projet, contact et de liaison des deux.
@@ -122,9 +118,7 @@ class ProjectController extends AbstractController
                 $this->entityManager->persist($cp);
                 $i+=1;
             }
-            //dd($project);
             $this->entityManager->flush();
-            // dd($project);
 
             return $this->redirectToRoute('homepage');
         }

@@ -45,11 +45,19 @@ class Contact
     #[ORM\OneToOne(inversedBy: 'contact', targetEntity: User::class, cascade: ['persist', 'remove'])]
     private $userAuth;
 
+    #[ORM\OneToMany(mappedBy: 'fundedBy', targetEntity: Cost::class)]
+    private $costs;
+
+    #[ORM\ManyToMany(targetEntity: ResearchOutput::class, mappedBy: 'contacts')]
+    private $researchOutputs;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
         $this->fundings = new ArrayCollection();
         $this->romps = new ArrayCollection();
+        $this->costs = new ArrayCollection();
+        $this->researchOutputs = new ArrayCollection();
     }
 
     public function __toString()
@@ -234,6 +242,63 @@ class Contact
     public function setUserAuth(?User $userAuth): self
     {
         $this->userAuth = $userAuth;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Cost>
+     */
+    public function getCosts(): Collection
+    {
+        return $this->costs;
+    }
+
+    public function addCost(Cost $cost): self
+    {
+        if (!$this->costs->contains($cost)) {
+            $this->costs[] = $cost;
+            $cost->setFundedBy($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCost(Cost $cost): self
+    {
+        if ($this->costs->removeElement($cost)) {
+            // set the owning side to null (unless already changed)
+            if ($cost->getFundedBy() === $this) {
+                $cost->setFundedBy(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ResearchOutput>
+     */
+    public function getResearchOutputs(): Collection
+    {
+        return $this->researchOutputs;
+    }
+
+    public function addResearchOutput(ResearchOutput $researchOutput): self
+    {
+        if (!$this->researchOutputs->contains($researchOutput)) {
+            $this->researchOutputs[] = $researchOutput;
+            $researchOutput->addContact($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResearchOutput(ResearchOutput $researchOutput): self
+    {
+        if ($this->researchOutputs->removeElement($researchOutput)) {
+            $researchOutput->removeContact($this);
+        }
 
         return $this;
     }

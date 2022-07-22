@@ -30,6 +30,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToOne(mappedBy: 'userAuth', targetEntity: Contact::class, cascade: ['persist', 'remove'])]
     private $contact;
 
+    
+
     public function getId(): ?int
     {
         return $this->id;

@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -56,6 +56,10 @@ class RegistrationFormType extends AbstractType
                 'prototype' => true,
                 'mapped' => false,
                 'prototype_name' => 'contact',
+            ])
+            ->add('role', HiddenType::class, [
+                'data' => 'ROLE_ADMIN',
+                'mapped' => false
             ])
             ;
         ;

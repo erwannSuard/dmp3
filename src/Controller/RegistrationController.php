@@ -25,9 +25,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             // ------------------------
-            // ------------------------
             //Prendre le mail (Attention, doublon pour l'instant)
-            // ------------------------
             // ------------------------
             $dataFormContact = $form->get('contact')->getData();
             $dataFormContact = $dataFormContact["contact"];
@@ -41,7 +39,12 @@ class RegistrationController extends AbstractController
                 )
             );
             $contact = $dataFormContact;
-            $user->setContact($contact);
+            // // Pour tricher et créer un admin
+            // $user->setContact($contact);
+            // $userRole = [];
+            // array_push($userRole, $form->get('role')->getData());
+            // $user->setRoles($userRole);
+            // // fin triche, à commenter pour créer un User basique
             $entityManager->persist($contact);
             $entityManager->persist($user);
             $entityManager->flush();

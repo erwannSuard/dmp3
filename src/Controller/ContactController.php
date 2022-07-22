@@ -20,12 +20,8 @@ class ContactController extends AbstractController
     public function index(Request $request): Response
     {
 //------------------------------------------------
-//------------------------------------------------
-//------------------------------------------------
         //Sécurité accès
-        $this->denyAccessUnlessGranted('ROLE_USER');       
-//------------------------------------------------
-//------------------------------------------------
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');       
 //------------------------------------------------
 
         $contact = new Contact();
