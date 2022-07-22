@@ -30,10 +30,11 @@ class ProjectType extends AbstractType
             ->add('abstract' ,TextAreaType::class, [
                 'label' => '* Abstract : ',
                 'attr' => [
-                    'placeholder' => '* Abstract : '
+                    'placeholder' => '* Abstract : ',
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
+                    'rows' => '3'
                 ],
             ])
             ->add('acronym', TextType::class, [
@@ -57,7 +58,7 @@ class ProjectType extends AbstractType
             ])
             //------------------------------------
             ->add('startDate', null, [
-                'label' => 'Project starting date : '
+                'label' => '* Project starting date : '
             ])
             ->add('duration', null, [
                 'label' => 'Duration in month : ',
@@ -93,7 +94,13 @@ class ProjectType extends AbstractType
 
             ->add('idContact', EntityType::class, [
                 'class' => Contact::class,
-                'label' => 'Project Coordinator : ',
+                'label' => '* Project Coordinator : ',
+                'attr' => [
+                    'placeholder' => '* Project Coordinator : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
                 'mapped' => false,
                 // 'multiple' => true,
                 

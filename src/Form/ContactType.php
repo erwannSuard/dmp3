@@ -15,9 +15,9 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('lastName', TextType::class, [
-                'label' => 'Last Name or Organization * : ',
+                'label' => '* Last Name or Organization : ',
                 'attr' => [
-                    'placeholder' => 'Last Name or Organization * : '
+                    'placeholder' => '* Last Name or Organization : '
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
@@ -34,18 +34,18 @@ class ContactType extends AbstractType
                 'required' => false,
             ])
             ->add('mail', TextType::class, [
-                'label' => 'Mail * : ',
+                'label' => '* Mail : ',
                 'attr' => [
-                    'placeholder' => 'Mail * : '
+                    'placeholder' => '* Mail : '
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
                 ]
             ])
             ->add('affiliation', TextType::class, [
-                'label' => 'Affiliation * : ',
+                'label' => '* Affiliation : ',
                 'attr' => [
-                    'placeholder' => 'Affiliation * : '
+                    'placeholder' => '* Affiliation : '
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',

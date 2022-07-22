@@ -25,16 +25,16 @@ class RegistrationFormType extends AbstractType
                 'options' => ['attr' => ['class' => 'password-field','placeholder' => 'Password * :']],
                 'required' => true,
                 'first_options'  => [
-                    'label' => 'Password * :',
+                    'label' => '* Password :',
                     'attr' => [
-                        'placeholder' => 'Password * : '],
+                        'placeholder' => '* Password : '],
                     'row_attr' => [
                         'class' => 'form-floating',]
                     ],
                 'second_options' => [
-                    'label' => 'Repeat Password * :',
+                    'label' => '* Repeat Password :',
                     'attr' => [
-                        'placeholder' => 'Repeat Password * : '],
+                        'placeholder' => '* Repeat Password : '],
                     'row_attr' => [
                         'class' => 'form-floating',]
                 ],
