@@ -29,7 +29,7 @@
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-project-tab" data-toggle="pill" href="#v-pills-project" role="tab" aria-controls="v-pills-project" aria-selected="true">Project</a>
 {#                    <a class="nav-link" id="v-pills-romp-tab" data-toggle="pill" href="#v-pills-romp" role="tab" aria-controls="v-pills-romp" aria-selected="false">ROMP(s)</a>#}
-                    <a class="nav-link" id="v-pills-wp-tab" data-toggle="pill" href="#v-pills-wp" role="tab" aria-controls="v-pills-wp" aria-selected="false">Work Package(s)</a>
+                    <a class="nav-link wp" id="v-pills-wp-tab" data-toggle="pill" href="#v-pills-wp" role="tab" aria-controls="v-pills-wp" aria-selected="false">Work Package(s)</a>
                     <hr>
                     <a class="nav-link" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-contact" aria-selected="false">+ Add a Contact</a>
                 </div>
@@ -58,7 +58,7 @@
                                 <div class="col-6">{{ form_row (formProject.funding.vars.prototype.grantFunding) }}</div>
                                 <div class="col-6">{{ form_row (formProject.funding.vars.prototype.funder) }}</div>
                         </div>
-                        <div class="flex"><a href="#v-pills-romp"></a></div>
+                        <div class="d-flex justify-content-end mt-5"><button type="button" class="btn btn-primary btn-lg" id="nextWP">Next</button></div>
                     </div>
 
 {#                    <div class="tab-pane fade" id="v-pills-romp" role="tabpanel" aria-labelledby="v-pills-romp-tab" data-controller="tabs" data-tabs-name-value="ROMP">#}
@@ -121,6 +121,7 @@
                                 <button type="button" class="add_item_link" data-collection-holder-class="idRefProject">
                                 Add a Work Package
                                 </button>
+                                {{ form_end(formProject) }}
                             </div>
                         </div>
                     </div>
@@ -304,6 +305,14 @@ const addFormToCollection = () => {
             addFormToCollection();
         })
     });
+
+    // btn next project a wp
+    $("#nextWP").on("click" , () => {
+        let test = document.querySelector("#v-pills-wp-tab");
+
+        console.log( test)
+        test.click();
+})
 </script>
 {% endblock %}
 
