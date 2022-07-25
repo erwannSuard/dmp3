@@ -19,6 +19,13 @@
             display: inline;
         }
     </style>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
 {% endblock %}
 
 {% block div %}
@@ -28,7 +35,7 @@
             <div class="col-3" style="min-height: 78vh; background-color: #F4F4F4; border-right: solid 10px red; padding-top: 5px;">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-project-tab" data-toggle="pill" href="#v-pills-project" role="tab" aria-controls="v-pills-project" aria-selected="true">Project</a>
-{#                    <a class="nav-link" id="v-pills-romp-tab" data-toggle="pill" href="#v-pills-romp" role="tab" aria-controls="v-pills-romp" aria-selected="false">ROMP(s)</a>#}
+                    <a class="nav-link" id="v-pills-romp-tab" data-toggle="pill" href="#v-pills-romp" role="tab" aria-controls="v-pills-romp" aria-selected="false">ROMP(s)</a>
                     <a class="nav-link wp" id="v-pills-wp-tab" data-toggle="pill" href="#v-pills-wp" role="tab" aria-controls="v-pills-wp" aria-selected="false">Work Package(s)</a>
                     <hr>
                     <a class="nav-link" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-contact" aria-selected="false">+ Add a Contact</a>
@@ -58,38 +65,38 @@
                                 <div class="col-6">{{ form_row (formProject.funding.vars.prototype.grantFunding) }}</div>
                                 <div class="col-6">{{ form_row (formProject.funding.vars.prototype.funder) }}</div>
                         </div>
-                        <div class="d-flex justify-content-end mt-5"><button type="button" class="btn btn-primary btn-lg" id="nextWP">Next</button></div>
+                        <div class="d-flex justify-content-end mt-5"><button type="button" class="btn btn-primary btn-lg" id="nextROMP">Next</button></div>
                     </div>
 
-{#                    <div class="tab-pane fade" id="v-pills-romp" role="tabpanel" aria-labelledby="v-pills-romp-tab" data-controller="tabs" data-tabs-name-value="ROMP">#}
-{#                        <h3>ROMP : </h3>#}
-{#                        <p class="text-muted">Fields marked with an <span style="color: red">*</span> are mandatory</p>#}
-{#                        <nav>#}
-{#                            <div class="nav nav-tabs" id="nav-tab-romp" role="tablist" data-tabs-target="links">#}
-{#                                <a class="nav-item nav-link active" id="nav-romp-1-tab" data-toggle="tab" href="#nav-romp-1" role="tab" aria-controls="nav-romp-1" aria-selected="true">ROMP n°1</a>#}
-{#                                <button type="button" class="nav-item btn btn-primary" id="btnAddRomp" value="romp" data-tabs-target="button" data-action="tabs#openDialog">+ Add a ROMP</button>#}
-{#                            </div>#}
-{#                        </nav>#}
-{#                        <div class="tab-content" id="nav-tabContent-romp" data-tabs-target="content">#}
-{#                            <div class="tab-pane fade show active" id="nav-romp-1" role="tabpanel" aria-labelledby="nav-romp-1-tab">#}
+                    <div class="tab-pane fade" id="v-pills-romp" role="tabpanel" aria-labelledby="v-pills-romp-tab" data-controller="tabs" data-tabs-name-value="ROMP">
+                        <h3>ROMP : </h3>
+                        <p class="text-muted">Fields marked with an <span style="color: red">*</span> are mandatory</p>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab-romp" role="tablist" data-tabs-target="links">
+                                <a class="nav-item nav-link active" id="nav-romp-1-tab" data-toggle="tab" href="#nav-romp-1" role="tab" aria-controls="nav-romp-1" aria-selected="true">ROMP n°1</a>
+                                <button type="button" class="nav-item btn btn-primary" id="btnAddRomp" value="romp" data-tabs-target="button" data-action="tabs#openDialog">+ Add a ROMP</button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent-romp" data-tabs-target="content">
+                            <div class="tab-pane fade show active" id="nav-romp-1" role="tabpanel" aria-labelledby="nav-romp-1-tab">
 
-{#                                <fieldset class="row">#}
-{#                                    <div class="col-6">#}
-{#                                        {{form_row(formProject.romp.vars.prototype.submissionDate)}}#}
-{#                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.versionRomp)}}</div>#}
-{#                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.deliverable)}}</div>#}
-{#                                    </div>#}
+                                <fieldset class="row">
+                                    <div class="col-6">
+                                        {{form_row(formProject.romp.vars.prototype.submissionDate)}}
+                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.versionRomp)}}</div>
+                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.deliverable)}}</div>
+                                    </div>
 
-{#                                    <div class="col-6">#}
-{#                                        <div class="mt-6">{{form_row(formProject.romp.vars.prototype.licenceRomp)}}</div>#}
-{#                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.ethicalIssues)}}</div>#}
-{#                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.contactRomp)}}</div>#}
-{#                                    </div>#}
-{#                                </fieldset>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <button class="btn-primary rounded" style="margin-top: 10px;">Next</button>#}
-{#                    </div>#}
+                                    <div class="col-6">
+                                        <div class="mt-6">{{form_row(formProject.romp.vars.prototype.licenceRomp)}}</div>
+                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.ethicalIssues)}}</div>
+                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.contactRomp)}}</div>
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-5"><button type="button" class="btn btn-primary btn-lg" id="nextWP">Next</button></div>
+                    </div>
 
                     <div class="tab-pane fade" id="v-pills-wp" role="tabpanel" aria-labelledby="v-pills-wp-tab" data-controller="tabs" data-tabs-name-value="WP">
                         <nav>
@@ -99,28 +106,30 @@
                             </div>
                         </nav>
                         <div class="tab-content" id="nav-tabContent-wp" data-tabs-target="content">
-                            <div class="tab-pane fade show active" id="nav-wp-1" role="tabpanel" aria-labelledby="nav-wp-1-tab">
+                            <fieldset class="tab-pane fade show active" id="nav-wp-1" role="tabpanel" aria-labelledby="nav-wp-1-tab">
 
                                 <h3>Work Packages</h3>
-                                    <ul class="idRefProject" id="wpHolder"
+                                <ul class="idRefProject"
+                                        {# Ajouter des wps : #}
 
-                                        data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
-                                        data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"
-                                    >     Ajouter des wps :
-                                        {% for wp in formProject.idRefProject %}
-                                            <li>
-                                                <fieldset>
-                                                    <legend>Work package n°{{formProject.idRefProject|length}}</legend>
+                                    data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
+                                    data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"
+                                >
+                                    {% for wp in formProject.idRefProject %}
+                                        <li>
+                                            <fieldset>
+                                                <legend>Work package n°{{formProject.idRefProject|length}}</legend>
                                                 {{ form_row(wp.idRefProject.vars.prototype) }}
-                                                </fieldset>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
+                                            </fieldset>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
 
                                 {# Bouton ajout WP #}
                                 <button type="button" class="add_item_link" data-collection-holder-class="idRefProject">
-                                Add a Work Package
+                                    Add a Work Package
                                 </button>
+                                 </fieldset>
                                 {{ form_end(formProject) }}
                             </div>
                         </div>
@@ -225,7 +234,7 @@
 {#    </ul>#}
 
 {# Bouton ajout WP#}
-{#<button type="button" class="add_item_link" data-collection-holder-class="idRefProject">#}
+{#<button type="button" class="" data-collection-holder-class="idRefProject">#}
 {#Add a Work Package#}
 {#</button>#}
 
@@ -275,43 +284,46 @@ li {
 
 
 //Ajouter Work Packages
-const addFormToCollection = () => {
-    const collectionHolder = document.querySelector("#wpHolder");
+// const addFormToCollection = (e) => {
+//     const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+//     console.log(collectionHolder);
+//     const item = document.createElement('li');
+//
+//     item.innerHTML = collectionHolder
+//     .dataset
+//     .prototype
+//     .replace(/__name__/g,
+//     collectionHolder.dataset.index
+//     );
+//
+//     collectionHolder.appendChild(item);
+//
+//     collectionHolder.dataset.index++;
+//
+// }
+//     $(".add_item_link").on("click", () => {
+//         console.log("click btn wp")
+//         console.log(event.currentTarget.dataset.collectionHolderClass)
+//
+//         addFormToCollection();
+//     })
+//     //onClick
+//     document.querySelectorAll('.add_item_link').forEach(btn => {
+//         btn.addEventListener('click', () => {
+//             console.log("btn click wp");
+//             addFormToCollection();
+//         })
+//     });
 
-    const item = document.createElement('li');
-
-    item.innerHTML = collectionHolder
-    .dataset
-    .prototype
-    .replace(/__name__/g,
-    collectionHolder.dataset.index
-    );
-
-    collectionHolder.appendChild(item);
-
-    collectionHolder.dataset.index++;
-
-}
-    $(".add_item_link").on("click", () => {
-        console.log("click btn wp")
-        console.log(e)
-
-        addFormToCollection();
-    })
-    //onClick
-    document.querySelectorAll('.add_item_link').forEach(btn => {
-        btn.addEventListener('click', () => {
-            console.log("btn click wp");
-            addFormToCollection();
-        })
-    });
-
-    // btn next project a wp
+    // btn next project a romp
+    $("#nextROMP").on("click" , () => {
+        btnNextRomp = document.querySelector("#v-pills-romp-tab");
+        btnNextRomp.click();
+})
+// btn next romp a wp
     $("#nextWP").on("click" , () => {
-        let test = document.querySelector("#v-pills-wp-tab");
-
-        console.log( test)
-        test.click();
+        btnNextWp = document.querySelector("#v-pills-wp-tab");
+        btnNextWp.click();
 })
 </script>
 {% endblock %}
