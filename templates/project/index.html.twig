@@ -28,7 +28,7 @@
             <div class="col-3" style="min-height: 78vh; background-color: #F4F4F4; border-right: solid 10px red; padding-top: 5px;">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                     <a class="nav-link active" id="v-pills-project-tab" data-toggle="pill" href="#v-pills-project" role="tab" aria-controls="v-pills-project" aria-selected="true">Project</a>
-                    <a class="nav-link" id="v-pills-romp-tab" data-toggle="pill" href="#v-pills-romp" role="tab" aria-controls="v-pills-romp" aria-selected="false">ROMP(s)</a>
+{#                    <a class="nav-link" id="v-pills-romp-tab" data-toggle="pill" href="#v-pills-romp" role="tab" aria-controls="v-pills-romp" aria-selected="false">ROMP(s)</a>#}
                     <a class="nav-link" id="v-pills-wp-tab" data-toggle="pill" href="#v-pills-wp" role="tab" aria-controls="v-pills-wp" aria-selected="false">Work Package(s)</a>
                     <hr>
                     <a class="nav-link" id="v-pills-contact-tab" data-toggle="pill" href="#v-pills-contact" role="tab" aria-controls="v-pills-contact" aria-selected="false">+ Add a Contact</a>
@@ -61,35 +61,35 @@
                         <div class="flex"><a href="#v-pills-romp"></a></div>
                     </div>
 
-                    <div class="tab-pane fade" id="v-pills-romp" role="tabpanel" aria-labelledby="v-pills-romp-tab" data-controller="tabs" data-tabs-name-value="ROMP">
-                        <h3>ROMP : </h3>
-                        <p class="text-muted">Fields marked with an <span style="color: red">*</span> are mandatory</p>
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab-romp" role="tablist" data-tabs-target="links">
-                                <a class="nav-item nav-link active" id="nav-romp-1-tab" data-toggle="tab" href="#nav-romp-1" role="tab" aria-controls="nav-romp-1" aria-selected="true">ROMP n°1</a>
-                                <button type="button" class="nav-item btn btn-primary" id="btnAddRomp" value="romp" data-tabs-target="button" data-action="tabs#openDialog">+ Add a ROMP</button>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent-romp" data-tabs-target="content">
-                            <div class="tab-pane fade show active" id="nav-romp-1" role="tabpanel" aria-labelledby="nav-romp-1-tab">
+{#                    <div class="tab-pane fade" id="v-pills-romp" role="tabpanel" aria-labelledby="v-pills-romp-tab" data-controller="tabs" data-tabs-name-value="ROMP">#}
+{#                        <h3>ROMP : </h3>#}
+{#                        <p class="text-muted">Fields marked with an <span style="color: red">*</span> are mandatory</p>#}
+{#                        <nav>#}
+{#                            <div class="nav nav-tabs" id="nav-tab-romp" role="tablist" data-tabs-target="links">#}
+{#                                <a class="nav-item nav-link active" id="nav-romp-1-tab" data-toggle="tab" href="#nav-romp-1" role="tab" aria-controls="nav-romp-1" aria-selected="true">ROMP n°1</a>#}
+{#                                <button type="button" class="nav-item btn btn-primary" id="btnAddRomp" value="romp" data-tabs-target="button" data-action="tabs#openDialog">+ Add a ROMP</button>#}
+{#                            </div>#}
+{#                        </nav>#}
+{#                        <div class="tab-content" id="nav-tabContent-romp" data-tabs-target="content">#}
+{#                            <div class="tab-pane fade show active" id="nav-romp-1" role="tabpanel" aria-labelledby="nav-romp-1-tab">#}
 
-                                <fieldset class="row">
-                                    <div class="col-6">
-                                        {{form_row(formProject.romp.vars.prototype.submissionDate)}}
-                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.versionRomp)}}</div>
-                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.deliverable)}}</div>
-                                    </div>
+{#                                <fieldset class="row">#}
+{#                                    <div class="col-6">#}
+{#                                        {{form_row(formProject.romp.vars.prototype.submissionDate)}}#}
+{#                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.versionRomp)}}</div>#}
+{#                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.deliverable)}}</div>#}
+{#                                    </div>#}
 
-                                    <div class="col-6">
-                                        <div class="mt-6">{{form_row(formProject.romp.vars.prototype.licenceRomp)}}</div>
-                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.ethicalIssues)}}</div>
-                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.contactRomp)}}</div>
-                                    </div>
-                                </fieldset>
-                            </div>
-                        </div>
-                        <button class="btn-primary rounded" style="margin-top: 10px;">Next</button>
-                    </div>
+{#                                    <div class="col-6">#}
+{#                                        <div class="mt-6">{{form_row(formProject.romp.vars.prototype.licenceRomp)}}</div>#}
+{#                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.ethicalIssues)}}</div>#}
+{#                                        <div class="mt-3">{{form_row(formProject.romp.vars.prototype.contactRomp)}}</div>#}
+{#                                    </div>#}
+{#                                </fieldset>#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <button class="btn-primary rounded" style="margin-top: 10px;">Next</button>#}
+{#                    </div>#}
 
                     <div class="tab-pane fade" id="v-pills-wp" role="tabpanel" aria-labelledby="v-pills-wp-tab" data-controller="tabs" data-tabs-name-value="WP">
                         <nav>
@@ -100,27 +100,27 @@
                         </nav>
                         <div class="tab-content" id="nav-tabContent-wp" data-tabs-target="content">
                             <div class="tab-pane fade show active" id="nav-wp-1" role="tabpanel" aria-labelledby="nav-wp-1-tab">
+
                                 <h3>Work Packages</h3>
-                                <ul class="idRefProject"
-                                         Ajouter des wps :
+                                    <ul class="idRefProject" id="wpHolder"
 
-                                    data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
-                                    data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"
-                                >
-                                    {% for wp in formProject.idRefProject %}
-                                        <li>
-                                            <fieldset>
-                                                <legend>Work package n°{{formProject.idRefProject|length}}</legend>
+                                        data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
+                                        data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"
+                                    >     Ajouter des wps :
+                                        {% for wp in formProject.idRefProject %}
+                                            <li>
+                                                <fieldset>
+                                                    <legend>Work package n°{{formProject.idRefProject|length}}</legend>
                                                 {{ form_row(wp.idRefProject.vars.prototype) }}
-                                            </fieldset>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
+                                                </fieldset>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
 
+                                {# Bouton ajout WP #}
                                 <button type="button" class="add_item_link" data-collection-holder-class="idRefProject">
-                                    Add a Work Package
+                                Add a Work Package
                                 </button>
-                                {{ form_end(formProject) }}
                             </div>
                         </div>
                     </div>
@@ -250,42 +250,42 @@ li {
 
 
 <script>
-//Formulaire de contact
-var formContact = document.getElementById('contact');
-//Formulaire de projet
-var formProject = document.getElementById('project');
-// Les cacher ou non
-const showContactForm = (e) => {
-    formContact.classList.toggle('cache');
-    formProject.classList.toggle('cache');
-}
-
-var test = formProject.childNode;
-console.log(test);
-formContact.classList.add('cache');
-document.querySelectorAll('contact').forEach(button => {
-    button.addEventListener('click', showContactForm)
-});
-
-document.querySelectorAll('.btn').forEach(btn => {
-        btn.addEventListener('click', showContactForm)
-    });
+// //Formulaire de contact
+// var formContact = document.getElementById('contact');
+// //Formulaire de projet
+// var formProject = document.getElementById('project');
+// // Les cacher ou non
+// const showContactForm = (e) => {
+//     formContact.classList.toggle('cache');
+//     formProject.classList.toggle('cache');
+// }
+//
+// var test = formProject.childNode;
+// console.log(test);
+// formContact.classList.add('cache');
+// document.querySelectorAll('contact').forEach(button => {
+//     button.addEventListener('click', showContactForm)
+// });
+//
+// document.querySelectorAll('.btn').forEach(btn => {
+//         btn.addEventListener('click', showContactForm)
+//     });
 
 
 
 //Ajouter Work Packages
-const addFormToCollection = (e) => {
-    const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
-        
+const addFormToCollection = () => {
+    const collectionHolder = document.querySelector("#wpHolder");
+
     const item = document.createElement('li');
-        
+
     item.innerHTML = collectionHolder
     .dataset
     .prototype
     .replace(/__name__/g,
     collectionHolder.dataset.index
     );
-        
+
     collectionHolder.appendChild(item);
 
     collectionHolder.dataset.index++;
@@ -293,11 +293,16 @@ const addFormToCollection = (e) => {
 }
     $(".add_item_link").on("click", () => {
         console.log("click btn wp")
+        console.log(e)
+
         addFormToCollection();
     })
     //onClick
     document.querySelectorAll('.add_item_link').forEach(btn => {
-        btn.addEventListener('click', addFormToCollection)
+        btn.addEventListener('click', () => {
+            console.log("btn click wp");
+            addFormToCollection();
+        })
     });
 </script>
 {% endblock %}

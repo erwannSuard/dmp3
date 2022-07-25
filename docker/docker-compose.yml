@@ -16,6 +16,7 @@ services:
 ###< doctrine/doctrine-bundle ###
   app:
     image: 8c3aeed445d44b3f0bcdfeca1a90fbca14e85165cf0f509675f7ac04866927b8
+    build: /docker
     ports:
       - "8080:80"
     environment:
