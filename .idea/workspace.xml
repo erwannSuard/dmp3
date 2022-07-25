@@ -5,11 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e1849d3d-e957-4ba3-9086-05e7dea303f7" name="Changes" comment="redirect vers project une fois connecté">
-      <change afterPath="$PROJECT_DIR$/docker/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/apache.conf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker/docker.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/docker/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/apache.conf" beforeDir="false" afterPath="$PROJECT_DIR$/docker/apache.conf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker/docker.sh" beforeDir="false" afterPath="$PROJECT_DIR$/docker/docker.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +30,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="tabstest" />
+        <entry key="$PROJECT_DIR$" value="docker" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

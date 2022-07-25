@@ -15,9 +15,11 @@ services:
       # - ./docker/db/data:/var/lib/postgresql/data:rw
 ###< doctrine/doctrine-bundle ###
   app:
-    image: 340d5bfecfd7afcf4b18555b6ad8b98a688422807ea61f5ffa466b2f551a378b
+    image: a7dd193f6355a73964f7d4574e81cd26fa505d61ca103bf3d5a273b60bb4a34d
     ports:
       - "8080:80"
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-symfony}:${POSTGRES_PASSWORD:-ChangeMe}@database:5432/${POSTGRES_DB:-app}
 volumes:
 ###> doctrine/doctrine-bundle ###
   db-data:
