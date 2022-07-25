@@ -60,8 +60,6 @@ class ResearchOutput
     #[ORM\ManyToMany(targetEntity: VocabularyInfo::class, mappedBy: 'ResearchOutputs')]
     private $vocabularyInfos;
 
-    #[ORM\OneToOne(mappedBy: 'researchOutput', targetEntity: Data::class, cascade: ['persist', 'remove'])]
-    private $data;
 
     #[ORM\OneToMany(mappedBy: 'researchOutput', targetEntity: Distribution::class)]
     private $distributions;
@@ -328,22 +326,6 @@ class ResearchOutput
         return $this;
     }
 
-    public function getData(): ?Data
-    {
-        return $this->data;
-    }
-
-    public function setData(Data $data): self
-    {
-        // set the owning side of the relation if necessary
-        if ($data->getResearchOutput() !== $this) {
-            $data->setResearchOutput($this);
-        }
-
-        $this->data = $data;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Distribution>
