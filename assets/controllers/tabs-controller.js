@@ -74,7 +74,8 @@ export default class extends Controller {
             ' class="tab-pane fade" ' +
             'id="nav-' + tabName.toLowerCase() + '-' + tabCounter + '" ' +
             'role="tabpanel" aria-labelledby="nav-' + tabName.toLowerCase() + '-'+tabCounter+'-tab">' +
-            'content for tab ' + tabName + (' ' + tabTitle || ' n°'+ tabCounter )+'</div>';
+            '<p class="text-muted mt-2">Fields marked with an <span style="color: red">*</span> are mandatory</p>' +
+            '</div>';
 
         let btnId = (this.buttonTarget.id);
         $("#" + btnId).before(tabLinkTemplateHtml);
