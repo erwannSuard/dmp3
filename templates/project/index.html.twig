@@ -102,40 +102,30 @@
                     <div class="tab-pane fade" id="v-pills-wp" role="tabpanel" aria-labelledby="v-pills-wp-tab" data-controller="tabs" data-tabs-name-value="WP">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab-wp" role="tablist" data-tabs-target="links">
-                                <a class="nav-item nav-link active" id="nav-wp-1-tab" data-toggle="tab" href="#nav-wp-1" role="tab" aria-controls="nav-wp-1" aria-selected="true">WP n°1</a>
-                                <button type="button" class="nav-item btn btn-primary" id="btnAddWp" data-tabs-target="button" data-action="tabs#openDialog">+ Add a WP</button>
+{#                            #}
+                                <button type="button"  id="btnAddWp" data-tabs-target="button" data-action="tabs#addTab" class="nav-item btn btn-primary">+ Add a WP</button>
+                                <button type="button" class="add_item_link" style="visibility: hidden" data-collection-holder-class="idRefProject"></button>
                             </div>
                         </nav>
-                        <div class="tab-content" id="nav-tabContent-wp" data-tabs-target="content">
-                            <fieldset class="tab-pane fade show active" id="nav-wp-1" role="tabpanel" aria-labelledby="nav-wp-1-tab">
+                        <div class="tab-content idRefProject"
+                             id="nav-tabContent-wp"
+                             data-tabs-target="content"
+                             data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
+                             data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"
+                        >
+{#                            {% for wp in formProject.idRefProject %}#}
+{#                                <div class="tab-pane fade show active" id="nav-wp-"+{{ formProject.idRefProject|length}} role="tabpanel" aria-labelledby="nav-wp-1-tab">#}
 
-                                 WORK PACKAGES
-                                    <h3>Work Packages</h3>
-                                    <ul class="idRefProject"
-                                             Ajouter des wps :
-
-                                        data-index="{{ formProject.idRefProject|length > 0 ? formProject.idRefProject|last.vars.idRefProject + 1 : 0 }}"
-                                        data-prototype="{{ form_widget(formProject.idRefProject.vars.prototype)|e('html_attr') }}"
-                                    >
-                                        {% for wp in formProject.idRefProject %}
-                                            <li>
-                                                <fieldset>
-                                                    <legend>Work package n°{{formProject.idRefProject|length}}</legend>
-                                                    {{ form_row(wp.idRefProject.vars.prototype) }}
-                                                </fieldset>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-
-                                     Bouton ajout WP
-                                    <button type="button" class="add_item_link" data-collection-holder-class="idRefProject">
-                                        Add a Work Package
-                                    </button>
-                                 </fieldset>
+{#                            <fieldset>#}
+{#                                        <legend>Work package n°{{formProject.idRefProject|length}}</legend>#}
+{#                                        {{ form_row(wp.idRefProject.vars.prototype) }}#}
+{#                                    </fieldset>#}
+{#                                </li>#}
+{#                            {% endfor %}#}
                             </div>
                     </div>
 
-                {{ form_end(formProject) }}
+                        <div>{{ form_end(formProject) }}</div>
 
                     <div class="tab-pane fade" id="v-pills-contact" role="tabpanel" aria-labelledby="v-pills-contact-tab">
                             {{ form_start(formContact) }}
@@ -175,11 +165,14 @@ li {
     margin: 15px;
     border: solid black 2px;
 }
+
 </style>
 
 
 
 <script>
+    let test = document.getElementById("project_submit")
+    test.classList.add("d-none")
 
     // btn next project a romp
     $("#nextROMP").on("click" , () => {
@@ -208,6 +201,8 @@ li {
     $("#v-pills-romp-tab").on("click", () => {
         btnSubmitProject.classList.add("d-none");
     })
+
+
 
 </script>
 {% endblock %}

@@ -37,7 +37,7 @@ export default class extends Controller {
 
     addTab() {
         var tabName = this.nameValue;
-        var tabCounter = 2;
+        var tabCounter = 1;
         var tabId = 'nav-' + tabName.toLowerCase() + '-' + tabCounter + '-tab'
         var tabElement = document.getElementById(tabId);
 
@@ -81,12 +81,17 @@ export default class extends Controller {
 
         let contentContainerId = this.contentTarget.id;
         $("#" + contentContainerId).append(tabContentTemplateHtml);
+
+        $(".add_item_link").click();
+
         $("#nav-" + tabName.toLowerCase() + "-" + tabCounter + "-tab").click();
 
     }
 
     delTab() {
         let tabToDelete = (event.currentTarget).id;
+        console.log(tabToDelete);
+        $("#rmvBtn-" + tabToDelete).click();
         $("#nav-" + tabToDelete).remove();
         $("#" + tabToDelete).parent().remove();
 
