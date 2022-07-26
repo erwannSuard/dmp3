@@ -95,6 +95,7 @@ export default class extends Controller {
         $("#rmvBtn-" + tabToDelete).click();
         $("#nav-" + tabToDelete).remove();
         $("#" + tabToDelete).parent().remove();
+        $("#nav-" + tabName.toLowerCase() + "-" + tabCounter + "-tab").click();
 
     }
 

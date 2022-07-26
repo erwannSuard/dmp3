@@ -31,10 +31,10 @@ class ProjectType extends AbstractType
                 'label' => '* Abstract : ',
                 'attr' => [
                     'placeholder' => '* Abstract : ',
+                    'rows' => '10',
                 ],
                 'row_attr' => [
                     'class' => 'form-floating',
-                    'rows' => '3'
                 ],
             ])
             ->add('acronym', TextType::class, [
