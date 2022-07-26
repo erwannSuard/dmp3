@@ -26,9 +26,12 @@ const addFormToCollection = (e) => {
         );
 
     collectionHolder.appendChild(item);
+
     collectionHolder.dataset.index++;
 }
 //onClick
 document.querySelectorAll('.add_item_link').forEach(btn => {
     btn.addEventListener('click', addFormToCollection)
 });
+
+
