@@ -2,27 +2,30 @@
 
 namespace App\Form;
 
-use App\Entity\Embargo;
+use App\Entity\Host;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
 // INUTILE POUR L'INSTANT
-class EmbargoType extends AbstractType
+class HostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('startDate')
-            ->add('endDate')
-            ->add('legalAndContractualReasons')
-            ->add('intentionalRestrictions')
+            ->add('hostName')
+            ->add('hostDescription')
+            ->add('hostUrl')
+            ->add('pidSystem')
+            ->add('supportVersionning')
+            ->add('certifiedWith')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Embargo::class,
+            'data_class' => Host::class,
         ]);
     }
 }

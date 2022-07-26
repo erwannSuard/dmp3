@@ -12,9 +12,15 @@ class DataType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('sensitiveData')
-            ->add('personalData')
-            ->add('dataSecurity')
+            ->add('sensitiveData', null, [
+                // 'required' => false,
+                ])
+            ->add('personalData', null, [
+                // 'required' => false,
+                ])
+            ->add('dataSecurity', null, [
+                // 'required' => false,
+                ])
             //->add('researchOutput')
         ;
     }

@@ -2,27 +2,25 @@
 
 namespace App\Form;
 
-use App\Entity\Embargo;
+use App\Entity\Licence;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 // INUTILE POUR L'INSTANT
-class EmbargoType extends AbstractType
+class LicenceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('startDate')
-            ->add('endDate')
-            ->add('legalAndContractualReasons')
-            ->add('intentionalRestrictions')
+            ->add('name')
+            ->add('url')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Embargo::class,
+            'data_class' => Licence::class,
         ]);
     }
 }

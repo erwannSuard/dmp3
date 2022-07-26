@@ -12,10 +12,18 @@ class CostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('type')
-            ->add('value')
-            ->add('unit')
-            ->add('fundedBy')
+            ->add('type', null, [
+            // 'required' => false,
+            ])
+            ->add('value', null, [
+                // 'required' => false,
+                ])
+            ->add('unit', null, [
+                // 'required' => false,
+                ])
+            ->add('fundedBy', null, [
+                // 'required' => false,
+                ])
             //->add('ResearchOutput')
         ;
     }

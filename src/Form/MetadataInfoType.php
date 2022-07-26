@@ -12,9 +12,15 @@ class MetadataInfoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('description')
-            ->add('standardName')
-            ->add('api')
+            ->add('description', null, [
+                // 'required' => false,
+                ])
+            ->add('standardName', null, [
+                // 'required' => false,
+                ])
+            ->add('api', null, [
+                // 'required' => false,
+                ])
         ;
     }
 

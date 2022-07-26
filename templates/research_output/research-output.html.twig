@@ -1,47 +1,135 @@
+{% import _self as formMacros %}
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello ResearchOutputController!{% endblock %}
 
 {% block body %}
 <fieldset>
-<legend><h3>General Infos : </h3></legend>
-{{form(formRO)}}
+<legend><h3>General Infos</h3></legend>
+{{form_start(formRO)}}
+{{ form_row(formRO.title) }}
+{{ form_row(formRO.type) }}
+{{ form_row(formRO.identifier) }}
+{{ form_row(formRO.description) }}
+{{ form_row(formRO.standardUsed) }}
+{{ form_row(formRO.reused) }}
+{{ form_row(formRO.lineage) }}
+{{ form_row(formRO.utility) }}
+{{ form_row(formRO.issued) }}
+{{ form_row(formRO.language) }}
+{{ form_row(formRO.keyword) }}
+{{ form_row(formRO.contacts) }}
+{{ form_row(formRO.costs) }}
+{{ form_row(formRO.vocabulary) }}
+    <fieldset id="vocabField">
+
+    <h3>Vocabulary</h3>
+        <ul class="vocabulary"
+            data-index="{{ formRO.vocabularyInfos|length > 0 ? formRO.vocabularyInfos|last.vars.vocabularyInfos + 1 : 0 }}"
+            data-prototype="{{ form_widget(formRO.vocabularyInfos.vars.prototype)|e('html_attr') }}"    
+        >
+            {% for wp in formRO.vocabularyInfos %}
+                <li>
+                    {{ form_row(wp.vocabularyInfos.vars.prototype) }}
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="button" class="add_item_linkVocab" data-collection-holder-class="vocabulary">
+            Add a Vocabulary Info
+        </button>
+    </fieldset>
+    <fieldset id="vocabField">
+
+
+
+{# MACRO POUR DISTRIB + EMBARGO CACHÉ #}
+{% macro printDistribEmbargo(wp) %}
+    <fieldset>
+    <legend><h3>Distribution general informations</h3></legend>
+        {{ form_row(wp.access)}}
+        {{ form_row(wp.accessUrl) }}
+        {{ form_row(wp.accessProtocol) }}
+        {{ form_row(wp.sizeValue) }}
+        {{ form_row(wp.sizeUnit) }}
+        {{ form_row(wp.format) }}
+        {{ form_row(wp.downloadUrl) }}
+    </fieldset>
+    <fieldset>
+    <legend><h3>Embargo</h3></legend>
+        <h4>Provide embargo informations ONLY if there is an embargo on distribution. Ignore this otherwise.</h4>
+        {{ form_row(wp.embargoStartDate) }}
+        {{ form_row(wp.embargoEndDate) }}
+        {{ form_row(wp.embargoLegalAndContractualReasons) }}
+        {{ form_row(wp.embargoIntentionalRestrictions) }}
+    </fieldset>
+
+    <fieldset>
+    <legend><h3>Licence</h3></legend>
+        {{ form_row(wp.licenceName) }}
+        {{ form_row(wp.licenceUrl) }}
+    </fieldset>
+    <fieldset>
+    <legend><h3>Host</h3></legend>
+        {{ form_row(wp.hostName) }}
+        {{ form_row(wp.hostDescription) }}
+        {{ form_row(wp.hostUrl) }}
+        {{ form_row(wp.pidSystem) }}
+        {{ form_row(wp.supportVersionning) }}
+        {{ form_row(wp.certifiedWith) }}
+    </fieldset>
+   
+{% endmacro %}
+{# FIN MACRO #}
+    <h3>Distributions</h3>
+        <ul class="distribution"
+            data-index="{{ formRO.distribution|length > 0 ? formRO.distribution|last.vars.distribution + 1 : 0 }}"
+            data-prototype="{{ formMacros.printDistribEmbargo(formRO.distribution.vars.prototype)|e('html_attr') }}"    
+        >
+            {% for wp in formRO.distribution %}
+                <li>
+                    {{ formMacros.printDistribEmbargo(wp) }}
+                </li>
+            {% endfor %}
+        </ul>
+        <button type="button" class="add_item_linkDistrib" data-collection-holder-class="distribution">
+            Add a Distribution
+        </button>
+    </fieldset>
+    
 </fieldset>
 
+{# {{form_end(formRO)}} #}
 <fieldset id="costField">
-<legend><h3>Cost : </h3></legend>
-{{form(formCost)}}
+<legend><h3>Cost</h3></legend>
+{{form_row(formRO.cost)}}
 </fieldset>
 
 <fieldset id="dataField">
-<legend><h3>Data : </h3></legend>
-{{form(formData)}}
+<legend><h3>Data</h3></legend>
+{{form_row(formRO.data)}}
 </fieldset>
 
 <fieldset id="serviceField">
-<legend><h3>Service : </h3></legend>
-{{form(formService)}}
+<legend><h3>Service</h3></legend>
+{{form_row(formRO.service)}}
 </fieldset>
 
 <fieldset id="metaDataField">
-<legend><h3>Meta Data : </h3></legend>
-{{form(formMetaData)}}
+<legend><h3>Meta Data</h3></legend>
+{{form_row(formRO.metadata)}}
 </fieldset>
-
-<fieldset id="distribField">
-<legend><h3>Distribution : </h3></legend>
-{{form(formDistrib)}}
-    <fieldset id="embargoField">
-    <legend><h3>Embargo : </h3></legend>
-    {{form(formEmbargo)}}
-    </fieldset>
-</fieldset>
-
+{# {{form_row(formRO.submit)}} #}
+{{ form_end(formRO) }}
 
 
 <style>
 .cache {
     display: none;
+}
+li {
+    padding: 10px;
+    margin: 15px;
+    border: solid black 2px;
 }
 </style>
 <script>
@@ -65,6 +153,28 @@
         {
             costField.classList.add("cache");
             // Rajouter de quoi vider les inputs ? (Ou alors je gère dans le controlleur pour ne rien lier au RO)
+        }
+    }
+// ----------------------------- Fin section
+
+// ----------------------------- Section : Afficher ou non le formulaire Vocabulary
+    var vocabField = document.getElementById("vocabField");
+    {# vocabField.classList.add("cache");  #}
+    function startVocab()
+    {
+      document.getElementById("research_output_vocabulary").addEventListener("change", checkIfVocab, false);
+    }
+
+    function checkIfVocab()
+    {
+        var selectVocab = document.getElementById("research_output_vocabulary").value;
+        if (selectVocab == true && costField.classList.contains("cache"))
+        {
+            vocabField.classList.remove("cache");
+        }
+        else
+        {
+            vocabField.classList.add("cache");
         }
     }
 // ----------------------------- Fin section
@@ -95,7 +205,7 @@
     }
 // ----------------------------- Fin section 
 
-// ----------------------------- Section : Afficher ou non embargo
+{# // ----------------------------- Section : Afficher ou non embargo
     var embargoField = document.getElementById("embargoField");
     embargoField.classList.add("cache"); 
     function startEmbargo()
@@ -116,12 +226,62 @@
             // Rajouter de quoi vider les inputs ? (Ou alors je gère dans le controlleur pour ne rien lier au RO)
         }
     } 
-// ----------------------------- Fin section
+// ----------------------------- Fin section #}
+
 
 
 
 window.addEventListener("load", startCost, false);
 window.addEventListener("load", startDataOrService, false);
-window.addEventListener("load", startEmbargo, false);
+{# window.addEventListener("load", startEmbargo, false); #}
+window.addEventListener("load", startVocab, false);
+
+const addVocabToCollection = (e) => {
+    const collectionHolder = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+        
+    const item = document.createElement('li');
+        
+    item.innerHTML = collectionHolder
+    .dataset
+    .prototype
+    .replace(/__name__/g,
+    collectionHolder.dataset.index
+    );
+        
+    collectionHolder.appendChild(item);
+
+    collectionHolder.dataset.index++;
+
+}
+    //onClick
+    document.querySelectorAll('.add_item_linkVocab').forEach(btn => {
+        btn.addEventListener('click', addVocabToCollection)
+});
+
+
+
+
+
+const addDistribToCollection = (e) => {
+   
+
+    const collectionHolderDistrib = document.querySelector('.' + e.currentTarget.dataset.collectionHolderClass);
+     
+    const item = document.createElement('li');
+    
+    item.innerHTML = collectionHolderDistrib
+    .dataset
+    .prototype
+    .replace(/__name__/g,
+    collectionHolderDistrib.dataset.index
+    ); 
+    collectionHolderDistrib.appendChild(item);
+
+    collectionHolderDistrib.dataset.index++;
+}
+    //onClick
+    document.querySelectorAll('.add_item_linkDistrib').forEach(btn => {
+        btn.addEventListener('click', addDistribToCollection)
+});
 </script>
 {% endblock %}
