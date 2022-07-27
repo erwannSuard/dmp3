@@ -78,11 +78,9 @@ $("#v-pills-project-tab").on("click" , () => {
 
 $("#v-pills-wp-tab").on("click" , () => {
     if (document.getElementById('nav-wp-1-tab')) {
-        alert('exist')
         $("#project_submit").show()
     }
     else {
-        console.log("test")
         $("#btnAddWp").click()
         $("#project_submit").show()
     }
