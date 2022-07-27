@@ -100,10 +100,13 @@ class DistributionEmbargoType extends AbstractType
             // 'required' => false,
             'label' => 'PID System : ',
         ])
-        ->add('supportVersionning', CheckboxType::class, [
+        ->add('supportVersionning', ChoiceType::class, [
+            "choices" => [
+                'Yes' => true,
+                'No' => false
+            ],
+            'label' => 'Supports Versionning ? ',
             'mapped' => false,
-            // 'required' => false,
-            'label' => 'Supports Versionning ? (Check if yes) ',
         ])
         ->add('certifiedWith', TextAreaType::class, [
             'mapped' => false,

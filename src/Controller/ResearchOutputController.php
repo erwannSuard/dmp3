@@ -19,7 +19,8 @@ use App\Entity\Licence;
 use App\Entity\Host;
 use App\Entity\VocabularyInfo;
 use App\Repository\VocabularyInfoRepository;
-
+use App\Repository\HostRepository;
+use App\Repository\LicenceRepository;
 
 
 class ResearchOutputController extends AbstractController
@@ -32,65 +33,82 @@ class ResearchOutputController extends AbstractController
 
 
     #[Route('/research-output', name: 'research_output')]
-    public function index(Request $request, VocabularyInfoRepository $vocabRepository): Response
+    public function index(Request $request, VocabularyInfoRepository $vocabRepository, HostRepository $hostRepository, LicenceRepository $licenceRepository): Response
     {
         //------------------------------------------------
         //Sécurité accès
         $this->denyAccessUnlessGranted('ROLE_USER');       
         //------------------------------------------------
         
-        // Instance des Entity + Formulaires associés
+        // Instance RO
         $ro = new ResearchOutput();
         $formRO = $this->createForm(ResearchOutputType::class, $ro);
         $formRO->handleRequest($request);
-        $cost = new Cost();
-        $data = new Data();
-        $service = new Service();
-        $metaData = new MetadataInfo();
-        $distribution = new Distribution();
-        $embargo = new Embargo();
-        $licence = new Licence();
-        $host = new Host();
-        $vocabularyInfo = new VocabularyInfo();
+        
+        
 
 
         if($formRO->isSubmitted() && $formRO->isValid())
         {
             
-            // dd($formRO->getData());
             // Remplissage des infos générales du RO
             $ro = $formRO->getData();
-            $this->entityManager->persist($ro);
+            // Slice des keywords :
+            $keywordsFullText = $formRO->get('keyword')->getData();
+            $keywordBaseArray = explode(",", $keywordsFullText);
+            $keywordFinalArray = [];
+            // Nettoyage des valeurs vides et espaces
+            foreach($keywordBaseArray as $kw)
+            {
+                $kw = trim($kw);
+                if($kw != "")
+                {
+                    array_push($keywordFinalArray, $kw);
+                }
+            }
+            // dd($keywordFinalArray);
+            $ro->setKeyword($keywordFinalArray);
+            // $this->entityManager->persist($ro);
 
-            // ---------- à rajouter : Transformer le vocab en array + IMPORTANT METADATA PLUSIEURS---------- 
+            // ---------- à rajouter : Transformer le vocab en array + METADATA PLUSIEURS ("bonus")---------- 
 
-            // Remplissage de l'entité MetaData + liaison au RO 
+
+
+            // ----- Remplissage de l'entité MetaData + liaison au RO 
+            $metaData = new MetadataInfo();
             $metaData = $formRO->get('metadata')->getData();
             $metaData->setResearchOutput($ro);
-            $this->entityManager->persist($metaData);
+            $this->entityManager->persist($metaData); // Persist MetaData
             $ro->addMetadataInfo($metaData);
             // dd($ro);
 
-            // Le RO est il une data ou un service ?
+
+
+            // ----- Le RO est il une data ou un service ?
             $typeServiceOrData = $formRO->get('type')->getData();
             if ($typeServiceOrData == "dataSet")
             {
+                $data = new Data();
                 $data = $formRO->get('data')->getData();
                 $data->setResearchOutput($ro);
-                $this->entityManager->persist($data);
+                $this->entityManager->persist($data); // Persist Data
                 // dd($data);
             }
             else 
             {
+                $service = new Service();
                 $service = $formRO->get('service')->getData();
                 $service->setResearchOutput($ro);
-                $this->entityManager->persist($service);
+                $this->entityManager->persist($service); // Persist Service
                 // dd($service);
             }
-            // Si Vocab, boucler à l'interieur
+
+
             
+            // Si Vocab, boucler à l'interieur
             foreach($formRO->get('vocabularyInfos') as $vocab)
             {
+                $vocabularyInfo = new VocabularyInfo();
                 // Check s'il existe déjà
                 $uri = $vocab->getNormData()->getUri();
                 $vocabTest = ($vocabRepository->findOneBy(['uri' => $uri]));
@@ -108,22 +126,88 @@ class ResearchOutputController extends AbstractController
                     $ro->addVocabularyInfo($vocabTest);
                 }
             }
-            // ---------- à rajouter : Distrib attention, problème support versionning, mettre un select ----------
 
-            //J'EN SUIS LÀ EMBARGO
-            // Boucle distribution 
+
+            // ----- Boucle distribution 
             foreach($formRO->get('distribution') as $distrib)
             {
+                $distribution = new Distribution();
                 $distribution = $distrib->getData();
+
+                // ----- Remplissage de l'entité Embargo (si embargo)
                 if ($distrib->get('access')->getData() == "embargo")
                 {
+                    $embargo = new Embargo();
                     $embargo->setStartDate($distrib->get('embargoStartDate')->getData());
-
+                    $embargo->setEndDate($distrib->get('embargoEndDate')->getData());
+                    $embargo->setLegalAndContractualReasons($distrib->get('embargoLegalAndContractualReasons')->getData());
+                    $embargo->setIntentionalRestrictions($distrib->get('embargoIntentionalRestrictions')->getData());
+                    $this->entityManager->persist($embargo); // Persist Embargo
+                    $distribution->setEmbargo($embargo);
                 }
-                dd($distribution);
+                
+
+                // ----- Remplissage de l'entité Host
+                // Vérification si pré-existence
+                $hostUrl = $distrib->get('hostUrl')->getData();
+                $hostTest = ($hostRepository->findOneBy(['hostUrl' => $hostUrl]));
+                $host = new Host();
+                if($hostTest == null) // Si n'existe pas déjà, on le créé
+                {   
+                    $host->setHostName($distrib->get('hostName')->getData());
+                    $host->setHostDescription($distrib->get('hostDescription')->getData());
+                    $host->setHostUrl($distrib->get('hostUrl')->getData());
+                    $host->setPidSystem($distrib->get('pidSystem')->getData());
+                    $host->setSupportVersionning($distrib->get('supportVersionning')->getData());
+                    $host->setCertifiedWith($distrib->get('certifiedWith')->getData());
+                }
+
+                else // Sinon, on l'associe à l'existant
+                {
+                    $host = $hostTest;
+                }
+                $host->addDistribution($distribution);
+                $distribution->setHost($host);
+                $this->entityManager->persist($host); // Persist Host
+
+
+
+                // ----- Remplissage de l'entité Licence
+                // Vérification si pré-existence
+                $licence = new Licence();
+                $licenceName = $distrib->get('licenceName')->getData();
+                $licenceTest = ($licenceRepository->findOneBy(['name' => $licenceName]));
+
+                if($licenceTest == null) // Si n'existe pas déjà, on le créé
+                {
+                    $licence->setName($distrib->get('licenceName')->getData());
+                    $licence->setUrl($distrib->get('hostDescription')->getData());
+                }
+
+                else // Sinon, on l'associe à l'existant
+                {
+                    $licence = $licenceTest;
+                }
+                $licence->addDistribution($distribution);
+                $distribution->setLicence($licence);
+                $this->entityManager->persist($distribution); // Persist Distribution
+                $ro->addDistribution($distribution);
+                // dd($distribution);
             }
-            dd($ro);
-            // $this->entityManager->flush();
+            // dd($ro);
+            // if COST
+            if ($formRO->get('costs')->getData() == false) // (Si on a une entité cost)
+            {
+                
+                $cost = new Cost();
+                $cost = $formRO->get('cost')->getData();
+                $cost->addResearchOutput($ro);
+                $ro->addCost($cost);
+                // dd($cost);
+            }
+            // dd($ro);
+            $this->entityManager->persist($ro);
+            $this->entityManager->flush();
             return $this->render('homepage/index.html.twig', [
             ]);
         }
