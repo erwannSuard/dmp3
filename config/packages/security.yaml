@@ -37,7 +37,8 @@ security:
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
-
+        - { path: ^/project, roles: ROLE_USER, requires_channel: https }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }
 when@test:
     security:
         password_hashers:

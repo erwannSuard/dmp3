@@ -1,15 +1,7 @@
 {% extends 'base.html.twig'%}
+
 {% block body %}
-{#    {% if is_granted('ROLE_USER') %}#}
-{#        <ul>#}
-{#            <li><a href="{{ path('logout') }}"><h3>Logout</h3></a></li>#}
-{#        </ul>#}
-{#    {% else %}#}
-{#        <ul>#}
-{#            <li><a href="{{ path('register') }}"><h3>Register</h3></a></li>#}
-{#            <li><a href="{{ path('login') }}"><h3>Login</h3></a></li>#}
-{#        </ul>#}
-{#    {% endif %}#}
+
     <div style="display: flex;flex-flow: column;height: 100%;">
         <header style="background: linear-gradient(-89deg, #AED741, #8fd16f, #53abab, #65CFCB);padding-bottom: 13px;flex: 0 1 auto;">
             <div class="container-fluid" style="background: #ffffff;padding-top: 10px;padding-bottom: 10px;">
@@ -28,9 +20,12 @@
             </div>
         </header>
         <div class="container-fluid d-flex d-sm-flex d-md-flex d-xxl-flex justify-content-center align-items-center justify-content-sm-center align-items-sm-center justify-content-md-center align-items-md-center justify-content-xxl-center align-items-xxl-center" style="background: url({{ asset('build/images/F-E_BG.png') }}) no-repeat;background-size: cover;flex: 1 1 auto;padding: 1em;">
+
             {% block div %}
 
             {% endblock %}
+
         </div>
     </div>
+
 {% endblock %}

@@ -85,7 +85,7 @@ export default class extends Controller {
 
         $(".add_item_link").click();
 
-        $("#nav-" + tabName.toLowerCase() + "-" + tabCounter + "-tab").click();
+        $("#nav-" + tabName.toLowerCase() + "-" + tabCounter + "-tab")[0].click();
 
     }
 
@@ -95,8 +95,6 @@ export default class extends Controller {
         $("#rmvBtn-" + tabToDelete).click();
         $("#nav-" + tabToDelete).remove();
         $("#" + tabToDelete).parent().remove();
-        $("#nav-" + tabName.toLowerCase() + "-" + tabCounter + "-tab").click();
-
     }
 
 }
