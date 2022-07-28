@@ -1,7 +1,4 @@
 
-
-
-
 //numéro de l'onglet de depart
     let navNum = 1;
 
@@ -45,7 +42,7 @@
 
     }
 
-//onClick ajoute a wp
+//onClick ajoute un nouvea wp a l'longlet créé
     document.querySelectorAll('.add_item_link').forEach(btn => {
         btn.addEventListener('click', addFormToCollection)
     });
@@ -70,7 +67,7 @@ $("#project_submit").hide()
 
 
 
-
+//hide ou show le bouton submit en fonction de la pills
 
 $("#v-pills-project-tab").on("click" , () => {
     $("#project_submit").hide()
