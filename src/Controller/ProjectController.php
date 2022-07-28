@@ -34,11 +34,11 @@ class ProjectController extends AbstractController
         $cp = new ContactProject();
         $project = new Project();
         $contact = new Contact();
-        $contactRomp = new Contact();
+        // $contactRomp = new Contact();
         //Création instances funding et Romp
-        $romp = new Romp();
+        // $romp = new Romp();
         $funding = new Funding();
-        $cpRomp = new ContactProject();
+        // $cpRomp = new ContactProject();
         //Formulaire projet + contact (caché de base)
         $formContact = $this->createForm(ContactType::class, $contact);
         $formContact->handleRequest($request);
@@ -72,12 +72,12 @@ class ProjectController extends AbstractController
         if($formProject->isSubmitted() && $formProject->isValid())
         {
             //Ajout des données aux attributs
-            $romp = $formProject->get('romp')->getData();
-            $romp = $romp['romp'];
+            // $romp = $formProject->get('romp')->getData();
+            // $romp = $romp['romp'];
             $funding = $formProject->get('funding')->getData();
             $project = $formProject->getData();
             $contact = $formProject->get('idContact')->getData();
-            $contactRomp = $formProject['romp']['romp']['contactRomp']->getNormData();
+            // $contactRomp = $formProject['romp']['romp']['contactRomp']->getNormData();
             // dd($romp);
             //Associations
             $project->setFunding($funding['project']);
@@ -86,15 +86,15 @@ class ProjectController extends AbstractController
             $cp->setContact($contact);
             $cp->setRoleContact("Coordinator");
             //Association Contact <-> DMP Leader
-            $project->addRomp($romp);
-            $contactRomp->addRomp($romp);
-            $cpRomp->setProject($project);
-            $cpRomp->setContact($contactRomp);
-            $cpRomp->setRoleContact('DMP_Leader');
+            // $project->addRomp($romp);
+            // $contactRomp->addRomp($romp);
+            // $cpRomp->setProject($project);
+            // $cpRomp->setContact($contactRomp);
+            // $cpRomp->setRoleContact('DMP_Leader');
             //Persist les données
-            $this->entityManager->persist($romp);
+            // $this->entityManager->persist($romp);
             $this->entityManager->persist($cp);
-            $this->entityManager->persist($cpRomp);
+            // $this->entityManager->persist($cpRomp);
             $this->entityManager->persist($project);
 
             //Boucler dans les WP + index pour trouver le bon contact en charge du wp:

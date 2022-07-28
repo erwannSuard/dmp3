@@ -58,7 +58,7 @@ class RompController extends AbstractController
 
             $this->entityManager->persist($contactProject);
             $this->entityManager->persist($romp);
-            dd($romp);
+            
             $this->entityManager->flush();
 
             return $this->redirectToRoute('homepage');
