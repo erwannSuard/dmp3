@@ -67,6 +67,9 @@ class ResearchOutput
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'researchOutputs')]
     private $ROReference;
 
+    #[ORM\ManyToOne(targetEntity: Romp::class, inversedBy: 'researchOutputs')]
+    private $romp;
+
     // #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'ROReference')]
     // private $researchOutputs;
 
@@ -407,4 +410,16 @@ class ResearchOutput
 
     //     return $this;
     // }
+
+    public function getRomp(): ?Romp
+    {
+        return $this->romp;
+    }
+
+    public function setRomp(?Romp $romp): self
+    {
+        $this->romp = $romp;
+
+        return $this;
+    }
 }

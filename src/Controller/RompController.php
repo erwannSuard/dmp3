@@ -25,6 +25,11 @@ class RompController extends AbstractController
     #[Route('/romp', name: 'romp')]
     public function index(Request $request, ProjectRepository $projectRep): Response
     {
+
+        //------------------------------------------------
+        //Sécurité accès
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');       
+        //------------------------------------------------
         // S'il n'y a pas de projet créé, on redirige vers une page d'erreur qui demande d'en créer un
         $testProject = $projectRep->findBy(['parentProject' => null]);
         if(empty($testProject))

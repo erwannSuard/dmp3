@@ -21,7 +21,8 @@ use App\Entity\VocabularyInfo;
 use App\Repository\VocabularyInfoRepository;
 use App\Repository\HostRepository;
 use App\Repository\LicenceRepository;
-
+use App\Repository\RompRepository;
+use App\Entity\Romp;
 
 class ResearchOutputController extends AbstractController
 {
@@ -53,6 +54,9 @@ class ResearchOutputController extends AbstractController
             
             // Remplissage des infos générales du RO
             $ro = $formRO->getData();
+            $romp = new Romp();
+            $romp = $formRO->get('romp')->getData();
+            
             // Slice des keywords :
             $keywordsFullText = $formRO->get('keyword')->getData();
             $keywordBaseArray = explode(",", $keywordsFullText);
@@ -205,8 +209,10 @@ class ResearchOutputController extends AbstractController
                 $ro->addCost($cost);
                 // dd($cost);
             }
-            // dd($ro);
+            
             $this->entityManager->persist($ro);
+            $romp->addResearchOutput($ro);
+            // dd($ro);
             $this->entityManager->flush();
             return $this->render('homepage/index.html.twig', [
             ]);
