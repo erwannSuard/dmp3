@@ -12,14 +12,14 @@
 <br>
 <button><a href="{{path('project')}}">Add project</a></button>
 <br>
-<button>Add a Romp (en attente)</button>
+<button><a href="{{path('romp')}}">Add a DMP</a></button>
 <br>
 <button><a href="{{path('research_output')}}">Add a research Output</a></button>
 {% elseif is_granted('ROLE_USER') %}
 
 <h1>Hello User</h1>
 <br>
-<button>Add a Romp (en attente)</button>
+<button><a href="{{path('romp')}}">Add a DMP</a></button>
 <br>
 <button><a href="{{path('research_output')}}">Add a research Output</a></button>
 {% else %}

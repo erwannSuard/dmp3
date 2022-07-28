@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello RompController!{% endblock %}
+
+{% block body %}
+{{form_start(formRomp)}}
+
+{{ form_row(formRomp.project) }}
+{{ form_row(formRomp.submissionDate) }}
+{{ form_row(formRomp.versionRomp) }}
+{{ form_row(formRomp.deliverable) }}
+{{ form_row(formRomp.licenceRomp) }}
+{{ form_row(formRomp.ethicalIssues) }}
+{{ form_row(formRomp.contactRomp) }}
+<button type="submit">Create a DMP</button>
+{{ form_end(formRomp) }}
+{% endblock %}

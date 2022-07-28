@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Error!{% endblock %}
+
+{% block body %}
+<h2>Please add a project before creating a DMP</h2>
+<button><a href="{{path('project')}}">Add project</a></button>
+{% endblock %}
