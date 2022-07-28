@@ -30,7 +30,7 @@ class RegistrationController extends AbstractController
             $dataFormContact = $form->get('contact')->getData();
             $dataFormContact = $dataFormContact["contact"];
             $user->setEmail($dataFormContact->getMail());
-            
+
             // encode the plain password
             $user->setPassword(
             $userPasswordHasher->hashPassword(
@@ -40,10 +40,10 @@ class RegistrationController extends AbstractController
             );
             $contact = $dataFormContact;
             // // Pour tricher et créer un admin
-            // $user->setContact($contact);
-            // $userRole = [];
-            // array_push($userRole, $form->get('role')->getData());
-            // $user->setRoles($userRole);
+             $user->setContact($contact);
+             $userRole = [];
+             array_push($userRole, $form->get('role')->getData());
+             $user->setRoles($userRole);
             // // fin triche, à commenter pour créer un User basique
             $entityManager->persist($contact);
             $entityManager->persist($user);

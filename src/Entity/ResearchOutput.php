@@ -67,8 +67,8 @@ class ResearchOutput
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'researchOutputs')]
     private $ROReference;
 
-    // #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'ROReference')]
-    // private $researchOutputs;
+//     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'ROReference')]
+//     private $researchOutputs;
 
     public function __construct()
     {

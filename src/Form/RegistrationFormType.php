@@ -19,23 +19,27 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('agreeTerms', CheckboxType::class, [
-                'mapped' => false,
-                'constraints' => [
-                    new IsTrue([
-                        'message' => 'You should agree to our terms.',
-                    ]),
-                ],
-            ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
-                'options' => ['attr' => ['class' => 'password-field']],
+                'options' => ['attr' => ['class' => 'password-field','placeholder' => 'Password * :']],
                 'required' => true,
-                'first_options'  => ['label' => 'Password'],
-                'second_options' => ['label' => 'Repeat Password'],
+                'first_options'  => [
+                    'label' => '* Password :',
+                    'attr' => [
+                        'placeholder' => '* Password : '],
+                    'row_attr' => [
+                        'class' => 'form-floating',]
+                    ],
+                'second_options' => [
+                    'label' => '* Repeat Password :',
+                    'attr' => [
+                        'placeholder' => '* Repeat Password : '],
+                    'row_attr' => [
+                        'class' => 'form-floating',]
+                ],
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
+                'attr' => ['autocomplete' => 'new-password',],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password',
@@ -47,6 +51,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+                'row_attr' => ['class' => 'form-floating']
             ])
             ->add('contact', CollectionType::class, [
                 'label' => false,

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <title>project form test</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" rel="stylesheet" />
+    <!-- <link rel="stylesheet" href="css.css"> -->
+    <style>
+        .nav.nav-tabs .nav-item.nav-link button {
+            display: none;
+        }
+
+        .nav.nav-tabs .nav-item.nav-link.active.show button {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="col-3">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            {% block v-nav %}
+            <a class="nav-link active" id="v-pills-project-tab" data-toggle="pill" href="#v-pills-project" role="tab" aria-controls="v-pills-project" aria-selected="true">Project</a>
+            <a class="nav-link" id="v-pills-romp-tab" data-toggle="pill" href="#v-pills-romp" role="tab" aria-controls="v-pills-romp" aria-selected="false">ROMP(s)</a>
+            <a class="nav-link" id="v-pills-wp-tab" data-toggle="pill" href="#v-pills-wp" role="tab" aria-controls="v-pills-wp" aria-selected="false">Work Package(s)</a>
+            {% endblock %}
+        </div>
+    </div>
+    <div class="col-9">
+        <div class="tab-content" id="v-pills-tabContent" data-controller="tabs">
+            {% block v-tabs-content %}
+            <div class="tab-pane fade show active" id="v-pills-project" role="tabpanel" aria-labelledby="v-pills-project-tab">1... </div>
+
+            <div class="tab-pane fade" id="v-pills-romp" role="tabpanel" aria-labelledby="v-pills-romp-tab" data-action="tabs#romp">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab-romp" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-romp-1-tab" data-toggle="tab" href="#nav-romp-1" role="tab" aria-controls="nav-romp-1" aria-selected="true">ROMP n°1</a>
+                        <button type="button" class="nav-item btn btn-primary" id="btnAddRomp" value="romp">+ Add a ROMP</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent-romp">
+                    <div class="tab-pane fade show active" id="nav-romp-1" role="tabpanel" aria-labelledby="nav-romp-1-tab">content for romp n°1.</div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="v-pills-wp" role="tabpanel" aria-labelledby="v-pills-wp-tab">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab-wp" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-wp-1-tab" data-toggle="tab" href="#nav-wp-1" role="tab" aria-controls="nav-wp-1" aria-selected="true">WP n°1</a>
+                        <button type="button" class="nav-item btn btn-primary" id="btnAddWp" value="wp">+ Add a wp</button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent-wp">
+                    <div class="tab-pane fade show active" id="nav-wp-1" role="tabpanel" aria-labelledby="nav-wp-1-tab">content for wp n°1.</div>
+                </div>
+            </div>
+            {% endblock %}
+        </div>
+    </div>
+</div>
+</body>
+<div id="dialog" title="Add a Tab">
+    <form>
+        <fieldset class="ui-helper-reset">
+            <label for="tab_title">Tab Title</label>
+            <input type="text" name="tab_title" id="tab_title" value="" class="ui-widget-content ui-corner-all" />
+        </fieldset>
+    </form>
+</div>
+<script>
+
+
+</script>
+
+</html>

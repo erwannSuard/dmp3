@@ -15,24 +15,60 @@ class ContactType extends AbstractType
     {
         $builder
             ->add('lastName', TextType::class, [
-                'label' => 'Last Name or Organization : '
+                'label' => '* Last Name or Organization : ',
+                'attr' => [
+                    'placeholder' => '* Last Name or Organization : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
             ])
             ->add('firstName', TextType::class, [
-                'label' => 'First Name (optionnal) : ',
+                'label' => 'First Name : ',
+                'attr' => [
+                    'placeholder' => 'First Name : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
                 'required' => false,
             ])
             ->add('mail', TextType::class, [
-                'label' => 'Mail : '
+                'label' => '* Mail : ',
+                'attr' => [
+                    'placeholder' => '* Mail : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ]
             ])
             ->add('affiliation', TextType::class, [
-                'label' => 'Affiliation : '
+                'label' => '* Affiliation : ',
+                'attr' => [
+                    'placeholder' => '* Affiliation : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
             ])
             ->add('laboratoryOrDepartment', TextType::class, [
-                'label' => 'Laboratory or Department (optionnal): ',
+                'label' => 'Laboratory or Department : ',
+                'attr' => [
+                    'placeholder' => 'Laboratory or Department : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
                 'required' => false,
             ])
             ->add('identifier', TextType::class, [
-                'label' => 'ORCID type identifier (optionnal) : ',
+                'label' => 'ORCID type identifier : ',
+                'attr' => [
+                    'placeholder' => 'ORCID type identifier : '
+                ],
+                'row_attr' => [
+                    'class' => 'form-floating',
+                ],
                 'required' => false,
             ])
             // ->add('submit', SubmitType::class, [

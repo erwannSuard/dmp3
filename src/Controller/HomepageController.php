@@ -15,4 +15,20 @@ class HomepageController extends AbstractController
         return $this->render('homepage/index.html.twig', [
         ]);
     }
+
+    #[Route('/connected', name: 'connected')]
+    public function connected(): Response
+    {
+
+        return $this->render('homepage/connected.html.twig', [
+        ]);
+    }
+
+    #[Route('/authentication', name: 'authentication')]
+    public function authentication(): Response
+    {
+
+        return $this->render('homepage/authentication.html.twig', [
+        ]);
+    }
 }

@@ -1,0 +1,34 @@
+{% extends 'style.html.twig' %}
+{% block title %} FAIRE-EASE | Hub {% endblock %}
+{% block div %}
+
+    <div class="w-100 bg-danger">
+        {% if is_granted('ROLE_ADMIN') %}
+            <div style="background-color: white" class="mb" >
+
+                <div class="d-flex justify-content-center"><h1>Admin HUB</h1></div>
+                <div class="d-flex justify-content-around">
+                    <a class="btn btn-outline-primary btn-lg" href="{{path('contact')}}">Add contact</a>
+                    <a class="btn btn-outline-primary btn-lg" href="{{path('project')}}">Add project</a>
+                    <a class="btn btn-outline-primary btn-lg">Add a Romp (en attente)</a>
+                    <a class="btn btn-outline-primary btn-lg" href="{{path('research_output')}}">Add a research Output</a>
+                    <a class="btn btn-outline-danger btn-lg" href="{{path('logout')}}">Logout</a>
+
+                </div>
+
+            </div>
+        {% elseif is_granted('ROLE_USER') %}
+
+            <div style="background-color: white">
+                <div class="d-flex justify-content-center"><h1>User HUB</h1></div>
+
+                <div class="d-flex justify-content-around">
+                    <a class="btn btn-outline-primary btn-lg" href="{{path('research_output')}}">Add a research Output</a>
+                        <a class="btn btn-outline-danger btn-lg" href="{{path('logout')}}">Logout</a>
+                </div>
+            </div>
+        {% else %}
+        {% endif %}
+    </div>
+
+{% endblock %}
