@@ -124,17 +124,17 @@ class ProjectType extends AbstractType
             ])
             //-------------------------------------------
 
-            //---------------   ROMP   ---------------
-            ->add('romp', CollectionType::class, [
-                'entry_type' => RompType::class,
-                'entry_options' => ['label' => false],
-                'allow_add' => true,
-                'prototype' => true,
-                'mapped' => false,
-                'prototype_name' => 'romp',
-                'label' => false,
-            ])
-            //-----------------------------------
+            // //---------------   ROMP   ---------------
+            // ->add('romp', CollectionType::class, [
+            //     'entry_type' => RompType::class,
+            //     'entry_options' => ['label' => false],
+            //     'allow_add' => true,
+            //     'prototype' => true,
+            //     'mapped' => false,
+            //     'prototype_name' => 'romp',
+            //     'label' => false,
+            // ])
+            // //-----------------------------------
             ->add('submit', SubmitType::class, [
                 'label' => 'Submit the Project'
             ])

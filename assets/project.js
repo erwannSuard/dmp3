@@ -76,6 +76,10 @@ $("#v-pills-project-tab").on("click" , () => {
     $("#project_submit").hide()
 })
 
+$("#v-pills-contact-tab").on("click" , () => {
+    $("#project_submit").hide()
+})
+
 $("#v-pills-wp-tab").on("click" , () => {
     if (document.getElementById('nav-wp-1-tab')) {
         $("#project_submit").show()

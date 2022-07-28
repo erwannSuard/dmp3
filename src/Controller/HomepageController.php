@@ -16,7 +16,7 @@ class HomepageController extends AbstractController
         ]);
     }
 
-    #[Route('/connected', name: 'connected')]
+    #[Route('/hub', name: 'connected')]
     public function connected(): Response
     {
 

@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use App\Entity\Contact;
+use App\Entity\Project;
+use App\Repository\ProjectRepository;
 
 class RompType extends AbstractType
 {
@@ -18,6 +20,18 @@ class RompType extends AbstractType
     {
         $builder
             // ->add('identifier')
+            
+            //On ne retourne pas les WP
+            ->add('project', EntityType::class, [
+                'class' => Project::class,
+                'query_builder' => function (ProjectRepository $pr) {
+                    return $pr->createQueryBuilder('u')
+                        ->where('u.parentProject IS null');
+                },
+                'label' => "Choose wich project is your DMP for : ",
+                'multiple' => false,
+                'choice_label' => 'title',
+            ])
             ->add('submissionDate', null, [
                 'label' => '* Submission date : ',
             ])

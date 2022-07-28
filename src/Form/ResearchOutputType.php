@@ -20,7 +20,7 @@ use App\Entity\Cost;
 use App\Form\DataType;
 use App\Form\MetadataInfoType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
+use App\Entity\Romp;
 
 
 
@@ -30,6 +30,12 @@ class ResearchOutputType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+        ->add('romp', EntityType::class, [
+            'class' => Romp::class,
+            'label' => "Wich DMP are you referencing : ",
+            'multiple' => false,
+            'choice_label' => 'versionRomp',
+        ])
             ->add('title', TextType::class, [
                 'label' => 'Title : ',
                 // 'required' => false,

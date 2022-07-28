@@ -1,0 +1,34 @@
+{% extends 'style.html.twig' %}
+
+{% block title %}FAIR-EASE{% endblock %}
+
+{% block div %}
+
+        {{form_start(formRomp)}}
+<div class="container" style="background: linear-gradient(to left bottom, #AED741, #8fd16f, #53abab, #65CFCB);padding: 6px;border-radius: 25px;width: 100%;">
+    <div class="row" style="background-color: white; min-height: 60vh; border-radius: 20px; margin: 7px;">
+    <h2 class="mt-2">Add a DMP</h2>
+
+            {{ form_row(formRomp.project) }}
+        <div class="col-6 d-flex flex-column justify-content-between">
+            {{ form_row(formRomp.versionRomp) }}
+            <div style="margin-top: 35px;">
+                {{ form_row(formRomp.deliverable) }}
+            </div>
+            {{ form_row(formRomp.submissionDate) }}
+        </div>
+
+        <div class="col-6 d-flex flex-column justify-content-between">
+            {{ form_row(formRomp.licenceRomp) }}
+            {{ form_row(formRomp.ethicalIssues) }}
+            {{ form_row(formRomp.contactRomp) }}
+        </div>
+        <div class="d-flex justify-content-between mt-3 mb-3">
+            <a class="btn btn-outline-primary" href="{{ path('connected') }}">Return</a>
+            <button type="submit" class="btn btn-primary">Submit the DMP</button>
+        </div>
+    </div>
+</div>
+        {{ form_end(formRomp) }}
+
+{% endblock %}
