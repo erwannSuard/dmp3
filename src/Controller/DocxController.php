@@ -4,6 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Repository\ProjectRepository;
+use App\Repository\RompRepository;
+use App\Entity\Romp;
+use App\Entity\ResearchOutput;
+use App\Repository\ResearchOutputRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpOffice\PhpWord\PhpWord;
 use PhpOffice\PhpWord\IOFactory;
@@ -23,20 +27,20 @@ class DocxController extends AbstractController
     }
 
     #[Route('/docx', name: 'docx')]
-    public function index(Request $request, ProjectRepository $projectRep): Response
+    public function index(Request $request, RompRepository $rompRep): Response
     {
-        $project = new Project();
-        $project = $projectRep->findOneBy(['title' => 'FAIRYZ']);
         $doc = new PhpWord();
-        
-        // $phpHtml = new Html();
+        $romp = new Romp();
+        $romp = $rompRep->findOneBy(["versionRomp" => "PDT 1.0"]); // Logique à changer quand on pourra choisir le DMP à "imprimer" avec un formulaire
+        dd($romp);
         $section = $doc->addSection();
+        // 1. Data Summary
         $section->addText(
-            "Project Title : " . $project->getTitle(),
-            array('name' => 'Arial', 'size' => 70)
+            "1. Data Summary : ",
+            array('name' => 'Arial', 'size' => 14, 'bold' => true)
         );
         $docWrite = IOFactory::createWriter($doc, "Word2007");
-        $doc->save("ok.docx", "Word2007", true);
+        $doc->save("ok.docx", "Word2007", false); //dernier boolean sur true pour DownLoad
         exit;
         return $this->render('docx/index.html.twig', [
             'controller_name' => 'DocxController',

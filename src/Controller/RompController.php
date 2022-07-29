@@ -53,8 +53,10 @@ class RompController extends AbstractController
         if($formRomp->isSubmitted() && $formRomp->isValid())
         {
             $project = $formRomp->get('project')->getData();
+            
             $dmpLeader = $formRomp->get('contactRomp')->getData();
             $romp = $formRomp->getData();
+            if($romp->getEthicalIssues() == null) $romp->setEthicalIssues('');
             $romp->setContact($dmpLeader);
             $project->addRomp($romp);
             $contactProject->setProject($project);

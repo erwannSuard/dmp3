@@ -58,6 +58,8 @@ class ResearchOutputController extends AbstractController
             $ro->setWorkPackage($workPackage);
             $romp = new Romp();
             $romp = $formRO->get('romp')->getData();
+            $ro->setRomp($romp);
+            $romp->addResearchOutput($ro);
             
             // Slice des keywords :
             $keywordsFullText = $formRO->get('keyword')->getData();
@@ -188,6 +190,8 @@ class ResearchOutputController extends AbstractController
                 {
                     $licence->setName($distrib->get('licenceName')->getData());
                     $licence->setUrl($distrib->get('hostDescription')->getData());
+                    
+                    $this->entityManager->persist($licence);
                 }
 
                 else // Sinon, on l'associe à l'existant
@@ -214,7 +218,7 @@ class ResearchOutputController extends AbstractController
             
             $this->entityManager->persist($ro);
             $romp->addResearchOutput($ro);
-            dd($ro);
+            // dd($ro);
             $this->entityManager->flush();
             return $this->render('homepage/index.html.twig', [
             ]);
