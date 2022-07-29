@@ -39,7 +39,7 @@ class ResearchOutputType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Title : ',
                 // 'required' => false,
-                    
+
             ])
             ->add('type', ChoiceType::class, [
                 "choices" => [
@@ -54,6 +54,10 @@ class ResearchOutputType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description : ',
+                'attr' => [
+                    'rows' => 4,
+                    'style' => 'padding-bottom: 20px;',
+                ]
                 // 'required' => false,
             ])
             ->add('standardUsed', TextType::class, [
@@ -68,17 +72,17 @@ class ResearchOutputType extends AbstractType
                 ],
                 'label' => 'Re-used : ',
             ])
-            ->add('lineage', TextareaType::class, [
+            ->add('lineage', TextType::class, [
                 'label' => 'Lineage : ',
                 // 'required' => false,
                 'attr' => ['placeholder' => 'If a document exists, please provide an access URL...']
             ])
-            ->add('utility', TextareaType::class, [
+            ->add('utility', TextType::class, [
                 'label' => 'Utility : ',
                 // 'required' => false,
             ])
             ->add('issued', DateType::class, [
-                
+
                 // 'required' => false,
                 // // adds a class that can be selected in JavaScript
                 // 'attr' => ['class' => 'js-datepicker'],
@@ -90,8 +94,11 @@ class ResearchOutputType extends AbstractType
             ->add('keyword', TextareaType::class, [
                 'label' => 'Keywords : ',
                 // 'required' => false,
-                'mapped' => false, 
-                'attr' => ['placeholder' => 'Separate each keyword with a comma...']
+                'mapped' => false,
+                'attr' => [
+                    'placeholder' => 'Separate each keyword with a comma...',
+                    'rows' => 4,
+                    'style' => 'padding-bottom: 20px;']
             ])
             ->add('costs', ChoiceType::class, [
                 "choices" => [
@@ -109,15 +116,18 @@ class ResearchOutputType extends AbstractType
                 'label' => 'Is a vocabulary used ? ',
                 'mapped' => false,
             ])
-            
+
             ->add('contacts', EntityType::class, [
             // looks for choices from this entity
             'class' => Contact::class,
             // used to render a select box, check boxes or radios
             'multiple' => true,
             'expanded' => false,
+            'attr' => [
+                'style' => 'padding-bottom: 30px;',
+            ]
             ])
-            ->add('vocabularyInfos', CollectionType::class, 
+            ->add('vocabularyInfos', CollectionType::class,
 
             [   'label' => false,
             'entry_type' => VocabularyInfoType::class,
@@ -129,7 +139,7 @@ class ResearchOutputType extends AbstractType
             'allow_delete' => true,
             'prototype' => true,
         ])
-        ->add('distribution', CollectionType::class, 
+        ->add('distribution', CollectionType::class,
 
             [   'label' => false,
             'entry_type' => DistributionEmbargoType::class,
@@ -165,7 +175,7 @@ class ResearchOutputType extends AbstractType
             'label' => 'Submit the Research Output',
         ])
         ;
-        // ->add('distribution', CollectionType::class, 
+        // ->add('distribution', CollectionType::class,
 
         //     [   'label' => false,
         //     'entry_type' => DistributionType::class,
@@ -177,7 +187,7 @@ class ResearchOutputType extends AbstractType
         //     'allow_delete' => true,
         //     'prototype' => true,
         // ])
-        // ->add('embargo', CollectionType::class, 
+        // ->add('embargo', CollectionType::class,
 
         //     [   'label' => false,
         //     'entry_type' => EmbargoType::class,
@@ -188,7 +198,7 @@ class ResearchOutputType extends AbstractType
         //     'by_reference' => true,
         //     'allow_delete' => true,
         //     'prototype' => true,
-        // ])  
+        // ])
         ;
     }
 

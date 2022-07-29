@@ -1,3 +1,5 @@
+import('bootstrap');
+
 // ----------------------------- Section : Afficher ou non le formulaire Cost
 var costField = document.getElementById("costField");
 costField.classList.add("cache");
@@ -11,13 +13,18 @@ function startCost()
 function checkIfCost()
 {
   var selectCost = document.getElementById("research_output_costs").value;
+  const costTab = document.getElementById('nav-cost-tab');
+
   if (selectCost == false && costField.classList.contains("cache"))
   {
     costField.classList.remove("cache");
+    costTab.classList.remove("disabled");
+
   }
   else
   {
     costField.classList.add("cache");
+    costTab.classList.add("disabled");
     // Rajouter de quoi vider les inputs ? (Ou alors je gère dans le controlleur pour ne rien lier au RO)
   }
 }
@@ -68,37 +75,13 @@ function checkIfDataOrService()
     serviceField.classList.remove("cache");
   }
 }
-// ----------------------------- Fin section
 
- // // ----------------------------- Section : Afficher ou non embargo
- //  var embargoField = document.getElementById("embargoField");
- //  embargoField.classList.add("cache");
- //  function startEmbargo()
- //  {
- //    document.getElementById("distribution_access").addEventListener("change", checkIfEmbargo, false);
- //  }
- //
- //  function checkIfEmbargo()
- //  {
- //    var selectEmbargo = document.getElementById("distribution_access").value;
- //    if (selectEmbargo == "embargo" && embargoField.classList.contains("cache"))
- //    {
- //      embargoField.classList.remove("cache");
- //    }
- //    else
- //    {
- //      embargoField.classList.add("cache");
- //      // Rajouter de quoi vider les inputs ? (Ou alors je gère dans le controlleur pour ne rien lier au RO)
- //    }
- //  }
-// ----------------------------- Fin section
 
 
 
 
   window.addEventListener("load", startCost, false);
   window.addEventListener("load", startDataOrService, false);
-  // window.addEventListener("load", startEmbargo, false);
   window.addEventListener("load", startVocab, false);
 
   const addVocabToCollection = (e) => {

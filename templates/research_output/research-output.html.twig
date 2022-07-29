@@ -9,162 +9,203 @@
 
 {% block title %}FAIR-EASE | Research Output{% endblock %}
 
-{% block body %}
-    <div class="container">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                1
+
+
+{% block div %}
+
+<div class="container" style="background: linear-gradient(to left bottom, #AED741, #8fd16f, #53abab, #65CFCB); padding: 10px; border-radius: 25px;">
+        <nav style="background-color: rgba(255,255,255,0.82); border-radius:20px 20px 0 0;">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-general-tab" data-bs-toggle="tab" data-bs-target="#nav-general" type="button" role="tab" aria-controls="nav-general" aria-selected="true" style="border-top-left-radius: 20px;">General Infos</button>
+                <button class="nav-link" id="nav-dataorservice-tab" data-bs-toggle="tab" data-bs-target="#nav-dataorservice" type="button" role="tab" aria-controls="nav-dataorservice" aria-selected="false">Data / Service</button>
+                <button class="nav-link disabled" id="nav-cost-tab" data-bs-toggle="tab" data-bs-target="#nav-cost" type="button" role="tab" aria-controls="nav-cost" aria-selected="false">Cost</button>
             </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                2
+        </nav>
+    <div class="container-fluid bg-white" style="border-radius: 0 0 20px 20px">
+
+        <div class="tab-content p-2" id="nav-tabContent">
+
+            <div class="tab-pane fade show active" id="nav-general" role="tabpanel" aria-labelledby="nav-general-tab">
+
+               <div class="container-fluid">
+                   <fieldset class="row">
+                       <h2 class="pb-3">R.O General Infos</h2>
+                       <p class="text-muted">Fields marked with an <span style="color: red">*</span> are mandatory</p>
+
+                       <div class="col-6">
+                           <div>
+                               <span style="color: red">*</span>
+                           {{form_start(formRO)}}
+                           </div>
+                           {{ form_row(formRO.romp) }}
+                           {{ form_row(formRO.title) }}
+                           {{ form_row(formRO.type) }}
+                           {{ form_row(formRO.identifier) }}
+                           {{ form_row(formRO.contacts) }}
+                           {{ form_row(formRO.description) }}
+                           {{ form_row(formRO.standardUsed) }}
+                           {{ form_help() }}
+                       </div>
+                       <div class="col-6">
+
+                           {{ form_row(formRO.keyword) }}
+                           {{ form_row(formRO.reused) }}
+                           {{ form_row(formRO.lineage) }}
+                           {{ form_row(formRO.utility) }}
+                           {{ form_row(formRO.issued) }}
+                           {{ form_row(formRO.language) }}
+                           {{ form_row(formRO.vocabulary) }}
+                           {{ form_row(formRO.costs) }}
+                       </div>
+                   </fieldset>
+               </div>
             </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                3
+
+            <div class="tab-pane fade" id="nav-dataorservice" role="tabpanel" aria-labelledby="nav-dataorservice-tab">
+
+                <fieldset id="dataField" class="row">
+                    <legend><h2>Data</h2></legend>
+                    <p class="text-muted">Fields marked with an <span style="color: red">*</span> are mandatory</p>
+                    <div class="row">
+                        <div class="col-6">
+                            {{form_row(formRO.data.sensitiveData)}}
+                        </div>
+                        <div class="col-6">
+                            {{form_row(formRO.data.personalData)}}
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{form_row(formRO.data.dataSecurity)}}
+                    </div>
+                </fieldset>
+
+                <fieldset id="serviceField">
+                    <legend><h2>Service</h2></legend>
+                    <p class="text-muted">Fields marked with an <span style="color: red">*</span> are mandatory</p>
+                    {{form_row(formRO.service)}}
+                </fieldset>
+
+                <hr>
+
+                <fieldset id="metaDataField">
+                    <legend><h3>Meta Data</h3></legend>
+                    {{form_row(formRO.metadata)}}
+                </fieldset>
+
+                <fieldset id="vocabField">
+
+                    <h3>Vocabulary</h3>
+                    <ul class="vocabulary"
+                        data-index="{{ formRO.vocabularyInfos|length > 0 ? formRO.vocabularyInfos|last.vars.vocabularyInfos + 1 : 0 }}"
+                        data-prototype="{{ form_widget(formRO.vocabularyInfos.vars.prototype)|e('html_attr') }}"
+                    >
+                        {% for wp in formRO.vocabularyInfos %}
+                            <li>
+                                {{ form_row(wp.vocabularyInfos.vars.prototype) }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <button type="button" class="add_item_linkVocab" data-collection-holder-class="vocabulary">
+                        Add a Vocabulary Info
+                    </button>
+                </fieldset>
+
+
+
+                {# MACRO POUR DISTRIB + EMBARGO CACHÉ #}
+                {% macro printDistribEmbargo(wp) %}
+
+                    <div class="container-fluid">
+
+                        <fieldset class="row">
+                            <legend><h3>Distribution general informations</h3></legend>
+                            <div class="col-6">
+                                {{ form_row(wp.access)}}
+                                {{ form_row(wp.accessUrl) }}
+                                {{ form_row(wp.accessProtocol) }}
+                                {{ form_row(wp.sizeValue) }}
+                            </div>
+                            <div class="col-6">
+
+                                {{ form_row(wp.sizeUnit) }}
+                                {{ form_row(wp.format) }}
+                                {{ form_row(wp.downloadUrl) }}
+                            </div>
+                        </fieldset>
+
+                        <hr>
+
+                        <fieldset class="row">
+                            <legend><h3>Embargo</h3></legend>
+                            <h4>Provide embargo informations ONLY if there is an embargo on distribution. Ignore this otherwise.</h4>
+                            <div class="col-6" style="margin-top:1px;">
+                                {{ form_row(wp.embargoStartDate) }}
+                                {{ form_row(wp.embargoEndDate) }}
+                            </div>
+                            <div class="col-6" style="margin-top:10px;">
+                                {{ form_row(wp.embargoLegalAndContractualReasons) }}
+                                {{ form_row(wp.embargoIntentionalRestrictions) }}</div>
+                        </fieldset>
+
+                        <hr>
+
+                        <fieldset>
+                            <legend><h3>Licence</h3></legend>
+                            {{ form_row(wp.licenceName) }}
+                            {{ form_row(wp.licenceUrl) }}
+                        </fieldset>
+
+                        <hr>
+
+                        <fieldset class="row">
+                            <legend><h3>Host</h3></legend>
+                            <div class="col-6">
+                                {{ form_row(wp.hostName) }}
+                                {{ form_row(wp.hostDescription) }}
+                                {{ form_row(wp.hostUrl) }}
+                            </div>
+                            <div class="col-6">
+                                {{ form_row(wp.pidSystem) }}
+                                {{ form_row(wp.supportVersionning) }}
+                                {{ form_row(wp.certifiedWith) }}
+                            </div>
+                        </fieldset>
+                    </div>
+
+                {% endmacro %}
+                {# FIN MACRO #}
+                <h3>Distributions</h3>
+                <ul class="distribution"
+                    data-index="{{ formRO.distribution|length > 0 ? formRO.distribution|last.vars.distribution + 1 : 0 }}"
+                    data-prototype="{{ formMacros.printDistribEmbargo(formRO.distribution.vars.prototype)|e('html_attr') }}"
+                >
+                    {% for wp in formRO.distribution %}
+                        <li>
+                            {{ formMacros.printDistribEmbargo(wp) }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <button type="button" class="add_item_linkDistrib" data-collection-holder-class="distribution">
+                    Add a Distribution
+                </button>
+
             </div>
+
+            <div class="tab-pane fade" id="nav-cost" role="tabpanel" aria-labelledby="nav-cost-tab">
+
+                <fieldset id="costField">
+                    <legend><h2>Cost</h2></legend>
+                    {{form_row(formRO.cost)}}
+                </fieldset>
+            </div>
+                    {{ form_end(formRO) }}
         </div>
+
     </div>
+</div>
 
 
 
-
-    <div class="d-flex flex-column">
-
-
-<fieldset class="row bg-info">
-<legend><h3>General Infos</h3></legend>
-
-    <div class="col-6">
-    {{form_start(formRO)}}
-        {{ form_row(formRO.title) }}
-        {{ form_row(formRO.type) }}
-        {{ form_row(formRO.identifier) }}
-        {{ form_row(formRO.description) }}
-        {{ form_row(formRO.standardUsed) }}
-        {{ form_row(formRO.reused) }}
-        {{ form_row(formRO.lineage) }}
-    </div>
-    <div class="col-6">
-
-        {{ form_row(formRO.utility) }}
-        {{ form_row(formRO.issued) }}
-        {{ form_row(formRO.language) }}
-        {{ form_row(formRO.keyword) }}
-        {{ form_row(formRO.contacts) }}
-        {{ form_row(formRO.costs) }}
-        {{ form_row(formRO.vocabulary) }}
-    </div>
-</fieldset>
-
-    <fieldset id="vocabField">
-
-    <h3>Vocabulary</h3>
-        <ul class="vocabulary"
-            data-index="{{ formRO.vocabularyInfos|length > 0 ? formRO.vocabularyInfos|last.vars.vocabularyInfos + 1 : 0 }}"
-            data-prototype="{{ form_widget(formRO.vocabularyInfos.vars.prototype)|e('html_attr') }}"
-        >
-            {% for wp in formRO.vocabularyInfos %}
-                <li>
-                    {{ form_row(wp.vocabularyInfos.vars.prototype) }}
-                </li>
-            {% endfor %}
-        </ul>
-        <button type="button" class="add_item_linkVocab" data-collection-holder-class="vocabulary">
-            Add a Vocabulary Info
-        </button>
-    </fieldset>
-
-
-
-{# MACRO POUR DISTRIB + EMBARGO CACHÉ #}
-{% macro printDistribEmbargo(wp) %}
-    <fieldset>
-    <legend><h3>Distribution general informations</h3></legend>
-        {{ form_row(wp.access)}}
-        {{ form_row(wp.accessUrl) }}
-        {{ form_row(wp.accessProtocol) }}
-        {{ form_row(wp.sizeValue) }}
-        {{ form_row(wp.sizeUnit) }}
-        {{ form_row(wp.format) }}
-        {{ form_row(wp.downloadUrl) }}
-    </fieldset>
-    <fieldset>
-    <legend><h3>Embargo</h3></legend>
-        <h4>Provide embargo informations ONLY if there is an embargo on distribution. Ignore this otherwise.</h4>
-        {{ form_row(wp.embargoStartDate) }}
-        {{ form_row(wp.embargoEndDate) }}
-        {{ form_row(wp.embargoLegalAndContractualReasons) }}
-        {{ form_row(wp.embargoIntentionalRestrictions) }}
-    </fieldset>
-
-    <fieldset>
-    <legend><h3>Licence</h3></legend>
-        {{ form_row(wp.licenceName) }}
-        {{ form_row(wp.licenceUrl) }}
-    </fieldset>
-    <fieldset>
-    <legend><h3>Host</h3></legend>
-        {{ form_row(wp.hostName) }}
-        {{ form_row(wp.hostDescription) }}
-        {{ form_row(wp.hostUrl) }}
-        {{ form_row(wp.pidSystem) }}
-        {{ form_row(wp.supportVersionning) }}
-        {{ form_row(wp.certifiedWith) }}
-    </fieldset>
-
-{% endmacro %}
-{# FIN MACRO #}
-    <h3>Distributions</h3>
-        <ul class="distribution"
-            data-index="{{ formRO.distribution|length > 0 ? formRO.distribution|last.vars.distribution + 1 : 0 }}"
-            data-prototype="{{ formMacros.printDistribEmbargo(formRO.distribution.vars.prototype)|e('html_attr') }}"
-        >
-            {% for wp in formRO.distribution %}
-                <li>
-                    {{ formMacros.printDistribEmbargo(wp) }}
-                </li>
-            {% endfor %}
-        </ul>
-        <button type="button" class="add_item_linkDistrib" data-collection-holder-class="distribution">
-            Add a Distribution
-        </button>
-    </fieldset>
-
-</fieldset>
-
-{# {{form_end(formRO)}} #}
-<fieldset id="costField">
-<legend><h3>Cost</h3></legend>
-{{form_row(formRO.cost)}}
-</fieldset>
-
-<fieldset id="dataField">
-<legend><h3>Data</h3></legend>
-{{form_row(formRO.data)}}
-</fieldset>
-
-<fieldset id="serviceField">
-<legend><h3>Service</h3></legend>
-{{form_row(formRO.service)}}
-</fieldset>
-
-<fieldset id="metaDataField">
-<legend><h3>Meta Data</h3></legend>
-{{form_row(formRO.metadata)}}
-</fieldset>
-{# {{form_row(formRO.submit)}} #}
-{{ form_end(formRO) }}
-    </div>
 
 <style>
 .cache {
