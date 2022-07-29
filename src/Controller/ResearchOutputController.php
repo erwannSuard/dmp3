@@ -54,6 +54,8 @@ class ResearchOutputController extends AbstractController
             
             // Remplissage des infos générales du RO
             $ro = $formRO->getData();
+            $workPackage = $formRO->get('workPackage')->getData();
+            $ro->setWorkPackage($workPackage);
             $romp = new Romp();
             $romp = $formRO->get('romp')->getData();
             
@@ -212,7 +214,7 @@ class ResearchOutputController extends AbstractController
             
             $this->entityManager->persist($ro);
             $romp->addResearchOutput($ro);
-            // dd($ro);
+            dd($ro);
             $this->entityManager->flush();
             return $this->render('homepage/index.html.twig', [
             ]);
