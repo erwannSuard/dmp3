@@ -216,7 +216,7 @@ class ResearchOutputController extends AbstractController
             $romp->addResearchOutput($ro);
 //            dd($ro);
             $this->entityManager->flush();
-            return $this->render('homepage/index.html.twig', [
+            return $this->render('homepage/success.html.twig', [
             ]);
         }
 

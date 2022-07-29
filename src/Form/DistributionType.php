@@ -21,8 +21,12 @@ class DistributionType extends AbstractType
                 ],
                 'label' => 'Access : ',
             ])
-            ->add('accessUrl')
-            ->add('accessProtocol')
+            ->add('accessUrl', null, [
+                'label' => '* Access URL :'
+            ])
+            ->add('accessProtocol', null, [
+                'label' => '* Access Protocol :'
+            ])
             ->add('sizeValue')
             ->add('sizeUnit', ChoiceType::class, [
                 'choices' => [

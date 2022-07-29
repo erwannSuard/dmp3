@@ -28,9 +28,11 @@ class DistributionEmbargoType extends AbstractType
             'label' => 'Access : ',
         ])
         ->add('accessUrl', null, [
+            'label' => '* Access URL :'
             // 'required' => false,
             ])
         ->add('accessProtocol', null, [
+            'label' => '* Access Protocol :'
             // 'required' => false,
             ])
         ->add('sizeValue', null, [
@@ -53,6 +55,7 @@ class DistributionEmbargoType extends AbstractType
         ->add('embargoStartDate', DateType::class, [
             'mapped' => false,
             'required' => false,
+            'label' => '* Start Date :'
         ])
         ->add('embargoEndDate', DateType::class, [
             'mapped' => false,
@@ -61,6 +64,7 @@ class DistributionEmbargoType extends AbstractType
         ->add('embargoLegalAndContractualReasons', TextType::class, [
             'mapped' => false,
             'required' => false,
+            'label' => '* End Date :'
         ])
         ->add('embargoIntentionalRestrictions', TextType::class, [
             'mapped' => false,
@@ -71,7 +75,7 @@ class DistributionEmbargoType extends AbstractType
         ->add('licenceName', TextType::class, [
             'mapped' => false,
             // 'required' => false,
-            'label' => 'Licence name : ',
+            'label' => '* Licence name : ',
         ])
         ->add('licenceUrl', TextType::class, [
             'mapped' => false,
@@ -118,7 +122,7 @@ class DistributionEmbargoType extends AbstractType
         // ->add('researchOutput')
         // ->add('licence')
         // ->add('host')
-    
+
         ;
     }
 

@@ -30,7 +30,7 @@ class ResearchOutputType extends AbstractType
         $builder
             ->add('romp', EntityType::class, [
             'class' => Romp::class,
-            'label' => "Wich version of the DMP are you referencing : ",
+            'label' => "* Wich version of the DMP are you referencing : ",
             'multiple' => false,
             'choice_label' => 'versionRomp',
             ])
@@ -40,12 +40,12 @@ class ResearchOutputType extends AbstractType
                     return $pr->createQueryBuilder('u')
                         ->where('u.parentProject IS NOT null'); // Selection des projets ayant un projet parent (WP)
                 },
-                'label' => "Choose wich Work Package is your Research Output for : ",
+                'label' => "* Choose wich Work Package is your Research Output for : ",
                 'multiple' => false,
                 'choice_label' => 'title',
             ])
             ->add('title', TextType::class, [
-                'label' => 'Title : ',
+                'label' => '* Title : ',
                 // 'required' => false,
 
             ])
@@ -54,10 +54,10 @@ class ResearchOutputType extends AbstractType
                     'Data Set' => 'dataSet',
                     'Service' => 'service',
                 ],
-                'label' => 'Type : ',
+                'label' => '* Type : ',
             ])
             ->add('identifier', TextType::class, [
-                'label' => 'Identifier : ',
+                'label' => 'PID (if exist): ',
                 // 'required' => false,
             ])
             ->add('description', TextareaType::class, [
@@ -83,7 +83,11 @@ class ResearchOutputType extends AbstractType
             ->add('lineage', TextareaType::class, [
                 'label' => 'Lineage : ',
                 // 'required' => false,
-                'attr' => ['placeholder' => 'If a document exists, please provide an access URL...']
+                'attr' => [
+                    'placeholder' => 'If a document exists, please provide an access URL...',
+                    'rows' => 4,
+                    'style' => 'padding-bottom: 20px;'
+                ]
             ])
             ->add('utility', TextType::class, [
                 'label' => 'Utility : ',
@@ -96,7 +100,7 @@ class ResearchOutputType extends AbstractType
                 // 'attr' => ['class' => 'js-datepicker'],
             ])
             ->add('language', TextType::class, [
-                'label' => 'Language : ',
+                'label' => '* Language : ',
                 // 'required' => false,
             ])
             ->add('keyword', TextareaType::class, [
@@ -113,7 +117,7 @@ class ResearchOutputType extends AbstractType
                     'Yes' => true,
                     'No' => false
                 ],
-                'label' => 'Are the costs covered by the project ? ',
+                'label' => '* Are the costs covered by the project ? ',
                 'mapped' => false,
             ])
             ->add('vocabulary', ChoiceType::class, [
@@ -121,7 +125,7 @@ class ResearchOutputType extends AbstractType
                     'Yes' => true,
                     'No' => false
                 ],
-                'label' => 'Is a vocabulary used ? ',
+                'label' => '* Is a vocabulary used ? ',
                 'mapped' => false,
             ])
 
@@ -131,6 +135,7 @@ class ResearchOutputType extends AbstractType
             // used to render a select box, check boxes or radios
             'multiple' => true,
             'expanded' => false,
+            'label' => '* Contact(s)',
             'attr' => [
                 'style' => 'padding-bottom: 30px;',
             ]

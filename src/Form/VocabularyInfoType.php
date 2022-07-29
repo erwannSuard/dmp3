@@ -14,7 +14,9 @@ class VocabularyInfoType extends AbstractType
     {
         $builder
             ->add('vocabularyName',TextType::class)
-            ->add('uri', TextType::class)
+            ->add('uri', TextType::class, [
+                'label' => '* URI',
+            ])
             // ->add('ResearchOutputs')
         ;
     }

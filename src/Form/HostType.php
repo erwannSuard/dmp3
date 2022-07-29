@@ -14,11 +14,22 @@ class HostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('hostName')
-            ->add('hostDescription')
-            ->add('hostUrl')
+            ->add('hostName', null , [
+                'label' => '* Host Name :'
+            ])
+
+            ->add('hostDescription', null , [
+                'label' => '* Host Description :'
+            ])
+
+            ->add('hostUrl', null , [
+                'label' => '* Host URL :'
+            ])
+
             ->add('pidSystem')
-            ->add('supportVersionning')
+            ->add('supportVersionning', null , [
+                'label' => 'Support Versioning :'
+            ])
             ->add('certifiedWith')
         ;
     }

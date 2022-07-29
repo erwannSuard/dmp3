@@ -12,8 +12,12 @@ class ServiceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('typeOfService')
-            ->add('endProjectTrl')
+            ->add('typeOfService', null, [
+                'label' => '* Type of Service :'
+            ])
+            ->add('endProjectTrl', null, [
+                'label' => '* End Project TRL :'
+            ])
             //->add('researchOutput')
         ;
     }

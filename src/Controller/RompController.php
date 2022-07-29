@@ -66,7 +66,7 @@ class RompController extends AbstractController
 
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('success');
         }
 
 

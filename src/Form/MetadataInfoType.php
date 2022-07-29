@@ -13,12 +13,20 @@ class MetadataInfoType extends AbstractType
     {
         $builder
             ->add('description', null, [
+                'label' => '* Description :',
                 // 'required' => false,
                 ])
             ->add('standardName', null, [
+                'attr' => [
+                    'placeholder' => 'If case no standard is used, outline what type of metadata is created and how. if a metadata schema exists, provide the URL'
+                ],
                 // 'required' => false,
                 ])
             ->add('api', null, [
+                'attr' => [
+                    'placeholder' => 'API to access Metadata'
+                ],
+                'label' => '* API :'
                 // 'required' => false,
                 ])
         ;

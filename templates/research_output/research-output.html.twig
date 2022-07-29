@@ -72,6 +72,7 @@
                         <div class="col-6">
                             {{form_row(formRO.data.personalData)}}
                         </div>
+                        <p class="text-muted">Checked = (Yes) else = (No)</p>
                     </div>
                     <div class="row">
                         {{form_row(formRO.data.dataSecurity)}}
@@ -91,6 +92,8 @@
                     {{form_row(formRO.metadata)}}
                 </fieldset>
 
+                <hr>
+
                 <fieldset id="vocabField">
 
                     <h3>Vocabulary</h3>
@@ -104,7 +107,7 @@
                             </li>
                         {% endfor %}
                     </ul>
-                    <button type="button" class="add_item_linkVocab" data-collection-holder-class="vocabulary">
+                    <button type="button" class="add_item_linkVocab btn btn-outline-secondary" data-collection-holder-class="vocabulary">
                         Add a Vocabulary Info
                     </button>
                 </fieldset>
@@ -120,14 +123,14 @@
                             <legend><h3>Distribution general informations</h3></legend>
                             <div class="col-6">
                                 {{ form_row(wp.access)}}
+                                {{ form_row(wp.sizeValue) }}
                                 {{ form_row(wp.accessUrl) }}
                                 {{ form_row(wp.accessProtocol) }}
-                                {{ form_row(wp.sizeValue) }}
                             </div>
                             <div class="col-6">
 
-                                {{ form_row(wp.sizeUnit) }}
                                 {{ form_row(wp.format) }}
+                                {{ form_row(wp.sizeUnit) }}
                                 {{ form_row(wp.downloadUrl) }}
                             </div>
                         </fieldset>
@@ -136,7 +139,7 @@
 
                         <fieldset class="row">
                             <legend><h3>Embargo</h3></legend>
-                            <h4>Provide embargo informations ONLY if there is an embargo on distribution. Ignore this otherwise.</h4>
+                            <h5 class="text-warning">Provide embargo informations <span class="text-danger">ONLY</span> if there is an Embargo on Distribution. Ignore this otherwise.</h5>
                             <div class="col-6" style="margin-top:1px;">
                                 {{ form_row(wp.embargoStartDate) }}
                                 {{ form_row(wp.embargoEndDate) }}
@@ -173,6 +176,7 @@
 
                 {% endmacro %}
                 {# FIN MACRO #}
+                <hr>
                 <h3>Distributions</h3>
                 <ul class="distribution"
                     data-index="{{ formRO.distribution|length > 0 ? formRO.distribution|last.vars.distribution + 1 : 0 }}"
@@ -184,7 +188,7 @@
                         </li>
                     {% endfor %}
                 </ul>
-                <button type="button" class="add_item_linkDistrib" data-collection-holder-class="distribution">
+                <button type="button" class="add_item_linkDistrib btn btn-outline-secondary" data-collection-holder-class="distribution">
                     Add a Distribution
                 </button>
 
@@ -194,9 +198,12 @@
 
                 <fieldset id="costField">
                     <legend><h2>Cost</h2></legend>
+
+                    <p class="text-muted">Fields marked with an <span style="color: red">*</span> are mandatory</p>
                     {{form_row(formRO.cost)}}
                 </fieldset>
             </div>
+            <hr>
                 <div class="d-flex justify-content-between mb-3 mt-3 align-content-center">
                     <a class="btn btn-outline-primary h-25" href="{{ path('connected') }}">Return to HUB</a>
                     {{ form_end(formRO) }}
@@ -213,9 +220,11 @@
     display: none;
 }
 li {
+
     padding: 10px;
     margin: 15px;
-    border: solid black 2px;
+    border: solid lightseagreen 2px;
+    border-radius: 10px;
 }
 </style>
 

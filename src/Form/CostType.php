@@ -15,6 +15,7 @@ class CostType extends AbstractType
     {
         $builder
             ->add('type', ChoiceType::class, [
+                'label' => '* Type :',
                 "choices" => [
                     'Storage' => 'Storage',
                     'Re-Used' => 'Reused',
@@ -25,9 +26,11 @@ class CostType extends AbstractType
             // 'required' => false,
             )
             ->add('value', null, [
+                'label' => '* Value :'
                 // 'required' => false,
                 ])
             ->add('unit', TextType::class, [
+                'label' => '* Unit :',
                 // 'required' => false,
                 ])
             ->add('fundedBy', null, [

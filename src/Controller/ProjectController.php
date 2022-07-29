@@ -27,7 +27,7 @@ class ProjectController extends AbstractController
     {
 //------------------------------------------------
         //Sécurité accès
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');       
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
 //------------------------------------------------
 
         //Création des instances de projet, contact et de liaison des deux.
@@ -101,7 +101,7 @@ class ProjectController extends AbstractController
             $i=0;
             foreach($formProject->get('idRefProject')->getData() as $wp)
             {
-                
+
                 $cp = new ContactProject();
                 $cct = new Contact();
                 $cct = $formProject['idRefProject'][$i]['idContact']->getNormData();
@@ -120,7 +120,7 @@ class ProjectController extends AbstractController
             }
             $this->entityManager->flush();
 
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('success');
         }
         return $this->renderForm('project/index.html.twig', [
             'formProject' => $formProject,

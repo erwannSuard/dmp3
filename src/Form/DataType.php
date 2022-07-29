@@ -13,9 +13,11 @@ class DataType extends AbstractType
     {
         $builder
             ->add('sensitiveData', null, [
+                'label' => '* Sensitive Data :'
                 // 'required' => false,
                 ])
             ->add('personalData', null, [
+                'label' => '* Personal Data'
                 // 'required' => false,
                 ])
             ->add('dataSecurity', null, [

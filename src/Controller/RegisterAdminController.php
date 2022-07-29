@@ -13,9 +13,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class RegistrationController extends AbstractController
+class RegisterAdminController extends AbstractController
 {
-    #[Route('/register', name: 'register')]
+    #[Route('/registerAdmin', name: 'registerAdmin')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         //Création de Contact et User
@@ -33,17 +33,17 @@ class RegistrationController extends AbstractController
 
             // encode the plain password
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 )
             );
             $contact = $dataFormContact;
             // // Pour tricher et créer un admin
-//             $user->setContact($contact);
-//             $userRole = [];
-//             array_push($userRole, $form->get('role')->getData());
-//             $user->setRoles($userRole);
+             $user->setContact($contact);
+             $userRole = [];
+             array_push($userRole, $form->get('role')->getData());
+             $user->setRoles($userRole);
             // // fin triche, à commenter pour créer un User basique
             $entityManager->persist($contact);
             $entityManager->persist($user);
