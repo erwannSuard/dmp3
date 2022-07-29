@@ -21,7 +21,7 @@ class ContactController extends AbstractController
     {
 //------------------------------------------------
         //Sécurité accès
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');       
+        $this->denyAccessUnlessGranted('ROLE_USER');
 //------------------------------------------------
 
         $contact = new Contact();

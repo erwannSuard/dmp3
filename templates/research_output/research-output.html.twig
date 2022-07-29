@@ -18,7 +18,7 @@
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <button class="nav-link active" id="nav-general-tab" data-bs-toggle="tab" data-bs-target="#nav-general" type="button" role="tab" aria-controls="nav-general" aria-selected="true" style="border-top-left-radius: 20px;">General Infos</button>
                 <button class="nav-link" id="nav-dataorservice-tab" data-bs-toggle="tab" data-bs-target="#nav-dataorservice" type="button" role="tab" aria-controls="nav-dataorservice" aria-selected="false">Data / Service</button>
-                <button class="nav-link disabled" id="nav-cost-tab" data-bs-toggle="tab" data-bs-target="#nav-cost" type="button" role="tab" aria-controls="nav-cost" aria-selected="false">Cost</button>
+                <button class="nav-link" id="nav-cost-tab" data-bs-toggle="tab" data-bs-target="#nav-cost" type="button" role="tab" aria-controls="nav-cost" aria-selected="false">Cost</button>
             </div>
         </nav>
     <div class="container-fluid bg-white" style="border-radius: 0 0 20px 20px">
@@ -29,12 +29,11 @@
 
                <div class="container-fluid">
                    <fieldset class="row">
-                       <h2 class="pb-3">R.O General Infos</h2>
+                       <h2 class="pb-3">Research Output General Infos</h2>
                        <p class="text-muted">Fields marked with an <span style="color: red">*</span> are mandatory</p>
 
                        <div class="col-6">
                            <div>
-                               <span style="color: red">*</span>
                            {{form_start(formRO)}}
                            </div>
                            {{ form_row(formRO.romp) }}
@@ -44,7 +43,6 @@
                            {{ form_row(formRO.contacts) }}
                            {{ form_row(formRO.description) }}
                            {{ form_row(formRO.standardUsed) }}
-                           {{ form_help() }}
                        </div>
                        <div class="col-6">
 
@@ -198,7 +196,10 @@
                     {{form_row(formRO.cost)}}
                 </fieldset>
             </div>
+                <div class="d-flex justify-content-between mb-3 mt-3 align-content-center">
+                    <a class="btn btn-outline-primary h-25" href="{{ path('connected') }}">Return to HUB</a>
                     {{ form_end(formRO) }}
+                </div>
         </div>
 
     </div>
@@ -217,6 +218,10 @@ li {
     border: solid black 2px;
 }
 </style>
-{#<script>#}
+
+    <script>
+        let costTab = document.getElementById('nav-cost-tab');
+        costTab.classList.add("disabled")
+    </script>
 
 {% endblock %}

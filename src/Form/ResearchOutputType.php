@@ -32,7 +32,7 @@ class ResearchOutputType extends AbstractType
         $builder
         ->add('romp', EntityType::class, [
             'class' => Romp::class,
-            'label' => "Wich DMP are you referencing : ",
+            'label' => "Wich version of the DMP are you referencing : ",
             'multiple' => false,
             'choice_label' => 'versionRomp',
         ])

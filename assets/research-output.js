@@ -1,5 +1,9 @@
 import('bootstrap');
 
+
+let costTab = document.getElementById('nav-cost-tab');
+costTab.classList.add("disabled")
+
 // ----------------------------- Section : Afficher ou non le formulaire Cost
 var costField = document.getElementById("costField");
 costField.classList.add("cache");
@@ -13,7 +17,6 @@ function startCost()
 function checkIfCost()
 {
   var selectCost = document.getElementById("research_output_costs").value;
-  const costTab = document.getElementById('nav-cost-tab');
 
   if (selectCost == false && costField.classList.contains("cache"))
   {
