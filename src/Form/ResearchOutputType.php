@@ -14,14 +14,12 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use App\Form\VocabularyInfoType;
-use App\Form\DistributionType;
-use App\Form\EmbargoType;
-use App\Entity\Cost;
 use App\Form\DataType;
 use App\Form\MetadataInfoType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use App\Entity\Romp;
-
+use App\Repository\ProjectRepository;
+use App\Entity\Project;
 
 
 
@@ -30,12 +28,22 @@ class ResearchOutputType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('romp', EntityType::class, [
+            ->add('romp', EntityType::class, [
             'class' => Romp::class,
             'label' => "Wich version of the DMP are you referencing : ",
             'multiple' => false,
             'choice_label' => 'versionRomp',
-        ])
+            ])
+            ->add('workPackage', EntityType::class, [
+                'class' => Project::class,
+                'query_builder' => function (ProjectRepository $pr) {
+                    return $pr->createQueryBuilder('u')
+                        ->where('u.parentProject IS NOT null'); // Selection des projets ayant un projet parent (WP)
+                },
+                'label' => "Choose wich Work Package is your Research Output for : ",
+                'multiple' => false,
+                'choice_label' => 'title',
+            ])
             ->add('title', TextType::class, [
                 'label' => 'Title : ',
                 // 'required' => false,
@@ -72,7 +80,7 @@ class ResearchOutputType extends AbstractType
                 ],
                 'label' => 'Re-used : ',
             ])
-            ->add('lineage', TextType::class, [
+            ->add('lineage', TextareaType::class, [
                 'label' => 'Lineage : ',
                 // 'required' => false,
                 'attr' => ['placeholder' => 'If a document exists, please provide an access URL...']

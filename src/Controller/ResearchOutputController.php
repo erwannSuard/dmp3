@@ -38,25 +38,27 @@ class ResearchOutputController extends AbstractController
     {
         //------------------------------------------------
         //Sécurité accès
-        $this->denyAccessUnlessGranted('ROLE_USER');       
+        $this->denyAccessUnlessGranted('ROLE_USER');
         //------------------------------------------------
-        
+
         // Instance RO
         $ro = new ResearchOutput();
         $formRO = $this->createForm(ResearchOutputType::class, $ro);
         $formRO->handleRequest($request);
-        
-        
+
+
 
 
         if($formRO->isSubmitted() && $formRO->isValid())
         {
-            
+
             // Remplissage des infos générales du RO
             $ro = $formRO->getData();
+            $workPackage = $formRO->get('workPackage')->getData();
+            $ro->setWorkPackage($workPackage);
             $romp = new Romp();
             $romp = $formRO->get('romp')->getData();
-            
+
             // Slice des keywords :
             $keywordsFullText = $formRO->get('keyword')->getData();
             $keywordBaseArray = explode(",", $keywordsFullText);
@@ -74,11 +76,11 @@ class ResearchOutputController extends AbstractController
             $ro->setKeyword($keywordFinalArray);
             // $this->entityManager->persist($ro);
 
-            // ---------- à rajouter : Transformer le vocab en array + METADATA PLUSIEURS ("bonus")---------- 
+            // ---------- à rajouter : Transformer le vocab en array + METADATA PLUSIEURS ("bonus")----------
 
 
 
-            // ----- Remplissage de l'entité MetaData + liaison au RO 
+            // ----- Remplissage de l'entité MetaData + liaison au RO
             $metaData = new MetadataInfo();
             $metaData = $formRO->get('metadata')->getData();
             $metaData->setResearchOutput($ro);
@@ -98,7 +100,7 @@ class ResearchOutputController extends AbstractController
                 $this->entityManager->persist($data); // Persist Data
                 // dd($data);
             }
-            else 
+            else
             {
                 $service = new Service();
                 $service = $formRO->get('service')->getData();
@@ -108,7 +110,7 @@ class ResearchOutputController extends AbstractController
             }
 
 
-            
+
             // Si Vocab, boucler à l'interieur
             foreach($formRO->get('vocabularyInfos') as $vocab)
             {
@@ -132,7 +134,7 @@ class ResearchOutputController extends AbstractController
             }
 
 
-            // ----- Boucle distribution 
+            // ----- Boucle distribution
             foreach($formRO->get('distribution') as $distrib)
             {
                 $distribution = new Distribution();
@@ -149,7 +151,7 @@ class ResearchOutputController extends AbstractController
                     $this->entityManager->persist($embargo); // Persist Embargo
                     $distribution->setEmbargo($embargo);
                 }
-                
+
 
                 // ----- Remplissage de l'entité Host
                 // Vérification si pré-existence
@@ -157,7 +159,7 @@ class ResearchOutputController extends AbstractController
                 $hostTest = ($hostRepository->findOneBy(['hostUrl' => $hostUrl]));
                 $host = new Host();
                 if($hostTest == null) // Si n'existe pas déjà, on le créé
-                {   
+                {
                     $host->setHostName($distrib->get('hostName')->getData());
                     $host->setHostDescription($distrib->get('hostDescription')->getData());
                     $host->setHostUrl($distrib->get('hostUrl')->getData());
@@ -202,17 +204,17 @@ class ResearchOutputController extends AbstractController
             // if COST
             if ($formRO->get('costs')->getData() == false) // (Si on a une entité cost)
             {
-                
+
                 $cost = new Cost();
                 $cost = $formRO->get('cost')->getData();
                 $cost->addResearchOutput($ro);
                 $ro->addCost($cost);
                 // dd($cost);
             }
-            
+
             $this->entityManager->persist($ro);
             $romp->addResearchOutput($ro);
-            // dd($ro);
+//            dd($ro);
             $this->entityManager->flush();
             return $this->render('homepage/index.html.twig', [
             ]);

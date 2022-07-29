@@ -73,6 +73,9 @@ class ResearchOutput
     #[ORM\ManyToOne(targetEntity: Romp::class, inversedBy: 'researchOutputs')]
     private $romp;
 
+    #[ORM\ManyToOne(targetEntity: Project::class)]
+    private $workPackage;
+
     // #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'ROReference')]
     // private $researchOutputs;
 
@@ -422,6 +425,18 @@ class ResearchOutput
     public function setRomp(?Romp $romp): self
     {
         $this->romp = $romp;
+
+        return $this;
+    }
+
+    public function getWorkPackage(): ?Project
+    {
+        return $this->workPackage;
+    }
+
+    public function setWorkPackage(?Project $workPackage): self
+    {
+        $this->workPackage = $workPackage;
 
         return $this;
     }

@@ -31,4 +31,11 @@ class HomepageController extends AbstractController
         return $this->render('homepage/authentication.html.twig', [
         ]);
     }
+    #[Route('/success', name: 'success')]
+    public function success(): Response
+    {
+
+        return $this->render('homepage/success.html.twig', [
+        ]);
+    }
 }
