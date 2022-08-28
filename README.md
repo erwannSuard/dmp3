@@ -4,7 +4,7 @@
 - Symfony
 - Composer
 - NodeJS
-- NPM or Yarn
+- npm
 ## Local setup
 1. Clone the repository, make sure you are on the master branch. 
 `$ git clone https://github.com/erwannSuard/dmp3.git`
