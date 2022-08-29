@@ -1,5 +1,7 @@
 # FAIR-EASE DMP
 ### Requirements 
+- git
+- PostgreSQL
 - PHP
 - Symfony
 - Composer
