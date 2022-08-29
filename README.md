@@ -10,7 +10,7 @@
 `$ git clone https://github.com/erwannSuard/dmp3.git`
 2. Create a database in PostgreSQL
 `CREATE DATABASE databaseName`
-3. Edit the .env file of the folder cloned to correspond to the database created `DATABASE_URL="postgresql://username:password@127.0.0.1:5432/database-name?serverVersion=13&charset=utf8"` 
+3. Edit the .env file of the folder cloned to correspond to the database created `DATABASE_URL="postgresql://username:password@127.0.0.1:5432/databaseName?serverVersion=13&charset=utf8"` 
 4. Make the migration to the database
 `$ php bin/console doctrine:migrations:migrate`
 5. Install php dependencies with composer
