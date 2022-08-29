@@ -23,7 +23,6 @@
 `$ symfony server`
 9. Go to ://localhost:8000/
 
-Go to /registerAdmin to register admins
 
 # For Docker 
 
