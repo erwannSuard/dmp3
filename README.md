@@ -21,7 +21,7 @@
 `$ npm run build`
 8.  Run the Symfony local server
 `$ symfony server`
-9. Go to ://localhost:8000/
+9. Go to ` ://localhost:8000/ `
 
 
 # For Docker 
